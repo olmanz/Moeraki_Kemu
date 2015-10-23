@@ -42,6 +42,8 @@ public class Player {
 	 * @param amount The amount to increase the Player's points.
 	 */
 	 public void addPoints(int amount){
-		 points += amount;
+		 if (amount >= 0) {
+			 points += amount;
+		 }
 	 }
 }
