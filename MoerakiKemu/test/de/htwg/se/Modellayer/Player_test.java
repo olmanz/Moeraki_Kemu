@@ -24,5 +24,11 @@ public class Player_test {
 		player.addPoints(2);
 		assertEquals(2, player.getPoints());
 	}
+	
+	@Test
+	public void test_addPoints_negativeValueDoesNotLowerValue() {
+		player.addPoints(-2);
+		assertEquals(0, player.getPoints());
+	}
 }
 
