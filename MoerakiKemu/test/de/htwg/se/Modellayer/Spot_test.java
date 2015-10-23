@@ -14,9 +14,18 @@ public class Spot_test {
 	}
 	
 	@Test
-	public void test_isOccupied_return_NotNullString(){
-		spot.occupy("alpha");
+	public void test_isOccupied_firstOccupation_returnsNotEmptyString(){
+		assertTrue(spot.occupy("alpha"));
 		assertTrue(spot.isOccupied());
+		assertEquals("alpha", spot.getOccupiedByPlayer());
+	}
+	
+	@Test
+	public void test_isOccupied_alreadyOccupied_returnsFalse() {
+		assertTrue(spot.occupy("alpha"));
+		assertTrue(spot.isOccupied());
+		
+		assertFalse(spot.occupy("beta"));
 		assertEquals("alpha", spot.getOccupiedByPlayer());
 	}
 }

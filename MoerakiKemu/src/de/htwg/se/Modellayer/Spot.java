@@ -9,9 +9,13 @@ public class Spot {
 		occupied = false;
 	}
 	
-	public void occupy(final String playerName) {
-		occupied = true;
-		this.occupiedByPlayer = playerName;
+	public boolean occupy(final String playerName) {
+		if (this.isOccupied()) {
+			return false;
+		} else {
+			this.occupiedByPlayer = playerName;
+			return occupied = true;
+		}
 	}
 
 	public boolean isOccupied() {
