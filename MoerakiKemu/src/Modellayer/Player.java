@@ -1,4 +1,4 @@
-package de.htwg.de.moerakikemu;
+package Modellayer;
 
 public class Player {
 
