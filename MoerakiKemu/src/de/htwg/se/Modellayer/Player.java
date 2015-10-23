@@ -1,4 +1,4 @@
-package Modellayer;
+package de.htwg.se.Modellayer;
 
 public class Player {
 

@@ -1,9 +1,11 @@
-package Modellayer;
+package de.htwg.se.Modellayer;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.htwg.se.Modellayer.Player;
 
 public class Player_test {
 	Player player;
