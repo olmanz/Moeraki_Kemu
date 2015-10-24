@@ -15,6 +15,7 @@ public class Field_Test {
 	public void setUp() {
 		field = new Field();
 		player1 = new Player("alpha");
+		player2 = new Player("beta");
 	}
 
 	@Test
@@ -35,17 +36,26 @@ public class Field_Test {
 
 	@Test
 	public void test_occupy_occupyFourFieldsReturnsOnePoint() {
-		fail("Not yet inplemented!");
+		assertEquals(0, field.occupy(2, 3, player1.getName()));
+		assertEquals(0, field.occupy(3, 2, player1.getName()));
+		assertEquals(0, field.occupy(3, 3, player1.getName()));
+		assertEquals(1, field.occupy(2, 2, player1.getName()));
 	}
 
 	@Test
 	public void test_occupy_occupyThreeFieldsReturnsOnePoint() {
-		fail("Not yet inplemented!");
+		assertEquals(0, field.occupy(2, 3, player2.getName()));
+		assertEquals(0, field.occupy(3, 2, player1.getName()));
+		assertEquals(0, field.occupy(3, 3, player1.getName()));
+		assertEquals(1, field.occupy(2, 2, player1.getName()));
 	}
 	
 
 	@Test
 	public void test_occupy_occupyTwoFieldsReturnsNoPoints() {
-		fail("Not yet inplemented!");
+		assertEquals(0, field.occupy(2, 3, player2.getName()));
+		assertEquals(0, field.occupy(3, 2, player2.getName()));
+		assertEquals(0, field.occupy(3, 3, player1.getName()));
+		assertEquals(1, field.occupy(2, 2, player1.getName()));
 	}
 }
