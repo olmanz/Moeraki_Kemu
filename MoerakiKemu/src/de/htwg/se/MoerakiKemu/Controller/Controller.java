@@ -22,6 +22,44 @@ public class Controller {
 	}
 	
 	/**
+	 * Returns the points of the first player.
+	 *
+	 * @return Amount of points, 0 or more.
+	 */
+	public int getPlayer1Points() {
+		return pointsPlayer1;
+	}
+
+	/**
+	 * Returns the points of the second player.
+	 *
+	 * @return Amount of points, 0 or more.
+	 */
+	public int getPlayer2Points() {
+		return pointsPlayer2;
+	}
+	
+	/**
+	 * Returns the name of the player that occupies the field with the coordinates.
+	 *
+	 * @param x X-Coordinate.
+	 * @param y Y-Coordinate.
+	 * @return The name of the player or an empty String.
+	 */
+	public String getIsOccupiedByPlayer(int x, int y) {
+		return gameField.getIsOccupiedFrom(x, y);
+	}
+	
+	/**
+	 * Returns the length of one edge of the game field.
+	 *
+	 * @return Number > 0.
+	 */
+	public int getEdgeLength() {
+		return fieldLength;
+	}
+	
+	/**
 	 * Occupation of a Spot by a player. Returns -1 if the Spot is already occupied.
 	 * @param Xcoordinate X coordinate of the spot.
 	 * @param Ycoordinate Y coordinate of the spot.
