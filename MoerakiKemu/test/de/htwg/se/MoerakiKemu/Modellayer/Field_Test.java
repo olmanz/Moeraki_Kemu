@@ -25,41 +25,14 @@ public class Field_Test {
 	public void test_getIsOccupied_unoccupiedSpotReturnsFalse() {
 		assertEquals("", field.getIsOccupiedFrom(1, 2));
 	}
-//	
-//
-//	@Test
-//	public void test_occupy_occupyEmptySpotReturnsNoPoints() {
-//		assertEquals(0, field.occupy(2, 2, player1.getName()));
-//	}
-//
-//	@Test
-//	public void test_occupy_occupyNotEmptySpotReturnsNegativeOne() {
-//		assertEquals(0, field.occupy(2, 2, player1.getName()));
-//		assertEquals(-1, field.occupy(2, 2, player1.getName()));
-//	}
-//
-//	@Test
-//	public void test_occupy_occupyFourFieldsReturnsOnePoint() {
-//		assertEquals(0, field.occupy(2, 3, player1.getName()));
-//		assertEquals(0, field.occupy(3, 2, player1.getName()));
-//		assertEquals(0, field.occupy(3, 3, player1.getName()));
-//		assertEquals(1, field.occupy(2, 2, player1.getName()));
-//	}
-//
-//	@Test
-//	public void test_occupy_occupyThreeFieldsReturnsOnePoint() {
-//		assertEquals(0, field.occupy(2, 3, player2.getName()));
-//		assertEquals(0, field.occupy(3, 2, player1.getName()));
-//		assertEquals(0, field.occupy(3, 3, player1.getName()));
-//		assertEquals(1, field.occupy(2, 2, player1.getName()));
-//	}
-//	
-//
-//	@Test
-//	public void test_occupy_occupyTwoFieldsReturnsNoPoints() {
-//		assertEquals(0, field.occupy(2, 3, player2.getName()));
-//		assertEquals(0, field.occupy(3, 2, player2.getName()));
-//		assertEquals(0, field.occupy(3, 3, player1.getName()));
-//		assertEquals(1, field.occupy(2, 2, player1.getName()));
-//	}
+	@Test
+	public void test_occupy_occupyEmptySpotReturnsNoPoints() {
+		assertTrue(field.occupy(2, 2, player1.getName()));
+	}
+
+	@Test
+	public void test_occupy_occupyNotEmptySpotReturnsFalse() {
+		assertTrue(field.occupy(2, 2, player1.getName()));
+		assertFalse(field.occupy(2, 2, player1.getName()));
+	}
 }

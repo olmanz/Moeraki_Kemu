@@ -22,29 +22,56 @@ public class Controller {
 	}
 	
 	/**
+	 * Returns the points of the first player.
+	 *
+	 * @return Amount of points, 0 or more.
+	 */
+	public int getPlayer1Points() {
+		return pointsPlayer1;
+	}
+
+	/**
+	 * Returns the points of the second player.
+	 *
+	 * @return Amount of points, 0 or more.
+	 */
+	public int getPlayer2Points() {
+		return pointsPlayer2;
+	}
+	
+	/**
+	 * Returns the name of the player that occupies the field with the coordinates.
+	 *
+	 * @param x X-Coordinate.
+	 * @param y Y-Coordinate.
+	 * @return The name of the player or an empty String.
+	 */
+	public String getIsOccupiedByPlayer(int x, int y) {
+		return gameField.getIsOccupiedFrom(x, y);
+	}
+	
+	/**
+	 * Returns the length of one edge of the game field.
+	 *
+	 * @return Number > 0.
+	 */
+	public int getEdgeLength() {
+		return fieldLength;
+	}
+	
+	/**
 	 * Occupation of a Spot by a player. Returns -1 if the Spot is already occupied.
 	 * @param Xcoordinate X coordinate of the spot.
 	 * @param Ycoordinate Y coordinate of the spot.
 	 * @param playerName Name of the Player.
 	 * @return The number of points (0 - 4) or -1 if the Spot is occupied.
 	 */
-	private int occupy(int Xcoordinate, int Ycoordinate, String playerName) {
+	public int occupy(int Xcoordinate, int Ycoordinate, String playerName) {
 		if(gameField.getIsOccupiedFrom(Xcoordinate, Ycoordinate) != "leer"){
 			return -1;
-		}
-		int points = 0;
-		
-		testPositionOfPoint(Xcoordinate, Ycoordinate);
-
-		
-		// Calculate points and check if 4 spots of square selected
-		int xMin = Xcoordinate - 1;
-		int xMax = Xcoordinate + 1;
-		int yMin = Ycoordinate - 1;
-		int yMax = Ycoordinate + 1;
-			
-		return points;
-
+		}		
+		testPositionOfPoint(Xcoordinate, Ycoordinate);	
+		return 0;
 	}
 	
 	/**
@@ -56,22 +83,78 @@ public class Controller {
 	private void testPositionOfPoint(int XCoordinate, int YCoordinate){
 		if((XCoordinate == 0 && YCoordinate == 0) || (XCoordinate == 0 && YCoordinate == fieldLength) ||
 		   (XCoordinate == fieldLength && YCoordinate == 0) || (XCoordinate == fieldLength && YCoordinate == fieldLength)){
-			testEdgePoint(XCoordinate, YCoordinate);
+			testEdgeSpot(XCoordinate, YCoordinate);
 		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
-			//testBorderPoint(XCoordinate, YCoordinate);
+			testBorderSpot(XCoordinate, YCoordinate);
 		} else {
-			//testNormalPoint(XCoordinate, YCoordinate);
+			testNormalSpot(XCoordinate, YCoordinate);
 		}
 	}
 	
-	private void testEdgePoint(int xCoordinate, int yCoordinate){
+	/**
+	 * test the points around the main point if it is a point at a edge
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 */
+	private void testEdgeSpot(int xCoordinate, int yCoordinate){
 		if(xCoordinate == 0 && yCoordinate == 0){
-			testPoint(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
 		}
-		//WEITERE METHODEN
+		if(xCoordinate == 0 && yCoordinate == fieldLength){
+			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+		}
+		if(xCoordinate == fieldLength && yCoordinate == 0){
+			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+		}
+		if(xCoordinate == fieldLength && yCoordinate == fieldLength){
+			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+		}
 	}
 	
-	private void testPoint(int xMin, int yMin, int xMax, int yMax){
+	/**
+	 * test the points around the main point if it is a point at a border
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 */
+	private void testBorderSpot(int xCoordinate, int yCoordinate){
+		if(yCoordinate == 0){
+			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+		}
+		if(yCoordinate == fieldLength){
+			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+		}
+		if(xCoordinate == fieldLength){
+			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+		}
+		if(xCoordinate == 0){
+			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+		}
+	}
+	
+	/**
+	 * test the spots around the main point if it is a normal point in the middle of the map
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 */
+	private void testNormalSpot(int xCoordinate, int yCoordinate){
+		testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+		testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+		testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+		testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+	}
+	
+	/**
+	 * test four positions and looks how much spots are occupied by players
+	 * @param xMin
+	 * @param yMin
+	 * @param xMax
+	 * @param yMax
+	 */
+	private void testSpot(int xMin, int yMin, int xMax, int yMax){
 		int counterPlayer1 = 0;
 		int counterPlayer2 = 0;
 		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){
@@ -103,7 +186,44 @@ public class Controller {
 			}
 		}
 		
-		//Ergebnis berechnen!
+		getPointsOfPlayer(counterPlayer1, counterPlayer2);
 		
+	}
+	
+	/**
+	 * add the points the players get
+	 * @param counter1
+	 * @param counter2
+	 */
+	private void getPointsOfPlayer(int counter1, int counter2){
+		if(counter1 == 3){
+			player1.addPoints(1);
+		}
+		if(counter1 == 4){
+			player1.addPoints(1);
+			//*The End?
+		}
+		if(counter2 == 3){
+			player2.addPoints(1);
+		} 
+		if(counter2 == 4){
+			player2.addPoints(1);
+			//*The End?
+		}
+	}
+	
+	/**
+	 * returns the points of a player
+	 * @param playerName
+	 * @return the points of player one or player two or if there is no player with the given name, this method returns 0
+	 */
+	public int getPointsOfPlayer(String playerName){
+		if(player1.getName() == playerName){
+			return player1.getPoints();
+		} else if(player2.getName() == playerName){
+			return player2.getPoints();
+		} else {
+			return 0;
+		}
 	}
 }
