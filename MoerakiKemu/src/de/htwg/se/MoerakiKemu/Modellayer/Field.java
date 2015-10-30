@@ -1,4 +1,4 @@
-package de.htwg.se.Modellayer;
+package de.htwg.se.MoerakiKemu.Modellayer;
 
 public class Field {
 	private int edgeLength;
@@ -71,14 +71,34 @@ public class Field {
 	 * @param playerName Name of the player that occupied the field.
 	 * @return The amount of points (0 - 4) for the current player.
 	 */
-	private int calcPoints(final int xMin, final int xMax,
+	private int calcPoints(final int XCoordinate, final int YCoordinate,
+						   final int xMin, final int xMax,
 						   final int yMin, final int yMax,
 						   final String playerName) {
-		int points = 0;
+		int pointsPlayerOne = 0;
+		int pointsPlayerTwo = 0;
+		int counterPlayerOne = 1;		//Player who occupied this Spot
+		int counterPlayerTwo = 0;		//Enemieplayer
+		
+//		if(pointIsOccupied(yMin, xMin)){
+//			
+//		}
+		
+		
+		
 		
 		// TODO: Only calculate points if all 4 Spots of a squres are set. The player with 3 / 4 Spots gets the points.
 		
-		return points;
+		return pointsPlayerOne;
+	}
+	
+	
+	private String pointIsOccupied(int XCoordinate, int YCoordinate){
+		if(array[XCoordinate][YCoordinate].isOccupied()){
+			return array[XCoordinate][YCoordinate].getOccupiedByPlayer();
+		} else {
+			return " ";
+		}
 	}
 	
 	// Determine lines to edge of field

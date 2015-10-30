@@ -1,4 +1,4 @@
-package de.htwg.se.Modellayer;
+package de.htwg.se.MoerakiKemu.Modellayer;
 
 public class Spot {
 
