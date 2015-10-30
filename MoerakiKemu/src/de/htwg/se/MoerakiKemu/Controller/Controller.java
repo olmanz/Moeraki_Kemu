@@ -84,7 +84,7 @@ public class Controller {
 	 * @param playerName Name of the Player.
 	 * @return The number of points (0 - 4) or -1 if the Spot is occupied.
 	 */
-	public int occupy(int Xcoordinate, int Ycoordinate, String playerName) {
+	public int occupy(int Xcoordinate, int Ycoordinate) {
 		if(gameField.getIsOccupiedFrom(Xcoordinate, Ycoordinate) != "leer"){
 			return -1;
 		}		
@@ -99,8 +99,11 @@ public class Controller {
 	 * @return 1 when the point is a edge, 2 if the point is a border - point and 3 if the point is somewhere in the middle of the field
 	 */
 	private void testPositionOfPoint(int XCoordinate, int YCoordinate){
-		if((XCoordinate == 0 && YCoordinate == 0) || (XCoordinate == 0 && YCoordinate == fieldLength) ||
-		   (XCoordinate == fieldLength && YCoordinate == 0) || (XCoordinate == fieldLength && YCoordinate == fieldLength)){
+		boolean leftUpperCorner = XCoordinate == 0 && YCoordinate == 0;
+		boolean leftLowerCorner = XCoordinate == 0 && YCoordinate == fieldLength;
+		boolean rightUpperCorner = XCoordinate == fieldLength && YCoordinate == 0;
+		boolean rightLowerCorner = XCoordinate == fieldLength && YCoordinate == fieldLength;
+		if(leftUpperCorner || leftLowerCorner || rightUpperCorner || leftLowerCorner){
 			testEdgeSquare(XCoordinate, YCoordinate);
 		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
 			testBorderSquare(XCoordinate, YCoordinate);
