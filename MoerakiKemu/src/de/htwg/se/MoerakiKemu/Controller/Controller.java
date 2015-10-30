@@ -34,7 +34,8 @@ public class Controller {
 		}
 		int points = 0;
 		
-		int posPoint = testPositionOfPoint(Xcoordinate, Ycoordinate);
+		testPositionOfPoint(Xcoordinate, Ycoordinate);
+
 		
 		// Calculate points and check if 4 spots of square selected
 		int xMin = Xcoordinate - 1;
@@ -47,19 +48,62 @@ public class Controller {
 	}
 	
 	/**
-	 * 
+	 * This method test where the point is located
 	 * @param XCoordinate
 	 * @param YCoordinate
 	 * @return 1 when the point is a edge, 2 if the point is a border - point and 3 if the point is somewhere in the middle of the field
 	 */
-	private int testPositionOfPoint(int XCoordinate, int YCoordinate){
+	private void testPositionOfPoint(int XCoordinate, int YCoordinate){
 		if((XCoordinate == 0 && YCoordinate == 0) || (XCoordinate == 0 && YCoordinate == fieldLength) ||
 		   (XCoordinate == fieldLength && YCoordinate == 0) || (XCoordinate == fieldLength && YCoordinate == fieldLength)){
-			return 1;
+			testEdgePoint(XCoordinate, YCoordinate);
 		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
-			return 2;
+			//testBorderPoint(XCoordinate, YCoordinate);
 		} else {
-			return 3;
+			//testNormalPoint(XCoordinate, YCoordinate);
 		}
+	}
+	
+	private void testEdgePoint(int xCoordinate, int yCoordinate){
+		if(xCoordinate == 0 && yCoordinate == 0){
+			testPoint(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+		}
+		//WEITERE METHODEN
+	}
+	
+	private void testPoint(int xMin, int yMin, int xMax, int yMax){
+		int counterPlayer1 = 0;
+		int counterPlayer2 = 0;
+		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){
+			if(gameField.getIsOccupiedFrom(xMin, yMin) == player1.getName()){
+				counterPlayer1 += 1;
+			} else if(gameField.getIsOccupiedFrom(xMin, yMin) == player2.getName()){
+				counterPlayer2 += 1;
+			}
+		} 
+		if(gameField.getIsOccupiedFrom(xMin, yMax) != ""){
+			if(gameField.getIsOccupiedFrom(xMin, yMax) == player1.getName()){
+				counterPlayer1 += 1;
+			} else if(gameField.getIsOccupiedFrom(xMin, yMax) == player2.getName()){
+				counterPlayer2 += 1;
+			}
+		} 
+		if(gameField.getIsOccupiedFrom(xMax, yMin) != ""){
+			if(gameField.getIsOccupiedFrom(xMax, yMax) == player1.getName()){
+				counterPlayer1 += 1;
+			} else if(gameField.getIsOccupiedFrom(xMax, yMax) == player2.getName()){
+				counterPlayer2 += 1;
+			}
+		}
+		if(gameField.getIsOccupiedFrom(xMax, yMax) != ""){
+			if(gameField.getIsOccupiedFrom(xMax, yMax) == player1.getName()){
+				counterPlayer1 += 1;
+			} else if(gameField.getIsOccupiedFrom(xMax, yMax) == player2.getName()){
+				counterPlayer2 += 1;
+			}
+		}
+		
+		//Ergebnis berechnen!
+		
 	}
 }
