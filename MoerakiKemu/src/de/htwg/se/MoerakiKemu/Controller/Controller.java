@@ -14,9 +14,9 @@ public class Controller {
 	private Field gameField;
 	private int fieldLength;
 	
-	public Controller(final String player1Name, final String player2Name, final int fieldLength) {
-		this.fieldLength = fieldLength;
-		gameField = new Field(fieldLength);
+	public Controller(final String player1Name, final String player2Name) {
+		gameField = new Field();
+		this.fieldLength = gameField.getEdgeLength();
 		player1 = new Player(player1Name);
 		player2 = new Player(player2Name);
 	}
@@ -101,11 +101,11 @@ public class Controller {
 	private void testPositionOfPoint(int XCoordinate, int YCoordinate){
 		if((XCoordinate == 0 && YCoordinate == 0) || (XCoordinate == 0 && YCoordinate == fieldLength) ||
 		   (XCoordinate == fieldLength && YCoordinate == 0) || (XCoordinate == fieldLength && YCoordinate == fieldLength)){
-			testEdgeSpot(XCoordinate, YCoordinate);
+			testEdgeSquare(XCoordinate, YCoordinate);
 		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
-			testBorderSpot(XCoordinate, YCoordinate);
+			testBorderSquare(XCoordinate, YCoordinate);
 		} else {
-			testNormalSpot(XCoordinate, YCoordinate);
+			testInnerSquare(XCoordinate, YCoordinate);
 		}
 	}
 	
@@ -114,18 +114,18 @@ public class Controller {
 	 * @param xCoordinate
 	 * @param yCoordinate
 	 */
-	private void testEdgeSpot(int xCoordinate, int yCoordinate){
+	private void testEdgeSquare(int xCoordinate, int yCoordinate){
 		if(xCoordinate == 0 && yCoordinate == 0){
-			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
 		}
 		if(xCoordinate == 0 && yCoordinate == fieldLength){
-			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
 		}
 		if(xCoordinate == fieldLength && yCoordinate == 0){
-			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 		}
 		if(xCoordinate == fieldLength && yCoordinate == fieldLength){
-			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
 	}
 	
@@ -134,22 +134,22 @@ public class Controller {
 	 * @param xCoordinate
 	 * @param yCoordinate
 	 */
-	private void testBorderSpot(int xCoordinate, int yCoordinate){
+	private void testBorderSquare(int xCoordinate, int yCoordinate){
 		if(yCoordinate == 0){
-			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
 		}
 		if(yCoordinate == fieldLength){
-			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
 		if(xCoordinate == fieldLength){
-			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-			testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
 		if(xCoordinate == 0){
-			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-			testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
 		}
 	}
 	
@@ -158,11 +158,11 @@ public class Controller {
 	 * @param xCoordinate
 	 * @param yCoordinate
 	 */
-	private void testNormalSpot(int xCoordinate, int yCoordinate){
-		testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		testSpot(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		testSpot(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+	private void testInnerSquare(int xCoordinate, int yCoordinate){
+		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 	}
 	
 	/**
@@ -172,7 +172,7 @@ public class Controller {
 	 * @param xMax
 	 * @param yMax
 	 */
-	private void testSpot(int xMin, int yMin, int xMax, int yMax){
+	private void testSquare(int xMin, int yMin, int xMax, int yMax){
 		int counterPlayer1 = 0;
 		int counterPlayer2 = 0;
 		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){

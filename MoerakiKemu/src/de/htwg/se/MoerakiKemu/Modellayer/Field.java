@@ -1,6 +1,7 @@
 package de.htwg.se.MoerakiKemu.Modellayer;
 
 public class Field {
+	private int edgeLength;
 	private Spot[][] array;
 	
 	/**
@@ -14,13 +15,26 @@ public class Field {
 	 * Generic constructor for an arbitrary field size.
 	 * @param edgeLength Length of an edge of the square field.
 	 */
-	public Field(int edgeLength) {
+	public Field(int edgeLength) throws IllegalArgumentException {
+		if(edgeLength < 1) {
+			throw new IllegalArgumentException("Edgelength too small: " + edgeLength);
+		}
+		this.edgeLength = edgeLength;
 		array = new Spot[edgeLength][edgeLength];
 		for (int i = 0; i < edgeLength; i++) {
 			for (int j = 0; j < edgeLength; j++) {
 				array[i][j] = new Spot();
 			}
 		}
+	}
+	
+	/**
+	 * Returns the length of an edge of the square game field.
+	 *
+	 * @return Number > 0
+	 */
+	public int getEdgeLength() {
+		return this.edgeLength;
 	}
 
 	/**
