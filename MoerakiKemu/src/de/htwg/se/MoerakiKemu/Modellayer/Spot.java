@@ -11,7 +11,7 @@ public class Spot {
 	/**
 	 * Name of the player of with token on this field
 	 */
-	private String occupiedByPlayer;
+	private String occupiedByPlayer = "leer";
 	
 	/**
 	 * Creates a new unoccupied Spot.
