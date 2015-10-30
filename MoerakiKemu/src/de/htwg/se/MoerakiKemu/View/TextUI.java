@@ -30,8 +30,10 @@ public class TextUI {
 	public void drawCurrentState() {
 		int edgeLength = myController.getEdgeLength();
 		
+		printColumnIdentifiers(edgeLength);
 		for(int i = 0; i < edgeLength; i++) {
 			printLine(edgeLength);
+			System.out.print(i + 1);
 			for(int j = 0; j < edgeLength; j++) {
 				String playerString = myController.getIsOccupiedByPlayer(i, j);
 				char id = playerString.isEmpty() ? ' ' : playerString.charAt(playerString.length() - 1);
@@ -63,5 +65,22 @@ public class TextUI {
 			System.out.print("---");
 		}
 		System.out.println();
+	}
+	
+	private void printColumnIdentifiers(final int edgeLength) {
+		int numDigits = String.valueOf(edgeLength).length();
+
+		StringBuilder offsetBuilder = new StringBuilder();
+		for (int l = 0; l < numDigits; l++) {
+			offsetBuilder.append(" ");
+		}
+		String offset = offsetBuilder.toString();
+		
+		StringBuilder headlineBuilder = new StringBuilder(offset);
+		for (int i = 1; i <= edgeLength; i++) {
+			headlineBuilder.append(i);
+		}
+		
+		System.out.println(headlineBuilder.toString());
 	}
 }
