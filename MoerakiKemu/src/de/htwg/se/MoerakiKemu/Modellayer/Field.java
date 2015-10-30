@@ -15,7 +15,7 @@ public class Field {
 	 * Generic constructor for an arbitrary field size.
 	 * @param edgeLength Length of an edge of the square field.
 	 */
-	private Field(int edgeLength) {
+	public Field(int edgeLength) {
 		this.edgeLength = edgeLength;
 		array = new Spot[edgeLength][edgeLength];
 		for (int i = 0; i < edgeLength; i++) {
@@ -23,13 +23,6 @@ public class Field {
 				array[i][j] = new Spot();
 			}
 		}
-	}
-	/**
-	 * Getter - Method fo the Class Field
-	 * @return Returns thie Field
-	 */
-	public Spot[][] getField(){
-		return array;
 	}
 	
 	/**
@@ -43,7 +36,7 @@ public class Field {
 		if(array[Xcoordinate][Ycoordinate].isOccupied()){
 			return array[Xcoordinate][Ycoordinate].getOccupiedByPlayer();
 		}
-		return "leer";
+		return "";
 	}
 	
 	// Determine lines to edge of field
