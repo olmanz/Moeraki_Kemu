@@ -72,6 +72,8 @@ public class Controller {
 		}
 		int points = 0;
 		
+		int posPoint = testPositionOfPoint(Xcoordinate, Ycoordinate);
+		
 		// Calculate points and check if 4 spots of square selected
 		int xMin = Xcoordinate - 1;
 		int xMax = Xcoordinate + 1;
@@ -83,22 +85,19 @@ public class Controller {
 	}
 	
 	/**
-	 * Calculates the points after a player occupies a spot on the field
-	 * determined by the spots around the currently set one in the square.
 	 * 
-	 * @param xMin Lower x border of the square.
-	 * @param xMax Upper x border of the square.
-	 * @param yMin Lower y border of the square.
-	 * @param yMax Upper y border of the square.
-	 * @param playerName Name of the player that occupied the field.
-	 * @return The amount of points (0 - 4) for the current player.
+	 * @param XCoordinate
+	 * @param YCoordinate
+	 * @return 1 when the point is a edge, 2 if the point is a border - point and 3 if the point is somewhere in the middle of the field
 	 */
-//	private int setSpot(final int XCoordinate, final int YCoordinate,
-//						   final int xMin, final int xMax,
-//						   final int yMin, final int yMax,
-//						   final String playerName1, final String playerName2) {
-//		
-//
-//	
-//	}
+	private int testPositionOfPoint(int XCoordinate, int YCoordinate){
+		if((XCoordinate == 0 && YCoordinate == 0) || (XCoordinate == 0 && YCoordinate == fieldLength) ||
+		   (XCoordinate == fieldLength && YCoordinate == 0) || (XCoordinate == fieldLength && YCoordinate == fieldLength)){
+			return 1;
+		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
+			return 2;
+		} else {
+			return 3;
+		}
+	}
 }
