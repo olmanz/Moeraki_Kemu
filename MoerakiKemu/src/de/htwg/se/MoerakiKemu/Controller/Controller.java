@@ -22,6 +22,24 @@ public class Controller {
 	}
 	
 	/**
+	 * Returns the name of player1.
+	 *
+	 * @return A String, not null.
+	 */
+	public String getPlayer1Name() {
+		return player1.getName();
+	}
+
+	/**
+	 * Returns the name of player2.
+	 *
+	 * @return A String, not null.
+	 */
+	public String getPlayer2Name() {
+		return player2.getName();
+	}
+	
+	/**
 	 * Returns the points of the first player.
 	 *
 	 * @return Amount of points, 0 or more.

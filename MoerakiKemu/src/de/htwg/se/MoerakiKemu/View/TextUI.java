@@ -10,6 +10,12 @@ public class TextUI {
 		myController = controller;
 	}
 
+	public boolean processInputLine(final String line) {
+		// TODO: Implement
+		
+		return false;
+	}
+	
 	/**
 	 * Draws all Spots as squares with an Player-identifying character in it.
 	 * ------
