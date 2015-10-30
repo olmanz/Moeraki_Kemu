@@ -1,7 +1,6 @@
 package de.htwg.se.MoerakiKemu.Modellayer;
 
 public class Field {
-	private int edgeLength;
 	private Spot[][] array;
 	
 	/**
@@ -16,7 +15,6 @@ public class Field {
 	 * @param edgeLength Length of an edge of the square field.
 	 */
 	public Field(int edgeLength) {
-		this.edgeLength = edgeLength;
 		array = new Spot[edgeLength][edgeLength];
 		for (int i = 0; i < edgeLength; i++) {
 			for (int j = 0; j < edgeLength; j++) {
@@ -25,6 +23,34 @@ public class Field {
 		}
 	}
 
+	/**
+	 * Determines whether the Spot is occupied.
+	 *
+	 * @param x X-coordinate of the spot.
+	 * @param y Y-coordinate of the spot.
+	 * @return True if the Spot is occupied, else false.
+	 */
+	public boolean getIsOccupied(int x, int y) {
+		return !getIsOccupiedFrom(x, y).isEmpty();
+	}
+	
+	/**
+	 * Occupies a Spot if not already occupied.
+	 *
+	 * @param x X-coordinate of the spot.
+	 * @param y Y-coordinate of the spot.
+	 * @param playerName Name of the player to occupy the spot.
+	 * @return True if the spot is newly occupied, false if the Spot was already occupied.
+	 */
+	public boolean occupy(int x, int y, final String playerName) {
+		if (array[x][y].isOccupied()) {
+			return false;
+		} else {
+			array[x][y].occupy(playerName);
+			return true;
+		}
+	}
+	
 	/**
 	 * Determines if one special spot is occupied from a specific player.
 	 *
