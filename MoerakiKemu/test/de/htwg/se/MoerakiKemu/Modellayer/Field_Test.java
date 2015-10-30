@@ -23,9 +23,8 @@ public class Field_Test {
 
 	@Test
 	public void test_getIsOccupied_unoccupiedSpotReturnsFalse() {
-		assertFalse(field.getIsOccupied(1, 2));
+		assertEquals("", field.getIsOccupiedFrom(1, 2));
 	}
-
 	@Test
 	public void test_occupy_occupyEmptySpotReturnsNoPoints() {
 		assertTrue(field.occupy(2, 2, player1.getName()));
@@ -36,5 +35,4 @@ public class Field_Test {
 		assertTrue(field.occupy(2, 2, player1.getName()));
 		assertFalse(field.occupy(2, 2, player1.getName()));
 	}
-
 }
