@@ -13,7 +13,5 @@ public class Controller_Test {
 		controller = new Controller("Spieler1", "Spieler2");
 	}
 	
-	@Test
-	
 	
 }
