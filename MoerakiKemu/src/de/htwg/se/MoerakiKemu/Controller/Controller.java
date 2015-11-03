@@ -103,7 +103,7 @@ public class Controller {
 		boolean leftLowerCorner = XCoordinate == 0 && YCoordinate == fieldLength;
 		boolean rightUpperCorner = XCoordinate == fieldLength && YCoordinate == 0;
 		boolean rightLowerCorner = XCoordinate == fieldLength && YCoordinate == fieldLength;
-		if(leftUpperCorner || leftLowerCorner || rightUpperCorner || leftLowerCorner){
+		if(leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner){
 			testEdgeSquare(XCoordinate, YCoordinate);
 		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
 			testBorderSquare(XCoordinate, YCoordinate);
