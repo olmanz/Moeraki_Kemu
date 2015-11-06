@@ -32,7 +32,7 @@ jar {
 task pom << {
     pom {
         project {
-        	groupId 'de.htwg.se'
+        	groupId ''
   			artifactId 'MoerakiKemu'
             version '2.0'
         }
