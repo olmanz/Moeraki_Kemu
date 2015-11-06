@@ -7,20 +7,11 @@ repositories {
 }
 
 apply plugin: "java"
-apply plugin: "idea"
 apply plugin: "sonar-runner"
 apply plugin: "org.sonarqube"
 apply plugin: "eclipse"
 apply plugin: "maven"
 apply plugin: "jacoco"
-
-idea {
-    project {
-        //if you want to set specific jdk and language level
-        jdkName = '1.8'
-        languageLevel = '1.8'
-    }
-}
 
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api',  version: '2.2'
@@ -35,14 +26,14 @@ sourceSets {
 }
 
 jar {
-    manifest.attributes "Main-Class":"de.htwg.sudoku.Sudoku"
+    manifest.attributes "Main-Class":"de.htwg.se.MoerakiKemu"
 }
 
 task pom << {
     pom {
         project {
         	groupId 'de.htwg.se'
-  			artifactId 'de.htwg.se.sudoku2'
+  			artifactId 'de.htwg.se.MoerakiKemu'
             version '2.0'
         }
     }.withXml {
@@ -54,8 +45,8 @@ task pom << {
     
 sonarqube {
     properties {
-    property "sonar.projectName", "de.htwg.se.Sudoku2"
-    property "sonar.projectKey", "de.htwg.se.Sudoku2"
+    property "sonar.projectName", "de.htwg.se.MoerakiKemu"
+    property "sonar.projectKey", "de.htwg.se.MoerakiKemu"
     property "sonar.projectVersion", "2.0"
     property "sonar.binaries", "build/classes"
     property "sonar.java.coveragePlugin", "jacoco"
