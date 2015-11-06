@@ -8,11 +8,17 @@ public class Controller {
 	private Player player1;
 	private Player player2;
 	
+	private Player currentPlayer;
+	
 	private int pointsPlayer1;
 	private int pointsPlayer2;
 	
 	private Field gameField;
 	private int fieldLength;
+	
+	public Controller() {
+		this("", "");
+	}
 	
 	public Controller(final String player1Name, final String player2Name) {
 		gameField = new Field();
@@ -55,6 +61,20 @@ public class Controller {
 	 */
 	public int getPlayer2Points() {
 		return pointsPlayer2;
+	}
+	
+	public void selectNextPlayer() {
+		if(currentPlayer == null) {
+			currentPlayer = player1;
+		} else if(currentPlayer == player1) {
+			currentPlayer = player2;
+		} else {
+			currentPlayer = player1;
+		}
+	}
+	
+	public String getCurrentPlayerName() {
+		return currentPlayer.getName();
 	}
 	
 	/**

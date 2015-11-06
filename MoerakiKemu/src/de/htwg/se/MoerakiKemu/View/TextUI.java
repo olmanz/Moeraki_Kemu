@@ -17,9 +17,21 @@ public class TextUI {
 	 * @return
 	 */
 	public boolean processInputLine(final String line) {
+		System.out.println("Spieler x, was tun Sie?");
+		printOptions();
+		System.out.print("\t>> ");
 		// TODO: Implement
 		
+		// Setzen
+		
+		// Was noch?
+		
 		return false;
+	}
+	
+	private void printOptions() {
+		System.out.println("1) Setzen");
+		System.out.println("2) Aufgeben");
 	}
 	
 	public String queryPlayerName() {
