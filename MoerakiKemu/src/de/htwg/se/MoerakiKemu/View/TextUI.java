@@ -10,10 +10,21 @@ public class TextUI {
 		myController = controller;
 	}
 
+	/**
+	 * Parses the input from the user and call controller things.
+	 * 
+	 * @param line Input from the user.
+	 * @return
+	 */
 	public boolean processInputLine(final String line) {
 		// TODO: Implement
 		
 		return false;
+	}
+	
+	public String queryPlayerName() {
+		// Read name from console
+		return "";
 	}
 	
 	/**
@@ -56,29 +67,43 @@ public class TextUI {
 	}
 	
 	/**
-	 * Prints a horizontal line for separating lines of Spots.
-	 * 
-	 * @param edgeLength Number of Spots per edge.
+	 * Calculates the offset for the game field according to the length of the
+	 * number representing the edge length.
+	 *
+	 * @param edgeLength Length of the edge of the game field.
+	 * @return The empty spaces for offset as String, not null.
 	 */
-	private void printLine(int edgeLength) {
-		for(int i = 0; i < edgeLength; i++) {
-			System.out.print("---");
-		}
-		System.out.println();
-	}
-	
-	private void printColumnIdentifiers(final int edgeLength) {
+	private String offset(int edgeLength) {
 		int numDigits = String.valueOf(edgeLength).length();
 
 		StringBuilder offsetBuilder = new StringBuilder();
 		for (int l = 0; l < numDigits; l++) {
 			offsetBuilder.append(" ");
 		}
-		String offset = offsetBuilder.toString();
-		
-		StringBuilder headlineBuilder = new StringBuilder(offset);
+		return offsetBuilder.toString();
+	}
+	
+	/**
+	 * Prints a horizontal line for separating lines of Spots.
+	 * 
+	 * @param edgeLength Number of Spots per edge.
+	 */
+	private void printLine(int edgeLength) {
+		System.out.print(offset(edgeLength));
+		for(int i = 0; i < edgeLength; i++) {
+			System.out.print("---");
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Prints a line with numbers above the game field that identifies the collumns.
+	 * @param edgeLength Length of the game field.
+	 */
+	private void printColumnIdentifiers(final int edgeLength) {
+		StringBuilder headlineBuilder = new StringBuilder(offset(edgeLength));
 		for (int i = 1; i <= edgeLength; i++) {
-			headlineBuilder.append(i);
+			headlineBuilder.append(" ").append(i).append(" ");
 		}
 		
 		System.out.println(headlineBuilder.toString());
