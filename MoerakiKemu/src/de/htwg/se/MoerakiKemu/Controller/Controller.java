@@ -63,6 +63,11 @@ public class Controller {
 		return pointsPlayer2;
 	}
 	
+	/**
+	 * Determines the next player.
+	 * If the current player does not exist the player1 is selected.
+	 * Otherwise the other player is selected.
+	 */
 	public void selectNextPlayer() {
 		if(currentPlayer == null) {
 			currentPlayer = player1;
@@ -73,8 +78,17 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Returns the name of the current player.
+	 *
+	 * @return String or empty string, not null.
+	 */
 	public String getCurrentPlayerName() {
-		return currentPlayer.getName();
+		if(currentPlayer != null) {
+			return currentPlayer.getName();
+		} else {
+			return "";
+		}
 	}
 	
 	/**
