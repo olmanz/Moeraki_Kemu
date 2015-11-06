@@ -1,4 +1,4 @@
-package de.htwg.se.MoerakiKemu.Modellayer;
+package de.htwg.se.moeraki_kemu.modellayer;
 
 public class Player {
 

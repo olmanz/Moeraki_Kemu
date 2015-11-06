@@ -1,4 +1,4 @@
-package de.htwg.se.MoerakiKemu.Modellayer;
+package de.htwg.se.moeraki_kemu.modellayer;
 
 public class Spot {
 
@@ -32,7 +32,8 @@ public class Spot {
 			return false;
 		} else {
 			this.occupiedByPlayer = playerName;
-			return occupied = true;
+			occupied = true;
+			return occupied;
 		}
 	}
 

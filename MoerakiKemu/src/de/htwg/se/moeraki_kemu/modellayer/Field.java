@@ -1,4 +1,4 @@
-package de.htwg.se.MoerakiKemu.Modellayer;
+package de.htwg.se.moeraki_kemu.modellayer;
 
 public class Field {
 	private int edgeLength;
@@ -68,13 +68,13 @@ public class Field {
 	/**
 	 * Determines if one special spot is occupied from a specific player.
 	 *
-	 * @param Xcoordinate X coordinate of the spot.
-	 * @param Ycoordinate Y coordinate of the spot.
+	 * @param xCoordinate X coordinate of the spot.
+	 * @param yCoordinate Y coordinate of the spot.
 	 * @return The Name of the player if one of the player has occupied the spot or an empty String if not occupied.
 	 */	
-	public String getIsOccupiedFrom(int Xcoordinate, int Ycoordinate) {
-		if(array[Xcoordinate][Ycoordinate].isOccupied()){
-			return array[Xcoordinate][Ycoordinate].getOccupiedByPlayer();
+	public String getIsOccupiedFrom(int xCoordinate, int yCoordinate) {
+		if(array[xCoordinate][yCoordinate].isOccupied()){
+			return array[xCoordinate][yCoordinate].getOccupiedByPlayer();
 		}
 		return "";
 	}

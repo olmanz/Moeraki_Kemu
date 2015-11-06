@@ -1,7 +1,7 @@
-package de.htwg.se.MoerakiKemu.Controller;
+package de.htwg.se.moeraki_kemu.controller;
 
-import de.htwg.se.MoerakiKemu.Modellayer.Field;
-import de.htwg.se.MoerakiKemu.Modellayer.Player;
+import de.htwg.se.moeraki_kemu.modellayer.Field;
+import de.htwg.se.moeraki_kemu.modellayer.Player;
 
 public class Controller {
 
@@ -79,37 +79,53 @@ public class Controller {
 	
 	/**
 	 * Occupation of a Spot by a player. Returns -1 if the Spot is already occupied.
-	 * @param Xcoordinate X coordinate of the spot.
-	 * @param Ycoordinate Y coordinate of the spot.
+	 * @param xCoordinate X coordinate of the spot.
+	 * @param yCoordinate Y coordinate of the spot.
 	 * @param playerName Name of the Player.
 	 * @return The number of points (0 - 4) or -1 if the Spot is occupied.
 	 */
-	public int occupy(int Xcoordinate, int Ycoordinate) {
-		if(gameField.getIsOccupiedFrom(Xcoordinate, Ycoordinate) != "leer"){
+	public int occupy(int xCoordinate, int yCoordinate) {
+		if(gameField.getIsOccupiedFrom(xCoordinate, yCoordinate) != "leer"){
 			return -1;
 		}		
-		testPositionOfPoint(Xcoordinate, Ycoordinate);	
+		testPositionOfPoint(xCoordinate, yCoordinate);	
 		return 0;
 	}
 	
 	/**
 	 * This method test where the point is located
-	 * @param XCoordinate
-	 * @param YCoordinate
+	 * @param xCoordinate
+	 * @param yCoordinate
 	 * @return 1 when the point is a edge, 2 if the point is a border - point and 3 if the point is somewhere in the middle of the field
 	 */
-	private void testPositionOfPoint(int XCoordinate, int YCoordinate){
-		boolean leftUpperCorner = XCoordinate == 0 && YCoordinate == 0;
-		boolean leftLowerCorner = XCoordinate == 0 && YCoordinate == fieldLength;
-		boolean rightUpperCorner = XCoordinate == fieldLength && YCoordinate == 0;
-		boolean rightLowerCorner = XCoordinate == fieldLength && YCoordinate == fieldLength;
-		if(leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner){
-			testEdgeSquare(XCoordinate, YCoordinate);
-		} else if(XCoordinate == 0 || YCoordinate == 0 || XCoordinate == fieldLength || YCoordinate == fieldLength){
-			testBorderSquare(XCoordinate, YCoordinate);
+	private void testPositionOfPoint(int xCoordinate, int yCoordinate){
+		if(testIsEdge(xCoordinate, yCoordinate)){
+			testEdgeSquare(xCoordinate, yCoordinate);
+		} else if(testIsBorder(xCoordinate, yCoordinate)){
+			testBorderSquare(xCoordinate, yCoordinate);
 		} else {
-			testInnerSquare(XCoordinate, YCoordinate);
+			testInnerSquare(xCoordinate, yCoordinate);
 		}
+	}
+	
+	/*
+	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
+	 */
+	private boolean testIsEdge(int xCoordinate, int yCoordinate){
+		if((xCoordinate == 0 && yCoordinate == 0)||(xCoordinate == 0 && yCoordinate == fieldLength)||(xCoordinate == fieldLength && yCoordinate == 0)||(xCoordinate == fieldLength && yCoordinate == fieldLength)){
+			return true;
+		}
+		return false;
+	}
+	
+	/*
+	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
+	 */
+	private boolean testIsBorder(int xCoordinate, int yCoordinate){
+		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength || yCoordinate == fieldLength){
+			return true;
+		}
+		return false;
 	}
 	
 	/**
