@@ -1,4 +1,5 @@
-package de.htwg.se.MoerakiKemu.View;
+package de.htwg.se.moeraki_kemu.view;
+
 
 public class GUI implements UserInterface {
 

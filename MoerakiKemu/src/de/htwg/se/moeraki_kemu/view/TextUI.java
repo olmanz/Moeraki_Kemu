@@ -1,6 +1,6 @@
-package de.htwg.se.MoerakiKemu.View;
+package de.htwg.se.moeraki_kemu.view;
 
-import de.htwg.se.MoerakiKemu.Controller.Controller;
+import de.htwg.se.moeraki_kemu.controller.Controller;
 
 public class TextUI implements UserInterface {
 

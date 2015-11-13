@@ -1,11 +1,11 @@
-package de.htwg.se.MoerakiKemu.Modellayer;
+package de.htwg.se.moeraki_kemu.modellayer;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.MoerakiKemu.Modellayer.Spot;
+import de.htwg.se.moeraki_kemu.modellayer.Spot;
 
 public class Spot_test {
 	Spot spot;

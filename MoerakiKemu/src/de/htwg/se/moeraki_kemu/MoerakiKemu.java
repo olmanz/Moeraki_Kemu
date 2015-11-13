@@ -1,9 +1,9 @@
-package de.htwg.se.MoerakiKemu;
+package de.htwg.se.moeraki_kemu;
 
 import java.util.Scanner;
 
-import de.htwg.se.MoerakiKemu.Controller.Controller;
-import de.htwg.se.MoerakiKemu.View.TextUI;
+import de.htwg.se.moeraki_kemu.controller.Controller;
+import de.htwg.se.moeraki_kemu.view.TextUI;
 
 public class MoerakiKemu {
 
@@ -22,6 +22,7 @@ public class MoerakiKemu {
 		TextUI tui = new TextUI(controller);
 		tui.drawCurrentState();
 		// continue until the user decides to quit
+
 		boolean continu = true;
 		scanner = new Scanner(System.in);
 		while (continu) {
