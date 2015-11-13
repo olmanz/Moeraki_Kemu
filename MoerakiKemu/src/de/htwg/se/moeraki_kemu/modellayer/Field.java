@@ -6,13 +6,6 @@ public class Field {
 	private Spot[][] array;
 	
 	/**
-	 * Creates a field with the default size of 6 by 6.
-	 */
-	public Field() {
-		this(6);
-	}
-	
-	/**
 	 * Generic constructor for an arbitrary field size.
 	 * @param edgeLength Length of an edge of the square field.
 	 */

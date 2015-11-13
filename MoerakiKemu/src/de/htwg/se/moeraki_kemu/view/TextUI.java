@@ -12,6 +12,7 @@ public class TextUI implements UserInterface {
 	public TextUI(Controller controller) {
 		myController = controller;
 		scanner = new Scanner(System.in);
+		queryPlayerName();
 	}
 
 	/**
@@ -21,7 +22,7 @@ public class TextUI implements UserInterface {
 	 * @return
 	 */
 	public boolean processInputLine() {		
-		System.out.println("Spieler " + myController.getCurrentPlayerName() + ", was tun Sie?");
+		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		System.out.print("\t>> ");
 		// TODO: Implement
@@ -36,6 +37,7 @@ public class TextUI implements UserInterface {
 				break;
 			} else {
 				System.out.println("Falsche Eingabe!");
+				printOptions();
 			}
 		}
 		// Setzen
@@ -62,9 +64,14 @@ public class TextUI implements UserInterface {
 		}while(err == -1);
 	}
 	
-	public String queryPlayerName() {
-		//TODO: Read name from console
-		return "";
+	public  void queryPlayerName() {
+		String name1;
+		String name2;
+		System.out.print("Bitte Namen des ersten Spielers eingeben: ");
+		name1 = scanner.nextLine();
+		System.out.print("Bitte Namen des zweiten Spielers eingeben: ");
+		name2 = scanner.nextLine();
+		myController.setName(name1, name2);
 	}
 	
 	/**
@@ -87,7 +94,7 @@ public class TextUI implements UserInterface {
 			System.out.print(i + 1);
 			for(int j = 0; j < edgeLength; j++) {
 				String playerString = myController.getIsOccupiedByPlayer(i, j);
-				char id = playerString.isEmpty() ? ' ' : playerString.charAt(playerString.length() - 1);
+				char id = playerString.isEmpty() ? ' ' : playerString.charAt(0);
 				drawSpot(id);
 			}
 			System.out.println();
@@ -98,8 +105,8 @@ public class TextUI implements UserInterface {
 	}
 	
 	private void printPoints(){
-		System.out.println("Player 1: " + myController.getPlayer1Points() + " points");
-		System.out.println("Player 2: " + myController.getPlayer2Points() + " points");
+		System.out.println(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " points");
+		System.out.println(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " points");
 	}
 	
 	/**

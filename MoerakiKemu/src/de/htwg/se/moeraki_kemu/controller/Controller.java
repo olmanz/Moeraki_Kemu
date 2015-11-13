@@ -9,21 +9,14 @@ public class Controller {
 	private Player player2;
 	private Player currentPlayer;
 	
-	private int pointsPlayer1;
-	private int pointsPlayer2;
-	
 	private Field gameField;
 	private int fieldLength;
 	
-	public Controller() {
-		this("1","2");
-	}
-	
-	public Controller(final String player1Name, final String player2Name) {
-		gameField = new Field();
-		this.fieldLength = gameField.getEdgeLength();
-		player1 = new Player(player1Name);
-		player2 = new Player(player2Name);
+	public Controller(int fieldLength) {
+		gameField = new Field(fieldLength);
+		this.fieldLength = fieldLength;
+		player1 = new Player();
+		player2 = new Player();
 		currentPlayer = player1;
 	}
 	
@@ -47,6 +40,11 @@ public class Controller {
 	
 	public void quitGame(){
 		System.exit(0);
+	}
+	
+	public void setName(String player1name, String player2name){
+		player1.setName(player1name);
+		player2.setName(player2name);
 	}
 	
 	/**
@@ -73,7 +71,7 @@ public class Controller {
 	 * @return Amount of points, 0 or more.
 	 */
 	public int getPlayer1Points() {
-		return pointsPlayer1;
+		return player1.getPoints();
 	}
 
 	/**
@@ -82,7 +80,7 @@ public class Controller {
 	 * @return Amount of points, 0 or more.
 	 */
 	public int getPlayer2Points() {
-		return pointsPlayer2;
+		return player2.getPoints();
 	}
 	
 	/**
@@ -151,7 +149,8 @@ public class Controller {
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
 	 */
 	private boolean testIsEdge(int xCoordinate, int yCoordinate){
-		if((xCoordinate == 0 && yCoordinate == 0)||(xCoordinate == 0 && yCoordinate == fieldLength)||(xCoordinate == fieldLength && yCoordinate == 0)||(xCoordinate == fieldLength && yCoordinate == fieldLength)){
+		int maxLength = fieldLength - 1;
+		if((xCoordinate == 0 && yCoordinate == 0)||(xCoordinate == 0 && yCoordinate == maxLength)||(xCoordinate == maxLength && yCoordinate == 0)||(xCoordinate == maxLength && yCoordinate == maxLength)){
 			return true;
 		}
 		return false;
@@ -173,16 +172,17 @@ public class Controller {
 	 * @param yCoordinate
 	 */
 	private void testEdgeSquare(int xCoordinate, int yCoordinate){
+		int maxLength = fieldLength - 1;
 		if(xCoordinate == 0 && yCoordinate == 0){
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
 		}
-		if(xCoordinate == 0 && yCoordinate == fieldLength){
+		if(xCoordinate == 0 && yCoordinate == maxLength){
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
 		}
-		if(xCoordinate == fieldLength && yCoordinate == 0){
+		if(xCoordinate == maxLength && yCoordinate == 0){
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 		}
-		if(xCoordinate == fieldLength && yCoordinate == fieldLength){
+		if(xCoordinate == maxLength && yCoordinate == maxLength){
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
 	}
@@ -233,6 +233,7 @@ public class Controller {
 	private void testSquare(int xMin, int yMin, int xMax, int yMax){
 		int counterPlayer1 = 0;
 		int counterPlayer2 = 0;
+		
 		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){
 			if(gameField.getIsOccupiedFrom(xMin, yMin) == player1.getName()){
 				counterPlayer1 += 1;
@@ -272,7 +273,7 @@ public class Controller {
 	 * @param counter2
 	 */
 	private void getPointsOfPlayer(int counter1, int counter2){
-		if(counter1 == 3){
+		if(counter1 == 3  && counter2 == 1){
 			player1.addPoints(1);
 		}
 		if(counter1 == 4){
@@ -281,7 +282,7 @@ public class Controller {
 			// Print points with message
 			// Then quit
 		}
-		if(counter2 == 3){
+		if(counter2 == 3 && counter1 == 1){
 			player2.addPoints(1);
 		} 
 		if(counter2 == 4){

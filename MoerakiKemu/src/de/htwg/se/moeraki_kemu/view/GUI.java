@@ -10,9 +10,8 @@ public class GUI implements UserInterface {
 	}
 
 	@Override
-	public String queryPlayerName() {
+	public void queryPlayerName() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -16,9 +16,9 @@ public class Field_Test {
 
 	@Before
 	public void setUp() {
-		field = new Field();
-		player1 = new Player("alpha");
-		player2 = new Player("beta");
+		field = new Field(6);
+		player1 = new Player();
+		player2 = new Player();
 	}
 
 	@Test

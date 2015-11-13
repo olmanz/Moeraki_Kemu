@@ -15,7 +15,7 @@ public class MoerakiKemu {
 	public static void main(String[] args) {
 		// TODO Replace Comments with code
 
-		Controller controller = new Controller();
+		Controller controller = new Controller(12);
 
 		TextUI tui = new TextUI(controller);
 		// continue until the user decides to quit
