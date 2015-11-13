@@ -17,6 +17,27 @@ public class Controller_Test {
 	}
 	
 	@Test
+	public void test_selectNextPlayer_wasPlayerOneIsPlayerTwoNextPlayerOne() {
+		assertEquals(controller.getCurrentPlayerName(), "Player1");
+		controller.selectNextPlayer();
+		assertEquals(controller.getCurrentPlayerName(), "Player2");
+		controller.selectNextPlayer();
+		assertEquals(controller.getCurrentPlayerName(), "Player1");
+	}
+	
+	@Test
+	public void test_setName_isSpieler1Spieler2() {
+		controller.setName("Spieler1", "Spieler2");
+		assertEquals(controller.getPlayer1Name(), "Spieler1");
+		assertEquals(controller.getPlayer2Name(), "Spieler2");
+	}
+	
+	@Test
+	public void test_getEdgeLength_sixAsInitialized() {
+		assertEquals(controller.getEdgeLength(), 6);
+	}
+	
+	@Test
 	public void test_occupy_returnNullIfOccupied(){
 		for(int i = 1; i < 5; i++){
 			for(int j = 1; j <= 6; j++){
@@ -47,7 +68,7 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getPointsOfPlayer_returnPointsofCurrentPlayer(){
-		controller = new Controller(5);
+		Controller controller = new Controller(5);
 		controller.setName("Player1", "Player2");
 		
 		controller.occupy(1, 1);
@@ -64,23 +85,39 @@ public class Controller_Test {
 	}
 	
 	@Test
-	public void test_selectNextPlayer_wasPlayerOneIsPlayerTwoNextPlayerOne() {
-		assertEquals(controller.getCurrentPlayerName(), "Player1");
-		controller.selectNextPlayer();
-		assertEquals(controller.getCurrentPlayerName(), "Player2");
-		controller.selectNextPlayer();
-		assertEquals(controller.getCurrentPlayerName(), "Player1");
+	public void test_getPlayer1Points_returnPointsOfPlayer1(){
+		Controller controller = new Controller(5);
+		controller.setName("Player1", "Player2");
+		
+		controller.occupy(1, 1);
+		controller.occupy(3, 3);
+		controller.occupy(1, 2);
+		controller.occupy(3, 4);
+		controller.occupy(2, 1);
+		controller.occupy(3, 5);
+		controller.occupy(2, 2);
+		
+		assertEquals(1, controller.getPlayer1Points());
 	}
 	
 	@Test
-	public void test_setName_isSpieler1Spieler2() {
-		controller.setName("Spieler1", "Spieler2");
-		assertEquals(controller.getPlayer1Name(), "Spieler1");
-		assertEquals(controller.getPlayer2Name(), "Spieler2");
+	public void test_getPlayer2Points_returnPointsOfPlayer2(){
+		assertEquals(0, controller.getPlayer2Points());
 	}
 	
 	@Test
-	public void test_getEdgeLength_sixAsInitialized() {
-		assertEquals(controller.getEdgeLength(), 6);
+	public void test_getIsOccupiedByPlayer_retursTheOccupiedPlayer(){
+		Controller controller = new Controller(5);
+		controller.setName("Player1", "Player2");
+		
+		controller.occupy(1, 1);
+		controller.occupy(3, 3);
+		controller.occupy(1, 2);
+		controller.occupy(3, 4);
+		controller.occupy(2, 1);
+		controller.occupy(3, 5);
+		controller.occupy(2, 2);
+		
+		assertEquals("Player1", controller.getIsOccupiedByPlayer(1, 1));
 	}
 }
