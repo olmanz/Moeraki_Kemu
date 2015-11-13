@@ -33,7 +33,7 @@ task pom << {
     pom {
         project {
         	groupId 'de.htwg.se'
-  			artifactId 'moeraki-kemu.MoerakiKemu'
+  			artifactId 'SE2015WS-14-MoerakiKemu'
             version '2.0'
         }
     }.withXml {
