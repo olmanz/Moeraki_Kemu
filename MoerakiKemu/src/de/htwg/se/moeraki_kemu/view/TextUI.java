@@ -38,18 +38,21 @@ public class TextUI implements UserInterface {
 				System.out.println("Falsche Eingabe!");
 			}
 		}
-		// Setzen
-		
-		// Was noch?
-		
 		return false;
 	}
 	
+	/**
+	 * Prints the options that the player can do with the game.
+	 */
 	private void printOptions() {
 		System.out.println("1) Setzen");
 		System.out.println("2) Beenden");
 	}
 	
+	/**
+	 * Queries the X-/Y-Coordinate from CommandLine to set a Spot.
+	 * If the spot is occupied it keeps asking for new coordinates.
+	 */
 	private void setSpot(){
 		int err = -1;
 		do{
@@ -62,6 +65,9 @@ public class TextUI implements UserInterface {
 		}while(err == -1);
 	}
 	
+	/**
+	 * Queries and returns a String for a player name.
+	 */
 	public String queryPlayerName() {
 		//TODO: Read name from console
 		return "";
@@ -96,7 +102,10 @@ public class TextUI implements UserInterface {
 		printPoints();
 		
 	}
-	
+
+	/**
+	 * Prints the points for both players.
+	 */
 	private void printPoints(){
 		System.out.println("Player 1: " + myController.getPlayer1Points() + " points");
 		System.out.println("Player 2: " + myController.getPlayer2Points() + " points");
@@ -150,7 +159,6 @@ public class TextUI implements UserInterface {
 		for (int i = 1; i <= edgeLength; i++) {
 			headlineBuilder.append(" ").append(i).append(" ");
 		}
-		
 		System.out.println(headlineBuilder.toString());
 	}
 }
