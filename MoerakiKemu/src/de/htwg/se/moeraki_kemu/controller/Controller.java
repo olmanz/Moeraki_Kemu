@@ -7,18 +7,61 @@ public class Controller {
 
 	private Player player1;
 	private Player player2;
-	
-	private int pointsPlayer1;
-	private int pointsPlayer2;
+	private Player currentPlayer;	// Pointer to one of the players above
 	
 	private Field gameField;
 	private int fieldLength;
 	
-	public Controller(final String player1Name, final String player2Name) {
-		gameField = new Field();
-		this.fieldLength = gameField.getEdgeLength();
-		player1 = new Player(player1Name);
-		player2 = new Player(player2Name);
+	public Controller(int fieldLength) {
+		gameField = new Field(fieldLength);
+		this.fieldLength = fieldLength;
+		player1 = new Player();
+		player2 = new Player();
+		currentPlayer = player1;
+	}
+	
+	/**
+	 * Determines the player that has the next turn.
+	 * If no one is the current player then player1 begins.
+	 * Else player1 and player2 are altering the next player.
+	 */
+	public void selectNextPlayer() {
+		if(currentPlayer == null) {
+			currentPlayer = player1;
+		} else if(currentPlayer == player1) {
+			currentPlayer = player2;
+		} else {
+			currentPlayer = player1;
+		}
+	}
+	
+	/**
+	 * Returns the name of the current player.
+	 * @return String that may be empty, not null.
+	 */
+	public String getCurrentPlayerName() {
+		if(currentPlayer != null) {
+			return currentPlayer.getName();
+		} else {
+			return "";
+		}
+	}
+	
+	/**
+	 * Ends the program (and all UIs).
+	 */
+	public void quitGame(){
+		System.exit(0);
+	}
+	
+	/**
+	 * Set the names for both player1 and player2.
+	 * @param player1name Name for player1.
+	 * @param player2name Name for player2.
+	 */
+	public void setName(String player1name, String player2name){
+		player1.setName(player1name);
+		player2.setName(player2name);
 	}
 	
 	/**
@@ -45,7 +88,7 @@ public class Controller {
 	 * @return Amount of points, 0 or more.
 	 */
 	public int getPlayer1Points() {
-		return pointsPlayer1;
+		return player1.getPoints();
 	}
 
 	/**
@@ -54,7 +97,7 @@ public class Controller {
 	 * @return Amount of points, 0 or more.
 	 */
 	public int getPlayer2Points() {
-		return pointsPlayer2;
+		return player2.getPoints();
 	}
 	
 	/**
@@ -79,16 +122,27 @@ public class Controller {
 	
 	/**
 	 * Occupation of a Spot by a player. Returns -1 if the Spot is already occupied.
-	 * @param xCoordinate X coordinate of the spot.
-	 * @param yCoordinate Y coordinate of the spot.
+	 * @param xCoordinate X coordinate of the spot beginning from 1 to edgeLength.
+	 * @param yCoordinate Y coordinate of the spot beginning from 1 to edgeLength.
 	 * @param playerName Name of the Player.
-	 * @return The number of points (0 - 4) or -1 if the Spot is occupied.
+	 * @return returns 0 if the current player occupied the field and got points;
+	 * -1 if the spot already was occpuied.
 	 */
 	public int occupy(int xCoordinate, int yCoordinate) {
-		if(gameField.getIsOccupiedFrom(xCoordinate, yCoordinate) != "leer"){
+		int x = xCoordinate - 1;
+		int y = yCoordinate - 1;
+		if(gameField.isFilled()){
+			// Notify UIs:
+			// Print points with message
+			// Then quit
+		}
+		
+		if(gameField.getIsOccupiedFrom(x, y) != ""){
 			return -1;
 		}		
-		testPositionOfPoint(xCoordinate, yCoordinate);	
+		gameField.occupy(x, y, getCurrentPlayerName());
+		testPositionOfPoint(x, y);
+		selectNextPlayer();
 		return 0;
 	}
 	
@@ -108,17 +162,18 @@ public class Controller {
 		}
 	}
 	
-	/*
+	/**
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
 	 */
 	private boolean testIsEdge(int xCoordinate, int yCoordinate){
-		if((xCoordinate == 0 && yCoordinate == 0)||(xCoordinate == 0 && yCoordinate == fieldLength)||(xCoordinate == fieldLength && yCoordinate == 0)||(xCoordinate == fieldLength && yCoordinate == fieldLength)){
+		int maxLength = fieldLength - 1;
+		if((xCoordinate == 0 && yCoordinate == 0)||(xCoordinate == 0 && yCoordinate == maxLength)||(xCoordinate == maxLength && yCoordinate == 0)||(xCoordinate == maxLength && yCoordinate == maxLength)){
 			return true;
 		}
 		return false;
 	}
 	
-	/*
+	/**
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
 	 */
 	private boolean testIsBorder(int xCoordinate, int yCoordinate){
@@ -134,16 +189,17 @@ public class Controller {
 	 * @param yCoordinate
 	 */
 	private void testEdgeSquare(int xCoordinate, int yCoordinate){
+		int maxLength = fieldLength - 1;
 		if(xCoordinate == 0 && yCoordinate == 0){
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
 		}
-		if(xCoordinate == 0 && yCoordinate == fieldLength){
+		if(xCoordinate == 0 && yCoordinate == maxLength){
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
 		}
-		if(xCoordinate == fieldLength && yCoordinate == 0){
+		if(xCoordinate == maxLength && yCoordinate == 0){
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 		}
-		if(xCoordinate == fieldLength && yCoordinate == fieldLength){
+		if(xCoordinate == maxLength && yCoordinate == maxLength){
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
 	}
@@ -194,6 +250,7 @@ public class Controller {
 	private void testSquare(int xMin, int yMin, int xMax, int yMax){
 		int counterPlayer1 = 0;
 		int counterPlayer2 = 0;
+		
 		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){
 			if(gameField.getIsOccupiedFrom(xMin, yMin) == player1.getName()){
 				counterPlayer1 += 1;
@@ -233,19 +290,23 @@ public class Controller {
 	 * @param counter2
 	 */
 	private void getPointsOfPlayer(int counter1, int counter2){
-		if(counter1 == 3){
+		if(counter1 == 3  && counter2 == 1){
 			player1.addPoints(1);
 		}
 		if(counter1 == 4){
 			player1.addPoints(1);
-			//*The End?
+			// Notify UIs:
+			// Print points with message
+			// Then quit
 		}
-		if(counter2 == 3){
+		if(counter2 == 3 && counter1 == 1){
 			player2.addPoints(1);
 		} 
 		if(counter2 == 4){
 			player2.addPoints(1);
-			//*The End?
+			// Notify UIs:
+			// Print points with message
+			// Then quit
 		}
 	}
 	

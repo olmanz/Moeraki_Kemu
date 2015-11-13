@@ -16,8 +16,8 @@ public class Player {
 	 * Creates a new Player with a name and zero points.
 	 * @param name
 	 */
-	public Player(final String name) {
-		this.name = name;
+	public Player() {
+		name = "1";
 		points = 0;
 	}
 	
@@ -45,5 +45,9 @@ public class Player {
 		 if (amount >= 0) {
 			 points += amount;
 		 }
+	 }
+	 
+	 public void setName (String name){
+		 this.name = name;
 	 }
 }

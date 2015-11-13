@@ -12,7 +12,7 @@ public class Controller_Test {
 	
 	@Before
 	public void setUp(){
-		controller = new Controller("Spieler1", "Spieler2");
+		controller = new Controller(6);
 	}
 	
 	

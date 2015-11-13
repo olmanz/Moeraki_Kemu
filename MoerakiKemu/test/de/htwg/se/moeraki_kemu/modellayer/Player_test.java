@@ -13,11 +13,12 @@ public class Player_test {
 
 	@Before
 	public void setUp(){
-		player = new Player("alpha");
+		player = new Player();
 	}
 	
 	@Test
 	public void test_getName_returnNotNullString(){
+		player.setName("alpha");
 		assertEquals("alpha", player.getName());
 	}
 	

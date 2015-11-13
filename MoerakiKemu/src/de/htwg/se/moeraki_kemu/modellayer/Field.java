@@ -2,14 +2,8 @@ package de.htwg.se.moeraki_kemu.modellayer;
 
 public class Field {
 	private int edgeLength;
+	private int occupiedSpots;
 	private Spot[][] array;
-	
-	/**
-	 * Creates a field with the default size of 6 by 6.
-	 */
-	public Field() {
-		this(6);
-	}
 	
 	/**
 	 * Generic constructor for an arbitrary field size.
@@ -26,6 +20,7 @@ public class Field {
 				array[i][j] = new Spot();
 			}
 		}
+		occupiedSpots = 0;
 	}
 	
 	/**
@@ -61,6 +56,7 @@ public class Field {
 			return false;
 		} else {
 			array[x][y].occupy(playerName);
+			occupiedSpots++;
 			return true;
 		}
 	}
@@ -77,6 +73,14 @@ public class Field {
 			return array[xCoordinate][yCoordinate].getOccupiedByPlayer();
 		}
 		return "";
+	}
+	
+	public boolean isFilled(){
+		if(occupiedSpots == (edgeLength * edgeLength)){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// Determine lines to edge of field
