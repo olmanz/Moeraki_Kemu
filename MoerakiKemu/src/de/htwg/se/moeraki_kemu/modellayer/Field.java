@@ -75,6 +75,10 @@ public class Field {
 		return "";
 	}
 	
+	/**
+	 * Returns true if all Spots are occupied, else false.
+	 * @return
+	 */
 	public boolean isFilled(){
 		if(occupiedSpots == (edgeLength * edgeLength)){
 			return true;
