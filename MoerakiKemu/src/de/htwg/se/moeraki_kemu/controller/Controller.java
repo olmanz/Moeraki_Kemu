@@ -26,9 +26,7 @@ public class Controller {
 	 * Else player1 and player2 are altering the next player.
 	 */
 	public void selectNextPlayer() {
-		if(currentPlayer == null) {
-			currentPlayer = player1;
-		} else if(currentPlayer == player1) {
+		if(currentPlayer == player1) {
 			currentPlayer = player2;
 		} else {
 			currentPlayer = player1;
@@ -40,11 +38,7 @@ public class Controller {
 	 * @return String that may be empty, not null.
 	 */
 	public String getCurrentPlayerName() {
-		if(currentPlayer != null) {
-			return currentPlayer.getName();
-		} else {
-			return "";
-		}
+		return currentPlayer.getName();
 	}
 	
 	/**

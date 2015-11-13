@@ -13,7 +13,28 @@ public class Controller_Test {
 	@Before
 	public void setUp(){
 		controller = new Controller(6);
+		controller.setName("Player1", "Player2");
 	}
 	
 	
+	@Test
+	public void test_selectNextPlayer_wasPlayerOneIsPlayerTwoNextPlayerOne() {
+		assertEquals(controller.getCurrentPlayerName(), "Player1");
+		controller.selectNextPlayer();
+		assertEquals(controller.getCurrentPlayerName(), "Player2");
+		controller.selectNextPlayer();
+		assertEquals(controller.getCurrentPlayerName(), "Player1");
+	}
+	
+	@Test
+	public void test_setName_isSpieler1Spieler2() {
+		controller.setName("Spieler1", "Spieler2");
+		assertEquals(controller.getPlayer1Name(), "Spieler1");
+		assertEquals(controller.getPlayer2Name(), "Spieler2");
+	}
+	
+	@Test
+	public void test_getEdgeLength_sixAsInitialized() {
+		assertEquals(controller.getEdgeLength(), 6);
+	}
 }
