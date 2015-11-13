@@ -15,4 +15,10 @@ public class GUI implements UserInterface {
 		return null;
 	}
 
+	@Override
+	public void printMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
