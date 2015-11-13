@@ -177,7 +177,7 @@ public class Controller {
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
 	 */
 	private boolean testIsBorder(int xCoordinate, int yCoordinate){
-		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength || yCoordinate == fieldLength){
+		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength - 1 || yCoordinate == fieldLength - 1){
 			return true;
 		}
 		return false;
@@ -214,11 +214,11 @@ public class Controller {
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
 		}
-		if(yCoordinate == fieldLength){
+		if(yCoordinate == fieldLength - 1){
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
-		if(xCoordinate == fieldLength){
+		if(xCoordinate == fieldLength - 1){
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		}
@@ -293,7 +293,7 @@ public class Controller {
 		if(counter1 == 3  && counter2 == 1){
 			player1.addPoints(1);
 		}
-		if(counter1 == 4){
+		if(counter1 == 4){ 
 			player1.addPoints(1);
 			// Notify UIs:
 			// Print points with message
@@ -321,7 +321,7 @@ public class Controller {
 		} else if(player2.getName() == playerName){
 			return player2.getPoints();
 		} else {
-			return 0;
+			return -1;
 		}
 	}
 }
