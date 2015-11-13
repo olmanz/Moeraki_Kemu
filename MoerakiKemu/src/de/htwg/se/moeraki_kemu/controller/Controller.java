@@ -7,7 +7,7 @@ public class Controller {
 
 	private Player player1;
 	private Player player2;
-	private Player currentPlayer;
+	private Player currentPlayer;	// Pointer to one of the players above
 	
 	private Field gameField;
 	private int fieldLength;
@@ -20,6 +20,11 @@ public class Controller {
 		currentPlayer = player1;
 	}
 	
+	/**
+	 * Determines the player that has the next turn.
+	 * If no one is the current player then player1 begins.
+	 * Else player1 and player2 are altering the next player.
+	 */
 	public void selectNextPlayer() {
 		if(currentPlayer == null) {
 			currentPlayer = player1;
@@ -30,6 +35,10 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Returns the name of the current player.
+	 * @return String that may be empty, not null.
+	 */
 	public String getCurrentPlayerName() {
 		if(currentPlayer != null) {
 			return currentPlayer.getName();
@@ -38,10 +47,18 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Ends the program (and all UIs).
+	 */
 	public void quitGame(){
 		System.exit(0);
 	}
 	
+	/**
+	 * Set the names for both player1 and player2.
+	 * @param player1name Name for player1.
+	 * @param player2name Name for player2.
+	 */
 	public void setName(String player1name, String player2name){
 		player1.setName(player1name);
 		player2.setName(player2name);
@@ -145,7 +162,7 @@ public class Controller {
 		}
 	}
 	
-	/*
+	/**
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
 	 */
 	private boolean testIsEdge(int xCoordinate, int yCoordinate){
@@ -156,7 +173,7 @@ public class Controller {
 		return false;
 	}
 	
-	/*
+	/**
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
 	 */
 	private boolean testIsBorder(int xCoordinate, int yCoordinate){

@@ -8,8 +8,7 @@ public interface UserInterface {
 	void drawCurrentState();
 
 	/**
-	 * Get Player names from UI.
-	 * Set the playername in the controllerclass
+	 * Set the player name in the controller
 	 */
 	void queryPlayerName();
 
