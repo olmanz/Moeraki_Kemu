@@ -95,7 +95,7 @@ public class TextUI implements UserInterface {
 		printColumnIdentifiers(edgeLength);
 		for(int i = 0; i < edgeLength; i++) {
 			printLine(edgeLength);
-			System.out.print(i + 1);
+			printLeadingNumber(i + 1, edgeLength);
 			for(int j = 0; j < edgeLength; j++) {
 				String playerString = myController.getIsOccupiedByPlayer(i, j);
 				char id = playerString.isEmpty() ? ' ' : playerString.charAt(0);
@@ -108,6 +108,18 @@ public class TextUI implements UserInterface {
 		
 	}
 
+	private void printLeadingNumber(final int currentNumber, final int edgeLength) {
+		int offset = offset(edgeLength).length();
+		
+		StringBuilder builder = new StringBuilder(Integer.toString(currentNumber));
+		
+		while(builder.length() < offset) {
+			builder.append(" ");
+		}
+		
+		System.out.print(builder.toString());
+	}
+	
 	/**
 	 * Prints the points for both players.
 	 */
