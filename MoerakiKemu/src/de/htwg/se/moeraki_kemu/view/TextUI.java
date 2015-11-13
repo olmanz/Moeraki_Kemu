@@ -161,4 +161,8 @@ public class TextUI implements UserInterface {
 		}
 		System.out.println(headlineBuilder.toString());
 	}
+	
+	public void printMessage(String msg) {
+		System.out.println(msg);
+	}
 }
