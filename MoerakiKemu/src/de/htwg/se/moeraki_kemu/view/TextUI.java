@@ -40,18 +40,21 @@ public class TextUI implements UserInterface {
 				printOptions();
 			}
 		}
-		// Setzen
-		
-		// Was noch?
-		
 		return false;
 	}
 	
+	/**
+	 * Prints the options that the player can do with the game.
+	 */
 	private void printOptions() {
 		System.out.println("1) Setzen");
 		System.out.println("2) Beenden");
 	}
 	
+	/**
+	 * Queries the X-/Y-Coordinate from CommandLine to set a Spot.
+	 * If the spot is occupied it keeps asking for new coordinates.
+	 */
 	private void setSpot(){
 		int err = -1;
 		do{
@@ -72,6 +75,7 @@ public class TextUI implements UserInterface {
 		System.out.print("Bitte Namen des zweiten Spielers eingeben: ");
 		name2 = scanner.nextLine();
 		myController.setName(name1, name2);
+
 	}
 	
 	/**
@@ -103,7 +107,10 @@ public class TextUI implements UserInterface {
 		printPoints();
 		
 	}
-	
+
+	/**
+	 * Prints the points for both players.
+	 */
 	private void printPoints(){
 		System.out.println(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " points");
 		System.out.println(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " points");
@@ -161,7 +168,10 @@ public class TextUI implements UserInterface {
 				headlineBuilder.append(i).append(" ");
 			}
 		}
-		
 		System.out.println(headlineBuilder.toString());
+	}
+	
+	public void printMessage(String msg) {
+		System.out.println(msg);
 	}
 }
