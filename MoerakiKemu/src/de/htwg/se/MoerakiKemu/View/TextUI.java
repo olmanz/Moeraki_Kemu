@@ -2,7 +2,7 @@ package de.htwg.se.MoerakiKemu.View;
 
 import de.htwg.se.MoerakiKemu.Controller.Controller;
 
-public class TextUI {
+public class TextUI implements UserInterface {
 
 	Controller myController;
 
@@ -17,7 +17,7 @@ public class TextUI {
 	 * @return
 	 */
 	public boolean processInputLine(final String line) {
-		System.out.println("Spieler x, was tun Sie?");
+		System.out.println("Spieler " + myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		System.out.print("\t>> ");
 		// TODO: Implement
@@ -31,11 +31,11 @@ public class TextUI {
 	
 	private void printOptions() {
 		System.out.println("1) Setzen");
-		System.out.println("2) Aufgeben");
+		System.out.println("2) Beenden");
 	}
 	
 	public String queryPlayerName() {
-		// Read name from console
+		//TODO: Read name from console
 		return "";
 	}
 	
