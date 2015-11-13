@@ -155,7 +155,11 @@ public class TextUI implements UserInterface {
 	private void printColumnIdentifiers(final int edgeLength) {
 		StringBuilder headlineBuilder = new StringBuilder(offset(edgeLength));
 		for (int i = 1; i <= edgeLength; i++) {
-			headlineBuilder.append(" ").append(i).append(" ");
+			if(i < 10){
+				headlineBuilder.append(" ").append(i).append(" ");
+			} else {
+				headlineBuilder.append(i).append(" ");
+			}
 		}
 		
 		System.out.println(headlineBuilder.toString());
