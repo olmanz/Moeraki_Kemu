@@ -16,7 +16,7 @@ public class Controller {
 	private int fieldLength;
 	
 	public Controller() {
-		this("","");
+		this("1","2");
 	}
 	
 	public Controller(final String player1Name, final String player2Name) {
@@ -43,6 +43,10 @@ public class Controller {
 		} else {
 			return "";
 		}
+	}
+	
+	public void quitGame(){
+		System.exit(0);
 	}
 	
 	/**
@@ -103,16 +107,27 @@ public class Controller {
 	
 	/**
 	 * Occupation of a Spot by a player. Returns -1 if the Spot is already occupied.
-	 * @param xCoordinate X coordinate of the spot.
-	 * @param yCoordinate Y coordinate of the spot.
+	 * @param xCoordinate X coordinate of the spot beginning from 1 to edgeLength.
+	 * @param yCoordinate Y coordinate of the spot beginning from 1 to edgeLength.
 	 * @param playerName Name of the Player.
-	 * @return The number of points (0 - 4) or -1 if the Spot is occupied.
+	 * @return returns 0 if the current player occupied the field and got points;
+	 * -1 if the spot already was occpuied.
 	 */
 	public int occupy(int xCoordinate, int yCoordinate) {
-		if(gameField.getIsOccupiedFrom(xCoordinate, yCoordinate) != "leer"){
+		int x = xCoordinate - 1;
+		int y = yCoordinate - 1;
+		if(gameField.isFilled()){
+			// Notify UIs:
+			// Print points with message
+			// Then quit
+		}
+		
+		if(gameField.getIsOccupiedFrom(x, y) != ""){
 			return -1;
 		}		
-		testPositionOfPoint(xCoordinate, yCoordinate);	
+		gameField.occupy(x, y, getCurrentPlayerName());
+		testPositionOfPoint(x, y);
+		selectNextPlayer();
 		return 0;
 	}
 	
@@ -262,14 +277,18 @@ public class Controller {
 		}
 		if(counter1 == 4){
 			player1.addPoints(1);
-			//*The End?
+			// Notify UIs:
+			// Print points with message
+			// Then quit
 		}
 		if(counter2 == 3){
 			player2.addPoints(1);
 		} 
 		if(counter2 == 4){
 			player2.addPoints(1);
-			//*The End?
+			// Notify UIs:
+			// Print points with message
+			// Then quit
 		}
 	}
 	

@@ -7,8 +7,6 @@ import de.htwg.se.moeraki_kemu.view.TextUI;
 
 public class MoerakiKemu {
 
-	static Scanner scanner;
-
 	/**
 	 * Starts the game with TUI, GUI.
 	 *
@@ -20,13 +18,11 @@ public class MoerakiKemu {
 		Controller controller = new Controller();
 
 		TextUI tui = new TextUI(controller);
-		tui.drawCurrentState();
 		// continue until the user decides to quit
-
-		boolean continu = true;
-		scanner = new Scanner(System.in);
-		while (continu) {
-		    continu = tui.processInputLine(scanner.next());
+		
+		while (true) {
+			tui.drawCurrentState();
+			tui.processInputLine();
 		}
 
 	}

@@ -2,6 +2,7 @@ package de.htwg.se.moeraki_kemu.modellayer;
 
 public class Field {
 	private int edgeLength;
+	private int occupiedSpots;
 	private Spot[][] array;
 	
 	/**
@@ -26,6 +27,7 @@ public class Field {
 				array[i][j] = new Spot();
 			}
 		}
+		occupiedSpots = 0;
 	}
 	
 	/**
@@ -61,6 +63,7 @@ public class Field {
 			return false;
 		} else {
 			array[x][y].occupy(playerName);
+			occupiedSpots++;
 			return true;
 		}
 	}
@@ -77,6 +80,14 @@ public class Field {
 			return array[xCoordinate][yCoordinate].getOccupiedByPlayer();
 		}
 		return "";
+	}
+	
+	public boolean isFilled(){
+		if(occupiedSpots == (edgeLength * edgeLength)){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// Determine lines to edge of field

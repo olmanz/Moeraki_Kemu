@@ -1,13 +1,17 @@
 package de.htwg.se.moeraki_kemu.view;
 
+import java.util.Scanner;
+
 import de.htwg.se.moeraki_kemu.controller.Controller;
 
 public class TextUI implements UserInterface {
 
 	Controller myController;
+	static Scanner scanner;
 
 	public TextUI(Controller controller) {
 		myController = controller;
+		scanner = new Scanner(System.in);
 	}
 
 	/**
@@ -16,12 +20,24 @@ public class TextUI implements UserInterface {
 	 * @param line Input from the user.
 	 * @return
 	 */
-	public boolean processInputLine(final String line) {
+	public boolean processInputLine() {		
 		System.out.println("Spieler " + myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		System.out.print("\t>> ");
 		// TODO: Implement
-		
+		while(true){
+			String line = scanner.next();
+			if(line.equals("1")){
+				setSpot();
+				break;
+			} else if(line.equals("2")){
+				printPoints();
+				myController.quitGame();
+				break;
+			} else {
+				System.out.println("Falsche Eingabe!");
+			}
+		}
 		// Setzen
 		
 		// Was noch?
@@ -32,6 +48,18 @@ public class TextUI implements UserInterface {
 	private void printOptions() {
 		System.out.println("1) Setzen");
 		System.out.println("2) Beenden");
+	}
+	
+	private void setSpot(){
+		int err = -1;
+		do{
+			System.out.print("Bitte gib eine X - Koordinate ein: ");
+			int x = scanner.nextInt();
+			System.out.print("Bitte gib eine Y - koordinate ein: ");
+			int y = scanner.nextInt();
+			
+			err = myController.occupy(x, y);
+		}while(err == -1);
 	}
 	
 	public String queryPlayerName() {
@@ -65,8 +93,13 @@ public class TextUI implements UserInterface {
 			System.out.println();
 		}
 		printLine(edgeLength);
-		System.out.println("Player 1: " + myController.getPlayer1Points() + "points");
-		System.out.println("Player 2: " + myController.getPlayer2Points() + "points");
+		printPoints();
+		
+	}
+	
+	private void printPoints(){
+		System.out.println("Player 1: " + myController.getPlayer1Points() + " points");
+		System.out.println("Player 2: " + myController.getPlayer2Points() + " points");
 	}
 	
 	/**
