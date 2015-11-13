@@ -27,10 +27,10 @@ public class TextUI implements UserInterface {
 		System.out.print("\t>> ");
 		while(true){
 			String line = scanner.next();
-			if(line.equals("1")){
+			if("1".equals(line)){
 				setSpot();
 				break;
-			} else if(line.equals("2")){
+			} else if("2".equals(line)){
 				printPoints();
 				myController.quitGame();
 				break;
