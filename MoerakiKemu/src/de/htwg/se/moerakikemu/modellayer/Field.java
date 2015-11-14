@@ -80,11 +80,7 @@ public class Field {
 	 * @return
 	 */
 	public boolean isFilled(){
-		if(occupiedSpots == (edgeLength * edgeLength)){
-			return true;
-		} else {
-			return false;
-		}
+		return occupiedSpots == (edgeLength * edgeLength);
 	}
 	
 	// Determine lines to edge of field
