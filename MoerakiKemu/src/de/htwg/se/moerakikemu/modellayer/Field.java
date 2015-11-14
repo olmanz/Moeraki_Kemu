@@ -1,4 +1,4 @@
-package de.htwg.se.moeraki_kemu.modellayer;
+package de.htwg.se.moerakikemu.modellayer;
 
 public class Field {
 	private int edgeLength;

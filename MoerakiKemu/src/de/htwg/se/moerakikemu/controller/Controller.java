@@ -1,7 +1,7 @@
-package de.htwg.se.moeraki_kemu.controller;
+package de.htwg.se.moerakikemu.controller;
 
-import de.htwg.se.moeraki_kemu.modellayer.Field;
-import de.htwg.se.moeraki_kemu.modellayer.Player;
+import de.htwg.se.moerakikemu.modellayer.Field;
+import de.htwg.se.moerakikemu.modellayer.Player;
 
 public class Controller {
 

@@ -1,11 +1,11 @@
-package de.htwg.se.moeraki_kemu.controller;
+package de.htwg.se.moerakikemu.controller;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moeraki_kemu.controller.Controller;
+import de.htwg.se.moerakikemu.controller.Controller;
 
 public class Controller_Test {
 	Controller controller;

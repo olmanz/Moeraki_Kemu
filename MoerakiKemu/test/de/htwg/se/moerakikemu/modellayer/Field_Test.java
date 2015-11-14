@@ -1,12 +1,12 @@
-package de.htwg.se.moeraki_kemu.modellayer;
+package de.htwg.se.moerakikemu.modellayer;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moeraki_kemu.modellayer.Field;
-import de.htwg.se.moeraki_kemu.modellayer.Player;
+import de.htwg.se.moerakikemu.modellayer.Field;
+import de.htwg.se.moerakikemu.modellayer.Player;
 
 public class Field_Test {
 	
@@ -15,7 +15,6 @@ public class Field_Test {
 	Field field;
 	Player player1;
 	Player player2;
-	
 
 	@Before
 	public void setUp() {
