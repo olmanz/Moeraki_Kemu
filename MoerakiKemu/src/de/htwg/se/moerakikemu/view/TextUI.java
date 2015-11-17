@@ -1,8 +1,8 @@
-package de.htwg.se.moeraki_kemu.view;
+package de.htwg.se.moerakikemu.view;
 
 import java.util.Scanner;
 
-import de.htwg.se.moeraki_kemu.controller.Controller;
+import de.htwg.se.moerakikemu.controller.Controller;
 
 public class TextUI implements UserInterface {
 

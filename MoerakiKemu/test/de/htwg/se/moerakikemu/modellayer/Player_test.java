@@ -1,11 +1,11 @@
-package de.htwg.se.moeraki_kemu.modellayer;
+package de.htwg.se.moerakikemu.modellayer;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moeraki_kemu.modellayer.Player;
+import de.htwg.se.moerakikemu.modellayer.Player;
 
 
 public class Player_test {

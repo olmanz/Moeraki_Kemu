@@ -1,4 +1,4 @@
-package de.htwg.se.moeraki_kemu.view;
+package de.htwg.se.moerakikemu.view;
 
 public interface UserInterface {
 

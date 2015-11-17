@@ -1,4 +1,4 @@
-package de.htwg.se.moeraki_kemu.modellayer;
+package de.htwg.se.moerakikemu.modellayer;
 
 public class Field {
 	private int edgeLength;
@@ -75,12 +75,12 @@ public class Field {
 		return "";
 	}
 	
+	/**
+	 * Returns true if all Spots are occupied, else false.
+	 * @return
+	 */
 	public boolean isFilled(){
-		if(occupiedSpots == (edgeLength * edgeLength)){
-			return true;
-		} else {
-			return false;
-		}
+		return occupiedSpots == (edgeLength * edgeLength);
 	}
 	
 	// Determine lines to edge of field

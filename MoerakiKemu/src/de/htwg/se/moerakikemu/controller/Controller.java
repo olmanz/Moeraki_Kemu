@@ -1,7 +1,7 @@
-package de.htwg.se.moeraki_kemu.controller;
+package de.htwg.se.moerakikemu.controller;
 
-import de.htwg.se.moeraki_kemu.modellayer.Field;
-import de.htwg.se.moeraki_kemu.modellayer.Player;
+import de.htwg.se.moerakikemu.modellayer.Field;
+import de.htwg.se.moerakikemu.modellayer.Player;
 
 public class Controller {
 
@@ -161,10 +161,13 @@ public class Controller {
 	 */
 	private boolean testIsEdge(int xCoordinate, int yCoordinate){
 		int maxLength = fieldLength - 1;
-		if((xCoordinate == 0 && yCoordinate == 0)||(xCoordinate == 0 && yCoordinate == maxLength)||(xCoordinate == maxLength && yCoordinate == 0)||(xCoordinate == maxLength && yCoordinate == maxLength)){
-			return true;
-		}
-		return false;
+
+		boolean leftUpperCorner = xCoordinate == 0 && yCoordinate == 0;
+		boolean leftLowerCorner = xCoordinate == 0 && yCoordinate == maxLength;
+		boolean rightUpperCorner = xCoordinate == maxLength && yCoordinate == 0;
+		boolean rightLowerCorner = xCoordinate == maxLength && yCoordinate == maxLength;
+
+		return leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner;
 	}
 	
 	/**

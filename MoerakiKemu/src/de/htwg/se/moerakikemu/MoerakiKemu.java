@@ -1,7 +1,7 @@
-package de.htwg.se.moeraki_kemu;
+package de.htwg.se.moerakikemu;
 
-import de.htwg.se.moeraki_kemu.controller.Controller;
-import de.htwg.se.moeraki_kemu.view.TextUI;
+import de.htwg.se.moerakikemu.controller.Controller;
+import de.htwg.se.moerakikemu.view.TextUI;
 
 public class MoerakiKemu {
 
