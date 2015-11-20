@@ -245,15 +245,22 @@ public class Controller {
 	private void testSquare(int xMin, int yMin, int xMax, int yMax){
 		int []counterForPlayers = {0, 0};
 		
-		int []indices_x = {xMin, xMin, xMax, xMax};
-		int []indices_y = {yMin, yMax, yMin, yMax};
-		
 		int index;
-		for (int i = 0; i < 4; i++) {
-			index = checkOccupationReturnPlayerGettingPoint(indices_x[i], indices_y[i]);
-			if (index != -1) {
-				counterForPlayers[index]++;
-			}
+		index = checkOccupationReturnPlayerGettingPoint(xMin, yMin);
+		if (index != -1) {
+			counterForPlayers[index]++;
+		}
+		index = checkOccupationReturnPlayerGettingPoint(xMin, yMax);
+		if (index != -1) {
+			counterForPlayers[index]++;
+		}
+		index = checkOccupationReturnPlayerGettingPoint(xMax, yMin);
+		if (index != -1) {
+			counterForPlayers[index]++;
+		}
+		index = checkOccupationReturnPlayerGettingPoint(xMax, yMax);
+		if (index != -1) {
+			counterForPlayers[index]++;
 		}
 
 		getPointsOfPlayer(counterForPlayers[0], counterForPlayers[1]);
@@ -264,7 +271,7 @@ public class Controller {
 	 *
 	 * @param x X-coordinates of the Spot.
 	 * @param y Y-coordinates of the Spot.
-	 * @return Retuns the number of the player (>=0) or -1 if no player gets a point.
+	 * @return Returns the number of the player (>=0) or -1 if no player gets a point.
 	 */
 	int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
 		if(!gameField.getIsOccupiedFrom(x, y).equals("")){
@@ -278,7 +285,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Calculates and athe points the players get by counting the number of occupied Spots in a square.
+	 * Calculates and the points the players get by counting the number of occupied Spots in a square.
 	 * @param counter1 Number of Spots occupied by player1 in the current square.
 	 * @param counter2 Number of Spots occupied by player2 in the current square.
 	 */
