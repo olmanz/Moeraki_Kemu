@@ -32,7 +32,6 @@ public class TextUI implements UserInterface {
 				break;
 			} else if("2".equals(line)){
 				printPoints();
-				myController.quitGame();
 				break;
 			} else {
 				System.out.println("Falsche Eingabe!");
@@ -180,7 +179,7 @@ public class TextUI implements UserInterface {
 			}
 		}
 		System.out.println(headlineBuilder.toString());
-	}
+	} 
 	
 	public void printMessage(String msg) {
 		System.out.println(msg);
