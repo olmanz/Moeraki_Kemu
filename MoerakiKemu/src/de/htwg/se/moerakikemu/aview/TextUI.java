@@ -1,11 +1,14 @@
 package de.htwg.se.moerakikemu.aview;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import de.htwg.se.moerakikemu.controller.Controller;
 
 public class TextUI implements UserInterface {
 
+	private Logger logger = Logger. getLogger("de.htwg.sudoku.aview.tui");
+	
 	Controller myController;
 	static Scanner scanner;
 
@@ -21,10 +24,10 @@ public class TextUI implements UserInterface {
 	 * @param line Input from the user.
 	 * @return
 	 */
-	public boolean processInputLine() {		
-		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
+	public boolean processInputLine() {
+		logger.info(myController.getCurrentPlayerName() + ", was tun Sie?\n");
 		printOptions();
-		System.out.print("\t>> ");
+		logger.info("\t>> ");
 		boolean end = false;
 		while(!end){
 			String line = scanner.next();
@@ -35,7 +38,7 @@ public class TextUI implements UserInterface {
 				printPoints();
 				end = true;
 			} else {
-				System.out.println("Falsche Eingabe!");
+				logger.info("Falsche Eingabe!\n");
 				printOptions();
 			}
 		}
@@ -46,8 +49,8 @@ public class TextUI implements UserInterface {
 	 * Prints the options that the player can do with the game.
 	 */
 	private void printOptions() {
-		System.out.println("1) Setzen");
-		System.out.println("2) Beenden");
+		logger.info("1) Setzen\n");
+		logger.info("2) Beenden\n");
 	}
 	
 	/**
@@ -57,9 +60,9 @@ public class TextUI implements UserInterface {
 	private void setSpot(){
 		int err = -1;
 		do{
-			System.out.print("Bitte gib eine X - Koordinate ein: ");
+			logger.info("Bitte gib eine X - Koordinate ein: ");
 			int x = scanner.nextInt();
-			System.out.print("Bitte gib eine Y - koordinate ein: ");
+			logger.info("Bitte gib eine Y - koordinate ein: ");
 			int y = scanner.nextInt();
 			
 			err = myController.occupy(x, y);
@@ -69,9 +72,9 @@ public class TextUI implements UserInterface {
 	public  void queryPlayerName() {
 		String name1;
 		String name2;
-		System.out.print("Bitte Namen des ersten Spielers eingeben: ");
+		logger.info("Bitte Namen des ersten Spielers eingeben: ");
 		name1 = scanner.nextLine();
-		System.out.print("Bitte Namen des zweiten Spielers eingeben: ");
+		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
 		name2 = scanner.nextLine();
 		myController.setName(name1, name2);
 
@@ -100,7 +103,7 @@ public class TextUI implements UserInterface {
 				char id = playerString.isEmpty() ? ' ' : playerString.charAt(0);
 				drawSpot(id);
 			}
-			System.out.println();
+			logger.info("\n");
 		}
 		printLine(edgeLength);
 		printPoints();
@@ -116,15 +119,15 @@ public class TextUI implements UserInterface {
 			builder.append(" ");
 		}
 		
-		System.out.print(builder.toString());
+		logger.info(builder.toString());
 	}
 	
 	/**
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		System.out.println(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " points");
-		System.out.println(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " points");
+		logger.info(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " points\n");
+		logger.info(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " points\n");
 	}
 	
 	/**
@@ -133,7 +136,7 @@ public class TextUI implements UserInterface {
 	 * @param playerChar Identifier for the player or ' ' if not occupied by player.
 	 */
 	private void drawSpot(final char playerChar) {
-		System.out.print("|" + playerChar + "|");
+		logger.info("|" + playerChar + "|");
 	}
 	
 	/**
@@ -159,11 +162,11 @@ public class TextUI implements UserInterface {
 	 * @param edgeLength Number of Spots per edge.
 	 */
 	private void printLine(int edgeLength) {
-		System.out.print(offset(edgeLength));
+		logger.info(offset(edgeLength));
 		for(int i = 0; i < edgeLength; i++) {
-			System.out.print("---");
+			logger.info("---");
 		}
-		System.out.println();
+		logger.info("\n");
 	}
 	
 	/**
@@ -179,11 +182,11 @@ public class TextUI implements UserInterface {
 				headlineBuilder.append(i).append(" ");
 			}
 		}
-		System.out.println(headlineBuilder.toString());
+		logger.info(headlineBuilder.toString() + "\n");
 	} 
 	
 	public void printMessage(String msg) {
-		System.out.println(msg);
+		logger.info(msg + "\n");
 	}
 	
 	/**
@@ -193,7 +196,7 @@ public class TextUI implements UserInterface {
 	public boolean testQuit(){
 		String winner = myController.getWinner();
 		if(winner != null){
-			System.out.println("The Winner is player " + winner + "!!!");
+			logger.info("The Winner is player " + winner + "!!!\n");
 			return true;
 		}
 		return false;
