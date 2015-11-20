@@ -115,7 +115,7 @@ public class Controller {
 	 * @param yCoordinate Y coordinate of the spot beginning from 1 to edgeLength.
 	 * @param playerName Name of the Player.
 	 * @return returns 0 if the current player occupied the field and got points;
-	 * -1 if the spot already was occpuied.
+	 * -1 if the spot already was occupied.
 	 */
 	public int occupy(int xCoordinate, int yCoordinate) {
 		int x = xCoordinate - 1;
@@ -274,7 +274,7 @@ public class Controller {
 	 * @return Returns the number of the player (>=0) or -1 if no player gets a point.
 	 */
 	int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
-		if(!gameField.getIsOccupiedFrom(x, y).equals("")){
+		if(!"".equals(gameField.getIsOccupiedFrom(x, y))){
 			if(gameField.getIsOccupiedFrom(x, y).equals(player1.getName())) {
 				return 0;
 			} else if(gameField.getIsOccupiedFrom(x, y).equals(player2.getName())) {
@@ -320,9 +320,9 @@ public class Controller {
 	 * @return the points of player one or player two or if there is no player with the given name, this method returns 0
 	 */
 	public int getPointsOfPlayer(String playerName){
-		if(player1.getName() == playerName){
+		if(player1.getName().equals(playerName)){
 			return player1.getPoints();
-		} else if(player2.getName() == playerName){
+		} else if(player2.getName().equals(playerName)){
 			return player2.getPoints();
 		} else {
 			return -1;
