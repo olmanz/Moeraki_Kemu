@@ -19,7 +19,7 @@ public class MoerakiKemu {
 
 		TextUI tui = new TextUI(controller);
 
-		while (true) {
+		while (true) { 
 			tui.drawCurrentState();
 			tui.processInputLine();
 			if(tui.testQuit()){
