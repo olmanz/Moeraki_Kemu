@@ -12,6 +12,8 @@ public class Controller {
 	private Field gameField;
 	private int fieldLength;
 	
+	private String PlayerWin = null;
+	
 	public Controller(int fieldLength) {
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
@@ -167,7 +169,10 @@ public class Controller {
 		boolean rightUpperCorner = xCoordinate == maxLength && yCoordinate == 0;
 		boolean rightLowerCorner = xCoordinate == maxLength && yCoordinate == maxLength;
 
-		return leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner;
+		if (leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner){
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -292,19 +297,23 @@ public class Controller {
 		}
 		if(counter1 == 4){ 
 			player1.addPoints(1);
-			// Notify UIs:
-			// Print points with message
-			// Then quit
+			PlayerWin = player1.getName();
 		}
 		if(counter2 == 3 && counter1 == 1){
 			player2.addPoints(1);
 		} 
 		if(counter2 == 4){
 			player2.addPoints(1);
-			// Notify UIs:
-			// Print points with message
-			// Then quit
+			PlayerWin = player2.getName();
 		}
+	}
+	
+	/**
+	 * returns if a player has won
+	 * @return the player who has won;
+	 */
+	public String getWinner(){
+		return PlayerWin;
 	}
 	
 	/**

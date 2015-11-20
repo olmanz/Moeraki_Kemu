@@ -55,7 +55,6 @@ public class Controller_Test {
 		controller.occupy(1, 2);
 		controller.occupy(3, 4);
 		controller.occupy(2, 1);
-		controller.occupy(3, 5);
 		controller.occupy(2, 2);
 		
 		assertEquals(1, controller.getPointsOfPlayer("Player1"));
@@ -82,5 +81,20 @@ public class Controller_Test {
 	@Test
 	public void test_getEdgeLength_sixAsInitialized() {
 		assertEquals(controller.getEdgeLength(), 6);
+	}
+	
+	@Test
+	public void test_getQuit_gamefinished(){
+		controller.setName("Player1", "Player2");
+		
+		controller.occupy(1, 1);
+		controller.occupy(3, 3);
+		controller.occupy(1, 2);
+		controller.occupy(3, 4);
+		controller.occupy(2, 1);
+		controller.occupy(3, 5);
+		controller.occupy(2, 2);
+		
+		assertEquals("Player1", controller.getWinner());
 	}
 }

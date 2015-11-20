@@ -185,4 +185,17 @@ public class TextUI implements UserInterface {
 	public void printMessage(String msg) {
 		System.out.println(msg);
 	}
+	
+	/**
+	 * prints the winner and end the game
+	 * @return the boolean  - value for the MoerakiKemu - class to finish the game.
+	 */
+	public boolean testQuit(){
+		String winner = myController.getWinner();
+		if(winner != null){
+			System.out.println("The Winner is player " + winner + "!!!");
+			return true;
+		}
+		return false;
+	}
 }
