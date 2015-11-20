@@ -25,14 +25,15 @@ public class TextUI implements UserInterface {
 		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		System.out.print("\t>> ");
-		while(true){
+		boolean end = false;
+		while(!end){
 			String line = scanner.next();
 			if("1".equals(line)){
 				setSpot();
-				break;
+				end = true;
 			} else if("2".equals(line)){
 				printPoints();
-				break;
+				end = true;
 			} else {
 				System.out.println("Falsche Eingabe!");
 				printOptions();

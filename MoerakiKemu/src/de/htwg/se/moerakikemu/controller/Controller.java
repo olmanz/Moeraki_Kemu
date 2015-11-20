@@ -12,7 +12,7 @@ public class Controller {
 	private Field gameField;
 	private int fieldLength;
 	
-	private String PlayerWin = null;
+	private String playerWin = null;
 	
 	public Controller(int fieldLength) {
 		gameField = new Field(fieldLength);
@@ -290,14 +290,14 @@ public class Controller {
 		}
 		if(counter1 == 4){ 
 			player1.addPoints(1);
-			PlayerWin = player1.getName();
+			playerWin = player1.getName();
 		}
 		if(counter2 == 3 && counter1 == 1){
 			player2.addPoints(1);
 		} 
 		if(counter2 == 4){
 			player2.addPoints(1);
-			PlayerWin = player2.getName();
+			playerWin = player2.getName();
 		}
 	}
 	
@@ -306,7 +306,7 @@ public class Controller {
 	 * @return the player who has won;
 	 */
 	public String getWinner(){
-		return PlayerWin;
+		return playerWin;
 	}
 	
 	/**
