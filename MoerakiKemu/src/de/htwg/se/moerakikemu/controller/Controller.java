@@ -237,55 +237,53 @@ public class Controller {
 	
 	/**
 	 * test four positions and looks how much spots are occupied by players
-	 * @param xMin
-	 * @param yMin
-	 * @param xMax
-	 * @param yMax
+	 * @param xMin Left lower corner of the square.
+	 * @param yMin Right lower corner of the square.
+	 * @param xMax Left upper corner of the square.
+	 * @param yMax Right upper corner of the square.
 	 */
 	private void testSquare(int xMin, int yMin, int xMax, int yMax){
-		int counterPlayer1 = 0;
-		int counterPlayer2 = 0;
+		int []counterForPlayers = {0, 0};
 		
-		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){
-			if(gameField.getIsOccupiedFrom(xMin, yMin) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMin, yMin) == player2.getName()){
-				counterPlayer2 += 1;
-			}
-		} 
-		if(gameField.getIsOccupiedFrom(xMin, yMax) != ""){
-			if(gameField.getIsOccupiedFrom(xMin, yMax) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMin, yMax) == player2.getName()){
-				counterPlayer2 += 1;
-			}
-		} 
-		if(gameField.getIsOccupiedFrom(xMax, yMin) != ""){
-			if(gameField.getIsOccupiedFrom(xMax, yMax) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMax, yMax) == player2.getName()){
-				counterPlayer2 += 1;
+		int []indices_x = {xMin, xMin, xMax, xMax};
+		int []indices_y = {yMin, yMax, yMin, yMax};
+		
+		int index;
+		for (int i = 0; i < 4; i++) {
+			index = checkOccupationReturnPlayerGettingPoint(indices_x[i], indices_y[i]);
+			if (index != -1) {
+				counterForPlayers[index]++;
 			}
 		}
-		if(gameField.getIsOccupiedFrom(xMax, yMax) != ""){
-			if(gameField.getIsOccupiedFrom(xMax, yMax) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMax, yMax) == player2.getName()){
-				counterPlayer2 += 1;
-			}
-		}
-		
-		getPointsOfPlayer(counterPlayer1, counterPlayer2);
-		
+
+		getPointsOfPlayer(counterForPlayers[0], counterForPlayers[1]);
 	}
 	
 	/**
-	 * add the points the players get
-	 * @param counter1
-	 * @param counter2
+	 * Returns the number of the player who occupies a Spot from 0 (for player1).
+	 *
+	 * @param x X-coordinates of the Spot.
+	 * @param y Y-coordinates of the Spot.
+	 * @return Retuns the number of the player (>=0) or -1 if no player gets a point.
+	 */
+	int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
+		if(!gameField.getIsOccupiedFrom(x, y).equals("")){
+			if(gameField.getIsOccupiedFrom(x, y).equals(player1.getName())) {
+				return 0;
+			} else if(gameField.getIsOccupiedFrom(x, y).equals(player2.getName())) {
+				return 1;
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * Calculates and athe points the players get by counting the number of occupied Spots in a square.
+	 * @param counter1 Number of Spots occupied by player1 in the current square.
+	 * @param counter2 Number of Spots occupied by player2 in the current square.
 	 */
 	private void getPointsOfPlayer(int counter1, int counter2){
-		if(counter1 == 3  && counter2 == 1){
+		if(counter1 == 3 && counter2 == 1){
 			player1.addPoints(1);
 		}
 		if(counter1 == 4){ 
