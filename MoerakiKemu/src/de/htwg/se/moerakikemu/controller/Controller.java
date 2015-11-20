@@ -44,13 +44,6 @@ public class Controller {
 	}
 	
 	/**
-	 * Ends the program (and all UIs).
-	 */
-	public void quitGame(){
-		System.exit(0);
-	}
-	
-	/**
 	 * Set the names for both player1 and player2.
 	 * @param player1name Name for player1.
 	 * @param player2name Name for player2.
