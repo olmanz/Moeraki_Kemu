@@ -115,7 +115,7 @@ public class Controller {
 	 * @param yCoordinate Y coordinate of the spot beginning from 1 to edgeLength.
 	 * @param playerName Name of the Player.
 	 * @return returns 0 if the current player occupied the field and got points;
-	 * -1 if the spot already was occpuied.
+	 * -1 if the spot already was occupied.
 	 */
 	public int occupy(int xCoordinate, int yCoordinate) {
 		int x = xCoordinate - 1;
@@ -237,53 +237,59 @@ public class Controller {
 	
 	/**
 	 * test four positions and looks how much spots are occupied by players
-	 * @param xMin
-	 * @param yMin
-	 * @param xMax
-	 * @param yMax
+	 * @param xMin Left lower corner of the square.
+	 * @param yMin Right lower corner of the square.
+	 * @param xMax Left upper corner of the square.
+	 * @param yMax Right upper corner of the square.
 	 */
 	private void testSquare(int xMin, int yMin, int xMax, int yMax){
-		int counterPlayer1 = 0;
-		int counterPlayer2 = 0;
+		int []counterForPlayers = {0, 0};
 		
-		if(gameField.getIsOccupiedFrom(xMin,yMin) != ""){
-			if(gameField.getIsOccupiedFrom(xMin, yMin) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMin, yMin) == player2.getName()){
-				counterPlayer2 += 1;
-			}
-		} 
-		if(gameField.getIsOccupiedFrom(xMin, yMax) != ""){
-			if(gameField.getIsOccupiedFrom(xMin, yMax) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMin, yMax) == player2.getName()){
-				counterPlayer2 += 1;
-			}
-		} 
-		if(gameField.getIsOccupiedFrom(xMax, yMin) != ""){
-			if(gameField.getIsOccupiedFrom(xMax, yMax) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMax, yMax) == player2.getName()){
-				counterPlayer2 += 1;
-			}
+		int index;
+		index = checkOccupationReturnPlayerGettingPoint(xMin, yMin);
+		if (index != -1) {
+			counterForPlayers[index]++;
 		}
-		if(gameField.getIsOccupiedFrom(xMax, yMax) != ""){
-			if(gameField.getIsOccupiedFrom(xMax, yMax) == player1.getName()){
-				counterPlayer1 += 1;
-			} else if(gameField.getIsOccupiedFrom(xMax, yMax) == player2.getName()){
-				counterPlayer2 += 1;
-			}
+		index = checkOccupationReturnPlayerGettingPoint(xMin, yMax);
+		if (index != -1) {
+			counterForPlayers[index]++;
 		}
-		
-		setPointsOfPlayer(counterPlayer1, counterPlayer2);
-		
+		index = checkOccupationReturnPlayerGettingPoint(xMax, yMin);
+		if (index != -1) {
+			counterForPlayers[index]++;
+		}
+		index = checkOccupationReturnPlayerGettingPoint(xMax, yMax);
+		if (index != -1) {
+			counterForPlayers[index]++;
+		}
+
+		setPointsOfPlayer(counterForPlayers[0], counterForPlayers[1]);
 	}
 	
 	/**
-	 * add the points the players get
-	 * @param counter1
-	 * @param counter2
+	 * Returns the number of the player who occupies a Spot from 0 (for player1).
+	 *
+	 * @param x X-coordinates of the Spot.
+	 * @param y Y-coordinates of the Spot.
+	 * @return Returns the number of the player (>=0) or -1 if no player gets a point.
 	 */
+	int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
+		if(!"".equals(gameField.getIsOccupiedFrom(x, y))){
+			if(gameField.getIsOccupiedFrom(x, y).equals(player1.getName())) {
+				return 0;
+			} else if(gameField.getIsOccupiedFrom(x, y).equals(player2.getName())) {
+				return 1;
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * Calculates and the points the players get by counting the number of occupied Spots in a square.
+	 * @param counter1 Number of Spots occupied by player1 in the current square.
+	 * @param counter2 Number of Spots occupied by player2 in the current square.
+	 */
+
 	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
 			player1.addPoints(1);
@@ -322,9 +328,9 @@ public class Controller {
 	 * @return the points of player one or player two or if there is no player with the given name, this method returns 0
 	 */
 	public int getPointsOfPlayer(String playerName){
-		if(player1.getName() == playerName){
+		if(player1.getName().equals(playerName)){
 			return player1.getPoints();
-		} else if(player2.getName() == playerName){
+		} else if(player2.getName().equals(playerName)){
 			return player2.getPoints();
 		} else {
 			return -1;
