@@ -1,13 +1,17 @@
 package de.htwg.se.moerakikemu.aview;
 
+
 import java.util.Scanner;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import de.htwg.se.moerakikemu.controller.Controller;
 
+
 public class TextUI implements UserInterface {
 
-	private Logger logger = Logger.getLogger("de.htwg.se.moerakikemu.aview.TextUI");
+	static Logger logger = LogManager.getLogger(TextUI.class);
 	
 	Controller myController;
 	static Scanner scanner;
