@@ -24,7 +24,7 @@ public class MoerakiKemu {
 			tui.drawCurrentState();
 			tui.processInputLine();
 			finished = controller.testIfWinnerExists();
-			if(finished == true)
+			if(finished)
 				tui.Quit();
 		}
 
