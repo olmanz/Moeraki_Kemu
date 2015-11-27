@@ -275,7 +275,7 @@ public class Controller {
 			}
 		}
 		
-		getPointsOfPlayer(counterPlayer1, counterPlayer2);
+		setPointsOfPlayer(counterPlayer1, counterPlayer2);
 		
 	}
 	
@@ -284,7 +284,7 @@ public class Controller {
 	 * @param counter1
 	 * @param counter2
 	 */
-	private void getPointsOfPlayer(int counter1, int counter2){
+	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
 			player1.addPoints(1);
 		}
@@ -306,6 +306,13 @@ public class Controller {
 	 * @return the player who has won;
 	 */
 	public String getWinner(){
+		if(playerWin == null){
+			if(player1.getPoints() > player2.getPoints()){
+				playerWin = player1.getName();
+			} else if(player1.getPoints() < player2.getPoints()){
+				playerWin = player2.getName();
+			}
+		}
 		return playerWin;
 	}
 	
@@ -322,5 +329,23 @@ public class Controller {
 		} else {
 			return -1;
 		}
+	}
+	
+	/**
+	 * ends the game
+	 */
+	public void endGame(){
+		System.exit(0);
+	}
+	
+	/**
+	 * test if there is a winner
+	 * @return true if there is a winner, false when there isnt one;
+	 */
+	public boolean testWinner(){
+		if(playerWin != null){
+			return true;
+		}
+		return false;
 	}
 }

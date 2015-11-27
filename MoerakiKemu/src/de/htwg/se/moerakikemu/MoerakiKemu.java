@@ -22,9 +22,6 @@ public class MoerakiKemu {
 		while (true) { 
 			tui.drawCurrentState();
 			tui.processInputLine();
-			if(tui.testQuit()){
-				break;
-			}
 		}
 
 	}
