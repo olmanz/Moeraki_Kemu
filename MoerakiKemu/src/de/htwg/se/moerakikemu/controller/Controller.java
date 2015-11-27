@@ -263,7 +263,7 @@ public class Controller {
 			counterForPlayers[index]++;
 		}
 
-		getPointsOfPlayer(counterForPlayers[0], counterForPlayers[1]);
+		setPointsOfPlayer(counterForPlayers[0], counterForPlayers[1]);
 	}
 	
 	/**
@@ -289,8 +289,9 @@ public class Controller {
 	 * @param counter1 Number of Spots occupied by player1 in the current square.
 	 * @param counter2 Number of Spots occupied by player2 in the current square.
 	 */
-	private void getPointsOfPlayer(int counter1, int counter2){
-		if(counter1 == 3 && counter2 == 1){
+
+	private void setPointsOfPlayer(int counter1, int counter2){
+		if(counter1 == 3  && counter2 == 1){
 			player1.addPoints(1);
 		}
 		if(counter1 == 4){ 
@@ -311,6 +312,13 @@ public class Controller {
 	 * @return the player who has won;
 	 */
 	public String getWinner(){
+		if(playerWin == null){
+			if(player1.getPoints() > player2.getPoints()){
+				playerWin = player1.getName();
+			} else if(player1.getPoints() < player2.getPoints()){
+				playerWin = player2.getName();
+			}
+		}
 		return playerWin;
 	}
 	
@@ -327,5 +335,23 @@ public class Controller {
 		} else {
 			return -1;
 		}
+	}
+	
+	/**
+	 * ends the game
+	 */
+	public void endGame(){
+		System.exit(0);
+	}
+	
+	/**
+	 * test if there is a winner
+	 * @return true if there is a winner, false when there isnt one;
+	 */
+	public boolean testWinner(){
+		if(playerWin != null){
+			return true;
+		}
+		return false;
 	}
 }

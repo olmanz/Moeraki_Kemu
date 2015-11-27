@@ -1,6 +1,6 @@
 package de.htwg.se.moerakikemu.aview;
 
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.Logger;
@@ -28,33 +28,35 @@ public class TextUI implements UserInterface {
 	 * @param line Input from the user.
 	 * @return
 	 */
-	public boolean processInputLine() {
-		logger.info(myController.getCurrentPlayerName() + ", was tun Sie?\n");
+	public void processInputLine() {
+		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
-		logger.info("\t>> ");
-		boolean end = false;
-		while(!end){
+		while(true){
 			String line = scanner.next();
 			if("1".equals(line)){
 				setSpot();
-				end = true;
+				if(myController.testWinner()){
+					Quit();
+				}
+				break;
 			} else if("2".equals(line)){
+				System.out.println("Spiel beendet!");
 				printPoints();
-				end = true;
+				Quit();
 			} else {
 				logger.info("Falsche Eingabe!\n");
 				printOptions();
 			}
 		}
-		return false;
 	}
 	
 	/**
 	 * Prints the options that the player can do with the game.
 	 */
 	private void printOptions() {
-		logger.info("1) Setzen\n");
-		logger.info("2) Beenden\n");
+		System.out.println("1) Setzen");
+		System.out.println("2) Beenden");
+		System.out.print("\t>> ");
 	}
 	
 	/**
@@ -63,13 +65,30 @@ public class TextUI implements UserInterface {
 	 */
 	private void setSpot(){
 		int err = -1;
+		boolean errorInput;
+		int x = 0, y = 0;
 		do{
-			logger.info("Bitte gib eine X - Koordinate ein: ");
-			int x = scanner.nextInt();
-			logger.info("Bitte gib eine Y - koordinate ein: ");
-			int y = scanner.nextInt();
+			errorInput = false;
+			System.out.print("Bitte gib eine X - Koordinate ein: ");	
+			try{
+			x = scanner.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Falsche Eingabe!");
+				errorInput = true;
+				scanner.nextLine();
+			}
+			System.out.print("Bitte gib eine Y - Koordinate ein: ");
+			try{
+			y = scanner.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Falsche Eingabe!");
+				errorInput = true;
+				scanner.nextLine();
+			}
 			
-			err = myController.occupy(x, y);
+			if(!errorInput){
+				err = myController.occupy(x, y);
+			}
 		}while(err == -1);
 	}
 	
@@ -130,8 +149,8 @@ public class TextUI implements UserInterface {
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		logger.info(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " points\n");
-		logger.info(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " points\n");
+		logger.info(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " Punkte\n");
+		logger.info(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " Punkte\n");
 	}
 	
 	/**
@@ -199,12 +218,13 @@ public class TextUI implements UserInterface {
 	 *
 	 * @return the boolean  - value for the MoerakiKemu - class to finish the game.
 	 */
-	public boolean testQuit(){
+	public void Quit(){
 		String winner = myController.getWinner();
 		if(winner != null){
 			logger.info("The Winner is player " + winner + "!!!\n");
-			return true;
+		} else {
+			System.out.println("Unentschieden");
 		}
-		return false;
+		myController.endGame();
 	}
 }
