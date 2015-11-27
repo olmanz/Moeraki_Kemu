@@ -29,7 +29,7 @@ public class TextUI implements UserInterface {
 	 * @return
 	 */
 	public void processInputLine() {
-		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
+		logger.info(myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		while(true){
 			String line = scanner.next();
@@ -40,11 +40,11 @@ public class TextUI implements UserInterface {
 				}
 				break;
 			} else if("2".equals(line)){
-				System.out.println("Spiel beendet!");
+				logger.warn("Spiel beendet!");
 				printPoints();
 				Quit();
 			} else {
-				logger.info("Falsche Eingabe!\n");
+				logger.warn("Falsche Eingabe!\n");
 				printOptions();
 			}
 		}
@@ -69,19 +69,19 @@ public class TextUI implements UserInterface {
 		int x = 0, y = 0;
 		do{
 			errorInput = false;
-			System.out.print("Bitte gib eine X - Koordinate ein: ");	
+			logger.info("Bitte gib eine X - Koordinate ein: ");	
 			try{
 			x = scanner.nextInt();
 			}catch(InputMismatchException e){
-				System.out.println("Falsche Eingabe!");
+				logger.warn("Falsche Eingabe!");
 				errorInput = true;
 				scanner.nextLine();
 			}
-			System.out.print("Bitte gib eine Y - Koordinate ein: ");
+			logger.info("Bitte gib eine Y - Koordinate ein: ");
 			try{
 			y = scanner.nextInt();
 			}catch(InputMismatchException e){
-				System.out.println("Falsche Eingabe!");
+				logger.warn("Falsche Eingabe!");
 				errorInput = true;
 				scanner.nextLine();
 			}
@@ -221,9 +221,9 @@ public class TextUI implements UserInterface {
 	public void Quit(){
 		String winner = myController.getWinner();
 		if(winner != null){
-			logger.info("The Winner is player " + winner + "!!!\n");
+			logger.info("Der Gewinner ist " + winner + "!!!\n");
 		} else {
-			System.out.println("Unentschieden");
+			logger.info("Unentschieden");
 		}
 		myController.endGame();
 	}
