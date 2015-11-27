@@ -7,7 +7,7 @@ import de.htwg.se.moerakikemu.controller.Controller;
 
 public class TextUI implements UserInterface {
 
-	private Logger logger = Logger. getLogger("de.htwg.sudoku.aview.tui");
+	private Logger logger = Logger.getLogger("de.htwg.se.moerakikemu.aview.TextUI");
 	
 	Controller myController;
 	static Scanner scanner;
@@ -158,7 +158,7 @@ public class TextUI implements UserInterface {
 	
 	/**
 	 * Prints a horizontal line for separating lines of Spots.
-	 * 
+	 *
 	 * @param edgeLength Number of Spots per edge.
 	 */
 	private void printLine(int edgeLength) {
@@ -170,7 +170,8 @@ public class TextUI implements UserInterface {
 	}
 	
 	/**
-	 * Prints a line with numbers above the game field that identifies the collumns.
+	 * Prints a line with numbers above the game field that identifies the columns.
+	 *
 	 * @param edgeLength Length of the game field.
 	 */
 	private void printColumnIdentifiers(final int edgeLength) {
@@ -190,7 +191,8 @@ public class TextUI implements UserInterface {
 	}
 	
 	/**
-	 * prints the winner and end the game
+	 * Prints the winner and ends the game.
+	 *
 	 * @return the boolean  - value for the MoerakiKemu - class to finish the game.
 	 */
 	public boolean testQuit(){
