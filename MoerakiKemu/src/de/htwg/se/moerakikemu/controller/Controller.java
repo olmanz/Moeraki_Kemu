@@ -135,6 +135,7 @@ public class Controller {
 		helper = new ControllerHelper(x, y, (fieldLength - 1));
 		helper.testSquare();
 		testListOfSquares();
+		helper.resetSquareTest();
 //		testPositionOfPoint
 		selectNextPlayer();
 		return 0;

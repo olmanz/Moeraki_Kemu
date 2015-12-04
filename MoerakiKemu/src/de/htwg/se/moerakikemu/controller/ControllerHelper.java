@@ -3,21 +3,28 @@ package de.htwg.se.moerakikemu.controller;
 public class ControllerHelper {
 	private int x,y, maxLength;
 	private int[] squareArray;
+	private boolean finished;
+	private Square square;
 	
 	public ControllerHelper (int xCoordinates, int yCoordinates, int maxLength){
 		this.x = xCoordinates;
 		this.y = yCoordinates;
 		this.maxLength = maxLength;
+		this.finished = false;
 		this.squareArray = new int[16];
+		this.square = new Square();
 	}
 
 	public void testSquare(){
-		Square square = new Square();
 		square.test();
 	}
 	
 	public int[] getSquareArray(){
 		return squareArray;
+	}
+	
+	public void resetSquareTest(){
+		square.resetSquare();
 	}
 	
 	class Square {
@@ -31,8 +38,14 @@ public class ControllerHelper {
 			squareState = s;
 		}
 		
+		public void resetSquare(){
+			setSquare(new EdgeSquare());
+		}
+		
 		public void test(){
-			squareState.test(this);
+			while(finished != true){
+				squareState.test(this);
+			}
 		}
 	}
 	
@@ -44,12 +57,16 @@ public class ControllerHelper {
 		public void test(Square square){
 			if(x == 0 && y == 0){
 				setArray(0, x, y, x + 1, y + 1);
+				finished = true;
 			} else if(x == 0 && y == maxLength){
 				setArray(0, x, y, x + 1, y - 1);
+				finished = true;
 			} else if(x == maxLength && y == 0){
 				setArray(0, x, y, x - 1, y + 1);
+				finished = true;
 			} else if(x == maxLength && y == maxLength){
 				setArray(0, x, y, x - 1, y - 1);
+				finished = true;
 			}else {
 				square.setSquare(new BorderSquare());
 			}
@@ -57,19 +74,28 @@ public class ControllerHelper {
 	}
 	
 	class BorderSquare implements SquareState{
+		
+		public BorderSquare(){
+			test(square);
+		}
+		
 		public void test(Square square){
 			if(x == 0){
 				setArray(0, x, y, x - 1, y + 1);
 				setArray(4, x, y, x + 1, y + 1);
+				finished = true;
 			} else if(y == 0){
 				setArray(0, x, y, x + 1, y - 1);
 				setArray(4, x, y, x - 1, y - 1);
+				finished = true;
 			} else if(x == maxLength){
 				setArray(0, x, y, x - 1, y + 1);
 				setArray(4, x, y, x - 1, y - 1);
+				finished = true;
 			} else if(y == maxLength){
 				setArray(0, x, y, x + 1, y + 1);
 				setArray(4, x, y, x + 1, y - 1);
+				finished = true;
 			} else {
 				square.setSquare(new InnerSquare());
 			}
@@ -77,12 +103,18 @@ public class ControllerHelper {
 	}
 	
 	class InnerSquare implements SquareState{
+		
+		public InnerSquare(){
+			test(square);
+		}
+		
 		public void test(Square square){
 			if(x < maxLength && y < maxLength){
 				setArray(0, x, y, x + 1, y - 1);
 				setArray(4, x, y, x - 1, y - 1);
 				setArray(8, x, y, x + 1, y + 1);
 				setArray(12, x, y, x - 1, y + 1);
+				finished = true;
 			} else {
 				square.setSquare(new FalseSquare());
 			}
@@ -92,6 +124,7 @@ public class ControllerHelper {
 	class FalseSquare implements SquareState{
 		public void test(Square square){
 			setArray(0, maxLength+1,0 ,0 ,0);
+			finished = true;
 		}
 	}
 	
