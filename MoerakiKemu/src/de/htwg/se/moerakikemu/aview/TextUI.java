@@ -25,7 +25,7 @@ public class TextUI implements UserInterface {
 	 */
 	public void processInputLine() {
 	}
-
+	
 	public  void queryPlayerName() {
 		logger.info("Bitte Namen des ersten Spielers eingeben: ");
 		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
