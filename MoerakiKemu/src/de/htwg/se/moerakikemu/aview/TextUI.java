@@ -9,6 +9,7 @@ public class TextUI implements UserInterface {
 
 	Controller myController;
 	static Scanner scanner;
+	String wrongInputMsg = "Falsche Eingabe!";
 
 	public TextUI(Controller controller) {
 		myController = controller;
@@ -29,7 +30,7 @@ public class TextUI implements UserInterface {
 			String line = scanner.next();
 			if("1".equals(line)){
 				setSpot();
-				if(myController.testWinner()){
+				if(myController.testIfWinnerExists()){
 					Quit();
 				}
 				break;
@@ -38,7 +39,7 @@ public class TextUI implements UserInterface {
 				printPoints();
 				Quit();
 			} else {
-				System.out.println("Falsche Eingabe!");
+				System.out.println(wrongInputMsg);
 				printOptions();
 			}
 		}
@@ -65,17 +66,17 @@ public class TextUI implements UserInterface {
 			errorInput = false;
 			System.out.print("Bitte gib eine X - Koordinate ein: ");	
 			try{
-			x = scanner.nextInt();
+				x = scanner.nextInt();
 			}catch(InputMismatchException e){
-				System.out.println("Falsche Eingabe!");
+				System.out.println(wrongInputMsg);
 				errorInput = true;
 				scanner.nextLine();
 			}
 			System.out.print("Bitte gib eine Y - Koordinate ein: ");
 			try{
-			y = scanner.nextInt();
+				y = scanner.nextInt();
 			}catch(InputMismatchException e){
-				System.out.println("Falsche Eingabe!");
+				System.out.println(wrongInputMsg);
 				errorInput = true;
 				scanner.nextLine();
 			}
@@ -217,6 +218,5 @@ public class TextUI implements UserInterface {
 		} else {
 			System.out.println("Unentschieden");
 		}
-		myController.endGame();
 	}
 }

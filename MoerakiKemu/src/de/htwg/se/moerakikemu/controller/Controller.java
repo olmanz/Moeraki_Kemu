@@ -14,14 +14,15 @@ public class Controller {
 
 	private ControllerHelper helper;
 	
-	private String playerWin = null;
+	private String playerWin;
 	
 	public Controller(int fieldLength) {
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		player1 = new Player();
 		player2 = new Player();
-		currentPlayer = player1;		
+		currentPlayer = player1;	
+		playerWin = null;
 	}
 	
 	/**
@@ -265,19 +266,12 @@ public class Controller {
 			return -1;
 		}
 	}
-	
-	/**
-	 * ends the game
-	 */
-	public void endGame(){
-		System.exit(0);
-	}
-	
+
 	/**
 	 * test if there is a winner
 	 * @return true if there is a winner, false when there isnt one;
 	 */
-	public boolean testWinner(){
+	public boolean testIfWinnerExists(){
 		if(playerWin != null){
 			return true;
 		}
