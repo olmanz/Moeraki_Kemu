@@ -1,13 +1,14 @@
 package de.htwg.se.moerakikemu.controller;
 
-
 public class ControllerHelper {
 	private int x,y, maxLength;
+	private int[] squareArray;
 	
 	public ControllerHelper (int xCoordinates, int yCoordinates, int maxLength){
 		this.x = xCoordinates;
 		this.y = yCoordinates;
 		this.maxLength = maxLength;
+		this.squareArray = new int[16];
 	}
 
 	
@@ -25,110 +26,75 @@ public class ControllerHelper {
 		public void test(){
 			squareState.test(this);
 		}
+		
+		public int[] getSquareArray(){
+			return squareArray;
+		}
 	}
 	
 	interface SquareState{
 		public void test(Square square);
 	}
 	
-	class InnerSquare implements SquareState{
-		public void test(Square square){
-			
-		}
-	}
-	
 	class EdgeSquare implements SquareState{
 		public void test(Square square){
-			if((x == 0 && y == 0) || (x == 0 && y == maxLength) || (x == maxLength && y == 0) || (x == maxLength && y == maxLength)){
-				//BERECHNUG STARTEN
-			}
-			else {
-				//STATUS ZU BORDERSQUARE WECHSELN
+			if(x == 0 && y == 0){
+				setArray(0, x, y, x + 1, y + 1);
+			} else if(x == 0 && y == maxLength){
+				setArray(0, x, y, x + 1, y - 1);
+			} else if(x == maxLength && y == 0){
+				setArray(0, x, y, x - 1, y + 1);
+			} else if(x == maxLength && y == maxLength){
+				setArray(0, x, y, x - 1, y - 1);
+			}else {
+				square.setSquare(new BorderSquare());
 			}
 		}
 	}
 	
 	class BorderSquare implements SquareState{
 		public void test(Square square){
-			
-		}
-	}
-/*
-	private void testPositionOfPoint(int xCoordinate, int yCoordinate){
-		if(testIsEdge(xCoordinate, yCoordinate)){
-			testEdgeSquare(xCoordinate, yCoordinate);
-		} else if(testIsBorder(xCoordinate, yCoordinate)){
-			testBorderSquare(xCoordinate, yCoordinate);
-		} else {
-			testInnerSquare(xCoordinate, yCoordinate);
+			if(x == 0){
+				setArray(0, x, y, x - 1, y + 1);
+				setArray(4, x, y, x + 1, y + 1);
+			} else if(y == 0){
+				setArray(0, x, y, x + 1, y - 1);
+				setArray(4, x, y, x - 1, y - 1);
+			} else if(x == maxLength){
+				setArray(0, x, y, x - 1, y + 1);
+				setArray(4, x, y, x - 1, y - 1);
+			} else if(y == maxLength){
+				setArray(0, x, y, x + 1, y + 1);
+				setArray(4, x, y, x + 1, y - 1);
+			} else {
+				square.setSquare(new InnerSquare());
+			}
 		}
 	}
 	
-
-	public boolean testIsEdge(int xCoordinate, int yCoordinate){
-		int maxLength = fieldLength - 1;
-
-		boolean leftUpperCorner = xCoordinate == 0 && yCoordinate == 0;
-		boolean leftLowerCorner = xCoordinate == 0 && yCoordinate == maxLength;
-		boolean rightUpperCorner = xCoordinate == maxLength && yCoordinate == 0;
-		boolean rightLowerCorner = xCoordinate == maxLength && yCoordinate == maxLength;
-
-		if (leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner){
-			return true;
+	class InnerSquare implements SquareState{
+		public void test(Square square){
+			if(x < maxLength && y < maxLength){
+				setArray(0, x, y, x + 1, y - 1);
+				setArray(4, x, y, x - 1, y - 1);
+				setArray(8, x, y, x + 1, y + 1);
+				setArray(12, x, y, x - 1, y + 1);
+			} else {
+				square.setSquare(new FalseSquare());
+			}
 		}
-		return false;
 	}
 	
-
-	public boolean testIsBorder(int xCoordinate, int yCoordinate){
-		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength - 1 || yCoordinate == fieldLength - 1){
-			return true;
+	class FalseSquare implements SquareState{
+		public void test(Square square){
+			setArray(0, maxLength+1,0 ,0 ,0);
 		}
-		return false;
 	}
 	
-
-	public void testEdgeSquare(int xCoordinate, int yCoordinate){
-		int maxLength = fieldLength - 1;
-		if(xCoordinate == 0 && yCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		}
-		if(xCoordinate == 0 && yCoordinate == maxLength){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		}
-		if(xCoordinate == maxLength && yCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-		}
-		if(xCoordinate == maxLength && yCoordinate == maxLength){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		}
+	private void setArray(int start, int edgeOne, int edgeTwo, int edgeThree, int edgeFour){
+		squareArray[start] = edgeOne;
+		squareArray[start + 1] = edgeTwo;
+		squareArray[start + 2] = edgeThree;
+		squareArray[start + 3] = edgeFour;
 	}
-
-	public void testBorderSquare(int xCoordinate, int yCoordinate){
-		if(yCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		}
-		if(yCoordinate == fieldLength - 1){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		}
-		if(xCoordinate == fieldLength - 1){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		}
-		if(xCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		}
-	}
-
-	public void testInnerSquare(int xCoordinate, int yCoordinate){
-		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-	}
-	 */
-
 }

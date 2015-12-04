@@ -154,7 +154,7 @@ public class Controller {
 	/**
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
 	 */
-	private boolean testIsEdge(int xCoordinate, int yCoordinate){
+	public boolean testIsEdge(int xCoordinate, int yCoordinate){
 		int maxLength = fieldLength - 1;
 
 		boolean leftUpperCorner = xCoordinate == 0 && yCoordinate == 0;
@@ -171,7 +171,7 @@ public class Controller {
 	/**
 	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
 	 */
-	private boolean testIsBorder(int xCoordinate, int yCoordinate){
+	public boolean testIsBorder(int xCoordinate, int yCoordinate){
 		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength - 1 || yCoordinate == fieldLength - 1){
 			return true;
 		}
@@ -183,7 +183,7 @@ public class Controller {
 	 * @param xCoordinate
 	 * @param yCoordinate
 	 */
-	private void testEdgeSquare(int xCoordinate, int yCoordinate){
+	public void testEdgeSquare(int xCoordinate, int yCoordinate){
 		int maxLength = fieldLength - 1;
 		if(xCoordinate == 0 && yCoordinate == 0){
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
@@ -204,7 +204,7 @@ public class Controller {
 	 * @param xCoordinate
 	 * @param yCoordinate
 	 */
-	private void testBorderSquare(int xCoordinate, int yCoordinate){
+	public void testBorderSquare(int xCoordinate, int yCoordinate){
 		if(yCoordinate == 0){
 			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
@@ -228,7 +228,7 @@ public class Controller {
 	 * @param xCoordinate
 	 * @param yCoordinate
 	 */
-	private void testInnerSquare(int xCoordinate, int yCoordinate){
+	public void testInnerSquare(int xCoordinate, int yCoordinate){
 		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
 		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
 		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
