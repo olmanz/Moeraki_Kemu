@@ -19,9 +19,13 @@ public class MoerakiKemu {
 
 		TextUI tui = new TextUI(controller);
 
-		while (true) { 
+		boolean finished = false;
+		while (!finished) { 
 			tui.drawCurrentState();
 			tui.processInputLine();
+			finished = controller.testIfWinnerExists();
+			if(finished)
+				tui.Quit();
 		}
 
 	}
