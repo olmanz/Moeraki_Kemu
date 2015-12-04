@@ -26,16 +26,17 @@ public class TextUI implements UserInterface {
 	public void processInputLine() {		
 		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
-		while(true){
+		boolean endOfGame = false;
+		while(!endOfGame){
 			String line = scanner.next();
 			if("1".equals(line)){
 				setSpot();
-				break;
+				endOfGame = true;
 			} else if("2".equals(line)){
 				System.out.println("Spiel beendet!");
 				printPoints();
 				myController.setEnd(true);
-				break;
+				endOfGame = true;
 			} else {
 				System.out.println(wrongInputMsg);
 				printOptions();
