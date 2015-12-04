@@ -9,6 +9,7 @@ public class TextUI implements UserInterface {
 
 	Controller myController;
 	static Scanner scanner;
+	String wrongInputMsg = "Falsche Eingabe!";
 
 	public TextUI(Controller controller) {
 		myController = controller;
@@ -38,7 +39,7 @@ public class TextUI implements UserInterface {
 				printPoints();
 				Quit();
 			} else {
-				System.out.println("Falsche Eingabe!");
+				System.out.println(wrongInputMsg);
 				printOptions();
 			}
 		}
@@ -67,7 +68,7 @@ public class TextUI implements UserInterface {
 			try{
 				x = scanner.nextInt();
 			}catch(InputMismatchException e){
-				System.out.println("Falsche Eingabe!");
+				System.out.println(wrongInputMsg);
 				errorInput = true;
 				scanner.nextLine();
 			}
@@ -75,7 +76,7 @@ public class TextUI implements UserInterface {
 			try{
 				y = scanner.nextInt();
 			}catch(InputMismatchException e){
-				System.out.println("Falsche Eingabe!");
+				System.out.println(wrongInputMsg);
 				errorInput = true;
 				scanner.nextLine();
 			}
