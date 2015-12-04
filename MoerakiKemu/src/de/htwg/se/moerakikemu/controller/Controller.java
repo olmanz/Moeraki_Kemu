@@ -15,6 +15,7 @@ public class Controller {
 	private ControllerHelper helper;
 	
 	private String playerWin;
+	private boolean gameEnds;
 	
 	public Controller(int fieldLength) {
 		gameField = new Field(fieldLength);
@@ -137,7 +138,6 @@ public class Controller {
 		helper.testSquare();
 		testListOfSquares();
 		helper.resetSquareTest();
-//		testPositionOfPoint
 		selectNextPlayer();
 		return 0;
 	}
@@ -145,22 +145,15 @@ public class Controller {
 	private void testListOfSquares(){
 		int[] squareArray = new int[17];
 		squareArray = helper.getSquareArray();
-		for(int j = 0; j < squareArray.length; j++){
-			System.out.print(squareArray[j]);
-			if(j == 0 || (j+1) == 5 || (j+1) == 9 || (j+1) == 13 || (j+1) == 17){
-				System.out.println();
-			}
-		}
 		if(squareArray[0] == 1){
 			testSquare(squareArray[1], squareArray[2], squareArray[3],squareArray[4]);
 		} else if(squareArray[0] == 2){
 			testSquare(squareArray[1], squareArray[2], squareArray[3],squareArray[4]);
 			testSquare(squareArray[5], squareArray[6], squareArray[7],squareArray[8]);
 		} else if(squareArray[0] == 4){
-			testSquare(squareArray[1], squareArray[2], squareArray[3],squareArray[4]);
-			testSquare(squareArray[5], squareArray[6], squareArray[7],squareArray[8]);
-			testSquare(squareArray[9], squareArray[10], squareArray[11],squareArray[12]);
-			testSquare(squareArray[13], squareArray[14], squareArray[15],squareArray[16]);
+			for(int i = 1; i < 17; i+=4){
+				testSquare(squareArray[i], squareArray[i+1], squareArray[i+2], squareArray[i+3]);
+			}
 		}
 	}
 	
@@ -173,7 +166,6 @@ public class Controller {
 	 */
 	private void testSquare(int xMin, int yMin, int xMax, int yMax){
 		int []counterForPlayers = {0, 0};
-		System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax);
 		
 		int index;
 		index = checkOccupationReturnPlayerGettingPoint(xMin, yMin);
@@ -215,7 +207,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Calculates and the points the players get by counting the number of occupied Spots in a square.
+	 * Calculates the points the players get by counting the number of occupied Spots in a square.
 	 * @param counter1 Number of Spots occupied by player1 in the current square.
 	 * @param counter2 Number of Spots occupied by player2 in the current square.
 	 */
@@ -227,6 +219,7 @@ public class Controller {
 		if(counter1 == 4){ 
 			player1.addPoints(1);
 			playerWin = player1.getName();
+			setEnd(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
 			player2.addPoints(1);
@@ -234,6 +227,7 @@ public class Controller {
 		if(counter2 == 4){
 			player2.addPoints(1);
 			playerWin = player2.getName();
+			setEnd(true);
 		}
 	}
 	
@@ -272,9 +266,10 @@ public class Controller {
 	 * @return true if there is a winner, false when there isnt one;
 	 */
 	public boolean testIfWinnerExists(){
-		if(playerWin != null){
-			return true;
-		}
-		return false;
+		return gameEnds;
+	}
+	
+	public void setEnd(boolean end){
+		gameEnds = end;
 	}
 }

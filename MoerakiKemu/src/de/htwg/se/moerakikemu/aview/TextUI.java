@@ -30,14 +30,12 @@ public class TextUI implements UserInterface {
 			String line = scanner.next();
 			if("1".equals(line)){
 				setSpot();
-				if(myController.testIfWinnerExists()){
-					Quit();
-				}
 				break;
 			} else if("2".equals(line)){
 				System.out.println("Spiel beendet!");
 				printPoints();
-				Quit();
+				myController.setEnd(true);
+				break;
 			} else {
 				System.out.println(wrongInputMsg);
 				printOptions();
