@@ -1,8 +1,5 @@
 package de.htwg.se.moerakikemu.aview;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -14,11 +11,9 @@ public class TextUI implements UserInterface {
 	static Logger logger = LogManager.getLogger(TextUI.class);
 	
 	Controller myController;
-	static Scanner scanner;
 
 	public TextUI(Controller controller) {
 		myController = controller;
-		scanner = new Scanner(System.in);
 		queryPlayerName();
 	}
 
@@ -29,78 +24,11 @@ public class TextUI implements UserInterface {
 	 * @return
 	 */
 	public void processInputLine() {
-		logger.info(myController.getCurrentPlayerName() + ", was tun Sie?");
-		printOptions();
-		while(true){
-			String line = scanner.next();
-			if("1".equals(line)){
-				setSpot();
-				if(myController.testIfWinnerExists()){
-					Quit();
-				}
-				break;
-			} else if("2".equals(line)){
-				logger.warn("Spiel beendet!");
-				printPoints();
-				Quit();
-			} else {
-				logger.warn("Falsche Eingabe!\n");
-				printOptions();
-			}
-		}
 	}
-	
-	/**
-	 * Prints the options that the player can do with the game.
-	 */
-	private void printOptions() {
-		System.out.println("1) Setzen");
-		System.out.println("2) Beenden");
-		System.out.print("\t>> ");
-	}
-	
-	/**
-	 * Queries the X-/Y-Coordinate from CommandLine to set a Spot.
-	 * If the spot is occupied it keeps asking for new coordinates.
-	 */
-	private void setSpot(){
-		int err = -1;
-		boolean errorInput;
-		int x = 0, y = 0;
-		do{
-			errorInput = false;
-			logger.info("Bitte gib eine X - Koordinate ein: ");	
-			try{
-				x = scanner.nextInt();
-			}catch(InputMismatchException e){
-				logger.warn("Falsche Eingabe!");
-				errorInput = true;
-				scanner.nextLine();
-			}
-			logger.info("Bitte gib eine Y - Koordinate ein: ");
-			try{
-				y = scanner.nextInt();
-			}catch(InputMismatchException e){
-				logger.warn("Falsche Eingabe!");
-				errorInput = true;
-				scanner.nextLine();
-			}
-			
-			if(!errorInput){
-				err = myController.occupy(x, y);
-			}
-		}while(err == -1);
-	}
-	
-	public  void queryPlayerName() {
-		String name1;
-		String name2;
-		logger.info("Bitte Namen des ersten Spielers eingeben: ");
-		name1 = scanner.nextLine();
-		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
-		name2 = scanner.nextLine();
-		myController.setName(name1, name2);
 
+	public  void queryPlayerName() {
+		logger.info("Bitte Namen des ersten Spielers eingeben: ");
+		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
 	}
 	
 	/**
