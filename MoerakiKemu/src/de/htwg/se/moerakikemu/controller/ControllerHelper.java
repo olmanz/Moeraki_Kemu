@@ -43,7 +43,7 @@ public class ControllerHelper {
 		}
 		
 		public void test(){
-			while(finished != true){
+			while(!finished){
 				squareState.test(this);
 			}
 		}
@@ -54,6 +54,7 @@ public class ControllerHelper {
 	}
 	
 	class EdgeSquare implements SquareState{
+		@Override
 		public void test(Square square){
 			if(x == 0 && y == 0){
 				squareArray[0] = 1;
@@ -82,7 +83,8 @@ public class ControllerHelper {
 		public BorderSquare(){
 			test(square);
 		}
-		
+
+		@Override
 		public void test(Square square){
 			if(x == 0){
 				squareArray[0] = 2;
@@ -115,7 +117,8 @@ public class ControllerHelper {
 		public InnerSquare(){
 			test(square);
 		}
-		
+
+		@Override
 		public void test(Square square){
 			if(x < maxLength && y < maxLength){
 				squareArray[0] = 4;
@@ -131,6 +134,7 @@ public class ControllerHelper {
 	}
 	
 	class FalseSquare implements SquareState{
+		@Override
 		public void test(Square square){
 			squareArray[0] = 0;
 			finished = true;
