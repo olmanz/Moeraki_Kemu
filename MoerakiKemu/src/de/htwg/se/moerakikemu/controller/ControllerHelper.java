@@ -11,6 +11,14 @@ public class ControllerHelper {
 		this.squareArray = new int[16];
 	}
 
+	public void testSquare(){
+		Square square = new Square();
+		square.test();
+	}
+	
+	public int[] getSquareArray(){
+		return squareArray;
+	}
 	
 	class Square {
 		private SquareState squareState;
@@ -25,10 +33,6 @@ public class ControllerHelper {
 		
 		public void test(){
 			squareState.test(this);
-		}
-		
-		public int[] getSquareArray(){
-			return squareArray;
 		}
 	}
 	

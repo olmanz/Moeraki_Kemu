@@ -11,6 +11,8 @@ public class Controller {
 	
 	private Field gameField;
 	private int fieldLength;
+
+	private ControllerHelper helper;
 	
 	private String playerWin = null;
 	
@@ -19,7 +21,7 @@ public class Controller {
 		this.fieldLength = fieldLength;
 		player1 = new Player();
 		player2 = new Player();
-		currentPlayer = player1;
+		currentPlayer = player1;		
 	}
 	
 	/**
@@ -130,109 +132,120 @@ public class Controller {
 			return -1;
 		}		
 		gameField.occupy(x, y, getCurrentPlayerName());
-		testPositionOfPoint(x, y);
+		helper = new ControllerHelper(x, y, (fieldLength - 1));
+		helper.testSquare();
+		testListOfSquares();
+//		testPositionOfPoint
 		selectNextPlayer();
 		return 0;
 	}
-	
-	/**
-	 * This method test where the point is located
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 * @return 1 when the point is a edge, 2 if the point is a border - point and 3 if the point is somewhere in the middle of the field
-	 */
-	private void testPositionOfPoint(int xCoordinate, int yCoordinate){
-		if(testIsEdge(xCoordinate, yCoordinate)){
-			testEdgeSquare(xCoordinate, yCoordinate);
-		} else if(testIsBorder(xCoordinate, yCoordinate)){
-			testBorderSquare(xCoordinate, yCoordinate);
-		} else {
-			testInnerSquare(xCoordinate, yCoordinate);
-		}
-	}
-	
-	/**
-	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
-	 */
-	public boolean testIsEdge(int xCoordinate, int yCoordinate){
-		int maxLength = fieldLength - 1;
 
-		boolean leftUpperCorner = xCoordinate == 0 && yCoordinate == 0;
-		boolean leftLowerCorner = xCoordinate == 0 && yCoordinate == maxLength;
-		boolean rightUpperCorner = xCoordinate == maxLength && yCoordinate == 0;
-		boolean rightLowerCorner = xCoordinate == maxLength && yCoordinate == maxLength;
-
-		if (leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner){
-			return true;
-		}
-		return false;
-	}
+//	/**
+//	 * This method test where the point is located
+//	 * @param xCoordinate
+//	 * @param yCoordinate
+//	 * @return 1 when the point is a edge, 2 if the point is a border - point and 3 if the point is somewhere in the middle of the field
+//	 */
+//	private void testPositionOfPoint(int xCoordinate, int yCoordinate){
+//		if(testIsEdge(xCoordinate, yCoordinate)){
+//			testEdgeSquare(xCoordinate, yCoordinate);
+//		} else if(testIsBorder(xCoordinate, yCoordinate)){
+//			testBorderSquare(xCoordinate, yCoordinate);
+//		} else {
+//			testInnerSquare(xCoordinate, yCoordinate);
+//		}
+//	}
+//	
+//	/**
+//	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a edge
+//	 */
+//	public boolean testIsEdge(int xCoordinate, int yCoordinate){
+//		int maxLength = fieldLength - 1;
+//
+//		boolean leftUpperCorner = xCoordinate == 0 && yCoordinate == 0;
+//		boolean leftLowerCorner = xCoordinate == 0 && yCoordinate == maxLength;
+//		boolean rightUpperCorner = xCoordinate == maxLength && yCoordinate == 0;
+//		boolean rightLowerCorner = xCoordinate == maxLength && yCoordinate == maxLength;
+//
+//		if (leftUpperCorner || leftLowerCorner || rightUpperCorner || rightLowerCorner){
+//			return true;
+//		}
+//		return false;
+//	}
+//	
+//	/**
+//	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
+//	 */
+//	public boolean testIsBorder(int xCoordinate, int yCoordinate){
+//		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength - 1 || yCoordinate == fieldLength - 1){
+//			return true;
+//		}
+//		return false;
+//	}
+//	
+//	/**
+//	 * test the points around the main point if it is a point at a edge
+//	 * @param xCoordinate
+//	 * @param yCoordinate
+//	 */
+//	public void testEdgeSquare(int xCoordinate, int yCoordinate){
+//		int maxLength = fieldLength - 1;
+//		if(xCoordinate == 0 && yCoordinate == 0){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+//		}
+//		if(xCoordinate == 0 && yCoordinate == maxLength){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+//		}
+//		if(xCoordinate == maxLength && yCoordinate == 0){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+//		}
+//		if(xCoordinate == maxLength && yCoordinate == maxLength){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+//		}
+//	}
+//	
+//	/**
+//	 * test the points around the main point if it is a point at a border
+//	 * @param xCoordinate
+//	 * @param yCoordinate
+//	 */
+//	public void testBorderSquare(int xCoordinate, int yCoordinate){
+//		if(yCoordinate == 0){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+//			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+//		}
+//		if(yCoordinate == fieldLength - 1){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+//			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+//		}
+//		if(xCoordinate == fieldLength - 1){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+//			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+//		}
+//		if(xCoordinate == 0){
+//			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+//			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+//		}
+//	}
+//	
+//	/**
+//	 * test the spots around the main point if it is a normal point in the middle of the map
+//	 * @param xCoordinate
+//	 * @param yCoordinate
+//	 */
+//	public void testInnerSquare(int xCoordinate, int yCoordinate){
+//		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
+//		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
+//		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
+//		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
+//	}
 	
-	/**
-	 * helper  - Method to the "testPositionOfPoint" - Method. Test if the point is on a border
-	 */
-	public boolean testIsBorder(int xCoordinate, int yCoordinate){
-		if(xCoordinate == 0 || yCoordinate == 0 || xCoordinate == fieldLength - 1 || yCoordinate == fieldLength - 1){
-			return true;
+	private void testListOfSquares(){
+		int[] squareArray = new int[16];
+		squareArray = helper.getSquareArray();
+		for(int i = 0; i < 4; i++){
+			testSquare(squareArray[i], squareArray[i + 1], squareArray[i+2], squareArray[i+3]);
 		}
-		return false;
-	}
-	
-	/**
-	 * test the points around the main point if it is a point at a edge
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 */
-	public void testEdgeSquare(int xCoordinate, int yCoordinate){
-		int maxLength = fieldLength - 1;
-		if(xCoordinate == 0 && yCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		}
-		if(xCoordinate == 0 && yCoordinate == maxLength){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		}
-		if(xCoordinate == maxLength && yCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-		}
-		if(xCoordinate == maxLength && yCoordinate == maxLength){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		}
-	}
-	
-	/**
-	 * test the points around the main point if it is a point at a border
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 */
-	public void testBorderSquare(int xCoordinate, int yCoordinate){
-		if(yCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		}
-		if(yCoordinate == fieldLength - 1){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		}
-		if(xCoordinate == fieldLength - 1){
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		}
-		if(xCoordinate == 0){
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-			testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		}
-	}
-	
-	/**
-	 * test the spots around the main point if it is a normal point in the middle of the map
-	 * @param xCoordinate
-	 * @param yCoordinate
-	 */
-	public void testInnerSquare(int xCoordinate, int yCoordinate){
-		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate - 1);
-		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate - 1);
-		testSquare(xCoordinate, yCoordinate, xCoordinate + 1, yCoordinate + 1);
-		testSquare(xCoordinate, yCoordinate, xCoordinate - 1, yCoordinate + 1);
 	}
 	
 	/**
