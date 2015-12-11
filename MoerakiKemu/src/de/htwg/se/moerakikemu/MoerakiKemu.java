@@ -1,7 +1,7 @@
 package de.htwg.se.moerakikemu;
 
 
-import de.htwg.se.moerakikemu.b_controller.*;
+
 import de.htwg.se.moerakikemu.controller.*;
 import de.htwg.se.moerakikemu.controller.controller_impl.Controller;
 import de.htwg.se.moerakikemu.controller.controller_impl.ControllerPlayer;
