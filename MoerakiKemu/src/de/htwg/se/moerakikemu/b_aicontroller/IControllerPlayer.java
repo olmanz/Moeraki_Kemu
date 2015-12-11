@@ -34,8 +34,16 @@ public interface IControllerPlayer {
 	 */
 	int getPlayer2Points();
 	
+	/**
+	 * adds a Point to the given Player
+	 * @param A String, not null
+	 */
 	void addAPoint(IPlayer player);
 	
+	/**
+	 * Return the current Player
+	 * @return A String, not null
+	 */
 	String getCurrentPlayerName();
 	
 	/**

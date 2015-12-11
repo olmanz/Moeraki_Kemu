@@ -7,7 +7,7 @@ public interface IController {
 	 *
 	 * @param x X-Coordinate.
 	 * @param y Y-Coordinate.
-	 * @return The name of the player or an empty String.
+	 * @return The name of the player or an empty String. 
 	 */
 	String getIsOccupiedByPlayer(int x, int y);
 	
@@ -30,7 +30,7 @@ public interface IController {
 	
 	/**
 	 * returns if a player has won
-	 * @return the player who has won;
+	 * @return A String, not null
 	 */
 	String getWinner();
 	
@@ -42,7 +42,7 @@ public interface IController {
 	
 	/**
 	 * return the boolean value "end";
-	 * @param end
+	 * @param a boolean Value
 	 */
 	void setEnd(boolean end);	
 }
