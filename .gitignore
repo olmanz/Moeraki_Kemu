@@ -1,1 +1,3 @@
 ./MoerakiKemu/bin
+*.class
+*.log
