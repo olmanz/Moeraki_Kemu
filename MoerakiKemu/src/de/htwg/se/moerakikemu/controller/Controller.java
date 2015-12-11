@@ -3,7 +3,7 @@ package de.htwg.se.moerakikemu.controller;
 import de.htwg.se.moerakikemu.modellayer.Field;
 import de.htwg.se.moerakikemu.modellayer.Player;
 
-public class Controller {
+public class Controller implements IController{
 
 	private Player player1;
 	private Player player2;
@@ -52,7 +52,7 @@ public class Controller {
 	 * @param player1name Name for player1.
 	 * @param player2name Name for player2.
 	 */
-	public void setName(String player1name, String player2name){
+	public void setName(String player1name, String player2name) {
 		player1.setName(player1name);
 		player2.setName(player2name);
 	}
@@ -195,7 +195,7 @@ public class Controller {
 	 * @param y Y-coordinates of the Spot.
 	 * @return Returns the number of the player (>=0) or -1 if no player gets a point.
 	 */
-	int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
+	private int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
 		if(!"".equals(gameField.getIsOccupiedFrom(x, y))){
 			if(gameField.getIsOccupiedFrom(x, y).equals(player1.getName())) {
 				return 0;
@@ -251,7 +251,7 @@ public class Controller {
 	 * @param playerName
 	 * @return the points of player one or player two or if there is no player with the given name, this method returns 0
 	 */
-	public int getPointsOfPlayer(String playerName){
+	public int getPointsOfPlayer(String playerName) {
 		if(player1.getName().equals(playerName)){
 			return player1.getPoints();
 		} else if(player2.getName().equals(playerName)){
@@ -265,11 +265,11 @@ public class Controller {
 	 * test if there is a winner
 	 * @return true if there is a winner, false when there isnt one;
 	 */
-	public boolean testIfWinnerExists(){
+	public boolean testIfWinnerExists() {
 		return gameEnds;
 	}
 	
-	public void setEnd(boolean end){
+	public void setEnd(boolean end) {
 		gameEnds = end;
 	}
 }

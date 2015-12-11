@@ -2,6 +2,7 @@ package de.htwg.se.moerakikemu;
 
 import de.htwg.se.moerakikemu.aview.TextUI;
 import de.htwg.se.moerakikemu.controller.Controller;
+import de.htwg.se.moerakikemu.controller.IController;
 
 public class MoerakiKemu {
 
@@ -15,7 +16,7 @@ public class MoerakiKemu {
 	 * @param args Unused parameters.
 	 */
 	public static void main(String[] args) {
-		Controller controller = new Controller(12);
+		IController controller = new Controller(12);
 
 		TextUI tui = new TextUI(controller);
 
