@@ -13,9 +13,9 @@ public class TextUI implements UserInterface {
 	static Scanner scanner;
 	String wrongInputMsg = "Falsche Eingabe!";
 
-	public TextUI(IController controller, IControllerPlayer sampler) {
+	public TextUI(IController controller, IControllerPlayer playerController) {
 		this.myController = controller;
-		this.playerController = sampler;
+		this.playerController = playerController;
 		scanner = new Scanner(System.in);
 		queryPlayerName();
 	}
