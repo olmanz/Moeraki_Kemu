@@ -19,6 +19,7 @@ public class GUI extends JFrame implements UserInterface {
 
 	@Override
 	public void drawCurrentState() {
+		// TODO Determine which Spots are occupied by which Player
 		this.repaint();
 	}
 
