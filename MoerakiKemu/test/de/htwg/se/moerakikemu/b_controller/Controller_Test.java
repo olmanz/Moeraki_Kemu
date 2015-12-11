@@ -50,8 +50,7 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getPointsOfPlayer_returnPointsofCurrentPlayer(){
-		controller = new Controller(5);
-		controller.setName("Player1", "Player2");
+		controller = new Controller(5, playerController);
 		
 		controller.occupy(1, 1);
 		controller.occupy(3, 3);
@@ -60,25 +59,24 @@ public class Controller_Test {
 		controller.occupy(2, 1);
 		controller.occupy(2, 2);
 		
-		assertEquals(1, controller.getPointsOfPlayer("Player1"));
-		assertEquals(0, controller.getPointsOfPlayer("Player2"));
-		assertEquals(-1, controller.getPointsOfPlayer("Random"));
+		assertEquals("Player1", playerController.getPlayer1Name());
+		assertEquals("Player2", playerController.getPlayer2Name());
 	}
 	
 	@Test
 	public void test_selectNextPlayer_wasPlayerOneIsPlayerTwoNextPlayerOne() {
-		assertEquals(controller.getCurrentPlayerName(), "Player1");
-		controller.selectNextPlayer();
-		assertEquals(controller.getCurrentPlayerName(), "Player2");
-		controller.selectNextPlayer();
-		assertEquals(controller.getCurrentPlayerName(), "Player1");
+		assertEquals(playerController.getCurrentPlayerName(), "Player1");
+		playerController.selectNextPlayer();
+		assertEquals(playerController.getCurrentPlayerName(), "Player2");
+		playerController.selectNextPlayer();
+		assertEquals(playerController.getCurrentPlayerName(), "Player1");
 	}
 	
 	@Test
-	public void test_setName_isSpieler1Spieler2() {
-		controller.setName("Spieler1", "Spieler2");
-		assertEquals(controller.getPlayer1Name(), "Spieler1");
-		assertEquals(controller.getPlayer2Name(), "Spieler2");
+	public void test_setName_isPlayer1Player2() {
+		playerController.setName("Player1", "Player2");
+		assertEquals(playerController.getPlayer1Name(), "Player1");
+		assertEquals(playerController.getPlayer2Name(), "Player2");
 	}
 	
 	@Test
@@ -88,16 +86,41 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getQuit_gamefinished(){
-		controller.setName("Player1", "Player2");
+		controller = new Controller(5, playerController);
+		assertFalse(controller.testIfWinnerExists());
 		
 		controller.occupy(1, 1);
-		controller.occupy(3, 3);
-		controller.occupy(1, 2);
-		controller.occupy(3, 4);
-		controller.occupy(2, 1);
-		controller.occupy(3, 5);
 		controller.occupy(2, 2);
+		controller.occupy(1, 2);
+		controller.occupy(2, 3);
+		controller.occupy(2, 1);
 		
 		assertEquals("Player1", controller.getWinner());
+		
+		playerController = new ControllerPlayer();
+		playerController.setName("Player1", "Player2");
+		controller = new Controller(5, playerController);
+		assertEquals("", controller.getWinner());
+
+		controller.occupy(5, 5);
+		controller.occupy(1, 1);
+		controller.occupy(4, 4);
+		controller.occupy(2, 1);
+		controller.occupy(3, 3);
+		controller.occupy(1, 2);
+		controller.occupy(2, 2);
+		
+		assertEquals("Player2", controller.getWinner());
+		assertEquals("Player2", controller.getWinner());
+	}
+	
+	@Test
+	public void test_getIsOccupiedByPlayer_ifOccupiedFromAPlayer(){
+		controller = new Controller(5, playerController);
+		
+		controller.occupy(1, 1);
+		
+		String a = controller.getIsOccupiedByPlayer(0, 0); //0,0 because occupy get the direkt input from a player, so there is a -1, -1 needed
+		assertEquals("Player1", a);
 	}
 }

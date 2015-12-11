@@ -26,7 +26,7 @@ public class Controller implements IController{
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
 		gameEnds = false;
-		playerWin = null;
+		playerWin = "";
 	}
 	
 	public String getIsOccupiedByPlayer(int x, int y) {
@@ -108,29 +108,29 @@ public class Controller implements IController{
 
 	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
-			playerController.addAPoint(player1);
+			playerController.addAPointPlayer1();
 		}
 		if(counter1 == 4){ 
-			playerController.addAPoint(player1);
+			playerController.addAPointPlayer1();
 			playerWin = playerController.getPlayer1Name();
 			setEnd(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
-			playerController.addAPoint(player2);
+			playerController.addAPointPlayer2();
 		} 
 		if(counter2 == 4){
-			playerController.addAPoint(player2);
+			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
 			setEnd(true);
 		}
 	}
 	
 	public String getWinner(){
-		if(playerWin == null){
+		if(playerWin.equals("")){
 			if(playerController.getPlayer1Points() > playerController.getPlayer2Points()){
-				playerWin = player1.getName();
+				playerWin = playerController.getPlayer1Name();
 			} else if(playerController.getPlayer1Points() < playerController.getPlayer2Points()){
-				playerWin = player2.getName();
+				playerWin = playerController.getPlayer2Name();
 			}
 		}
 		return playerWin;

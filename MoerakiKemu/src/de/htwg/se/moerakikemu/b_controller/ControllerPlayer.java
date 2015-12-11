@@ -37,14 +37,6 @@ public class ControllerPlayer implements IControllerPlayer {
 		return player2.getPoints();
 	}
 	
-	public void addAPoint(IPlayer player){
-		if(player.getName() == player1.getName()){
-			player1.addPoints(1);
-		} else if(player2.getName() == player2.getName()){
-			player2.addPoints(1);
-		}
-	}
-	
 	public void selectNextPlayer() {
 		if(currentPlayer == player1) {
 			currentPlayer = player2;
@@ -55,6 +47,16 @@ public class ControllerPlayer implements IControllerPlayer {
 
 	public String getCurrentPlayerName() {
 		return currentPlayer.getName();
+	}
+
+	@Override
+	public void addAPointPlayer1() {
+		player1.addPoints(1);
+	}
+
+	@Override
+	public void addAPointPlayer2() {
+		player2.addPoints(1);
 	}
 
 }

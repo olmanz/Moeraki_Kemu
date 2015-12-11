@@ -127,19 +127,10 @@ public class ControllerHelper {
 				setArray(9, x, y, x + 1, y + 1);
 				setArray(13, x, y, x - 1, y + 1);
 				finished = true;
-			} else {
-				square.setSquare(new FalseSquare());
 			}
 		}
 	}
-	
-	class FalseSquare implements SquareState{
-		@Override
-		public void test(Square square){
-			squareArray[0] = 0;
-			finished = true;
-		}
-	}
+
 	
 	private void setArray(int start, int edgeOne, int edgeTwo, int edgeThree, int edgeFour){
 		squareArray[start] = edgeOne;
