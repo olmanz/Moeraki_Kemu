@@ -13,42 +13,42 @@ public interface IController {
 	 * Returns the name of the current player.
 	 * @return String that may be empty, not null.
 	 */
-	public String getCurrentPlayerName();
+	String getCurrentPlayerName();
 	
 	/**
 	 * Set the names for both player1 and player2.
 	 * @param player1name Name for player1.
 	 * @param player2name Name for player2.
 	 */
-	public void setName(String player1name, String player2name);
+	void setName(String player1name, String player2name);
 	
 	/**
 	 * Returns the name of player1.
 	 *
 	 * @return A String, not null.
 	 */
-	public String getPlayer1Name();
+	String getPlayer1Name();
 	
 	/**
 	 * Returns the name of player2.
 	 *
 	 * @return A String, not null.
 	 */
-	public String getPlayer2Name();
+	String getPlayer2Name();
 	
 	/**
 	 * Returns the points of the first player.
 	 *
 	 * @return Amount of points, 0 or more.
 	 */
-	public int getPlayer1Points();
+	int getPlayer1Points();
 	
 	/**
 	 * Returns the points of the second player.
 	 *
 	 * @return Amount of points, 0 or more.
 	 */
-	public int getPlayer2Points();
+	int getPlayer2Points();
 	
 	/**
 	 * Returns the name of the player that occupies the field with the coordinates.
@@ -57,14 +57,14 @@ public interface IController {
 	 * @param y Y-Coordinate.
 	 * @return The name of the player or an empty String.
 	 */
-	public String getIsOccupiedByPlayer(int x, int y);
+	String getIsOccupiedByPlayer(int x, int y);
 	
 	/**
 	 * Returns the length of one edge of the game field.
 	 *
 	 * @return Number > 0.
 	 */
-	public int getEdgeLength();
+	int getEdgeLength();
 	
 	/**
 	 * Occupation of a Spot by a player. Returns -1 if the Spot is already occupied.
@@ -74,30 +74,30 @@ public interface IController {
 	 * @return returns 0 if the current player occupied the field and got points;
 	 * -1 if the spot already was occupied.
 	 */
-	public int occupy(int xCoordinate, int yCoordinate);
+	int occupy(int xCoordinate, int yCoordinate);
 	
 	/**
 	 * returns if a player has won
 	 * @return the player who has won;
 	 */
-	public String getWinner();
+	String getWinner();
 	
 	/**
 	 * returns the points of a player
 	 * @param playerName
 	 * @return the points of player one or player two or if there is no player with the given name, this method returns 0
 	 */
-	public int getPointsOfPlayer(String playerName);
+	int getPointsOfPlayer(String playerName);
 	
 	/**
 	 * test if there is a winner
 	 * @return true if there is a winner, false when there isnt one;
 	 */
-	public boolean testIfWinnerExists();
+	boolean testIfWinnerExists();
 	
 	/**
 	 * return the boolean value "end";
 	 * @param end
 	 */
-	public void setEnd(boolean end);	
+	void setEnd(boolean end);	
 }
