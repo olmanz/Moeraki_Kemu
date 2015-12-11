@@ -1,6 +1,8 @@
-package de.htwg.se.moerakikemu.modellayer;
+package de.htwg.se.moerakikemu.c_modellayer;
 
-public class Player {
+import de.htwg.se.moerakikemu.c_aimodellayer.IPlayer;
+
+public class Player implements IPlayer {
 
 	/**
 	 * Amount of points of the Player; determines win or lost of the game.

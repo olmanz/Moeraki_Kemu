@@ -1,18 +1,21 @@
-package de.htwg.se.moerakikemu.aview;
+package de.htwg.se.moerakikemu.a_view;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import de.htwg.se.moerakikemu.controller.Controller;
+import de.htwg.se.moerakikemu.a_aiview.UserInterface;
+import de.htwg.se.moerakikemu.b_aicontroller.*;
 
 public class TextUI implements UserInterface {
 
-	Controller myController;
+	IController myController;
+	IControllerPlayer playerController;
 	static Scanner scanner;
 	String wrongInputMsg = "Falsche Eingabe!";
 
-	public TextUI(Controller controller) {
-		myController = controller;
+	public TextUI(IController controller, IControllerPlayer sampler) {
+		this.myController = controller;
+		this.playerController = sampler;
 		scanner = new Scanner(System.in);
 		queryPlayerName();
 	}
@@ -24,7 +27,7 @@ public class TextUI implements UserInterface {
 	 * @return
 	 */
 	public void processInputLine() {		
-		System.out.println(myController.getCurrentPlayerName() + ", was tun Sie?");
+		System.out.println(playerController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		boolean endOfGame = false;
 		while(!endOfGame){
@@ -93,7 +96,7 @@ public class TextUI implements UserInterface {
 		name1 = scanner.nextLine();
 		System.out.print("Bitte Namen des zweiten Spielers eingeben: ");
 		name2 = scanner.nextLine();
-		myController.setName(name1, name2);
+		playerController.setName(name1, name2);
 
 	}
 	
@@ -143,8 +146,8 @@ public class TextUI implements UserInterface {
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		System.out.println(myController.getPlayer1Name() + ": " + myController.getPlayer1Points() + " Punkte");
-		System.out.println(myController.getPlayer2Name() + ": " + myController.getPlayer2Points() + " Punkte");
+		System.out.println(playerController.getPlayer1Name() + ": " + playerController.getPlayer1Points() + " Punkte");
+		System.out.println(playerController.getPlayer2Name() + ": " + playerController.getPlayer2Points() + " Punkte");
 	}
 	
 	/**

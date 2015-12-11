@@ -1,12 +1,12 @@
-package de.htwg.se.moerakikemu.modellayer;
+package de.htwg.se.moerakikemu.c_modellayer;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moerakikemu.modellayer.Field;
-import de.htwg.se.moerakikemu.modellayer.Player;
+import de.htwg.se.moerakikemu.c_modellayer.Field;
+import de.htwg.se.moerakikemu.c_modellayer.Player;
 
 public class Field_Test {
 	
