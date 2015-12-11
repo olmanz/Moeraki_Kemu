@@ -1,5 +1,7 @@
 package de.htwg.se.moerakikemu.c_modellayer;
 
+import de.htwg.se.moerakikemu.c_aimodellayer.IField;
+
 public class Field implements IField {
 	private int edgeLength;
 	private int occupiedSpots;
