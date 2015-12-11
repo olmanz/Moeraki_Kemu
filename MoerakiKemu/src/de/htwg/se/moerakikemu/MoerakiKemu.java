@@ -1,11 +1,11 @@
 package de.htwg.se.moerakikemu;
 
-
-import de.htwg.se.moerakikemu.b_controller.*;
 import de.htwg.se.moerakikemu.controller.*;
 import de.htwg.se.moerakikemu.controller.controller_impl.Controller;
 import de.htwg.se.moerakikemu.controller.controller_impl.ControllerPlayer;
 import de.htwg.se.moerakikemu.view.view_impl.TextUI;
+import de.htwg.se.moerakikemu.view.view_impl.gui.GUI;
+
 
 public class MoerakiKemu {
 
@@ -23,6 +23,7 @@ public class MoerakiKemu {
 		IController controller = new Controller(12, playerController);
 
 		TextUI tui = new TextUI(controller, playerController);
+		GUI myGui = new GUI(controller);
 
 		boolean finished = false;
 		while (!finished) { 
