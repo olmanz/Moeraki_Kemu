@@ -1,6 +1,6 @@
-package de.htwg.se.moerakikemu.b_aicontroller;
+package de.htwg.se.moerakikemu.controller;
 
-import de.htwg.se.moerakikemu.c_aimodellayer.IPlayer;
+import de.htwg.se.moerakikemu.modellayer.IPlayer;
 
 public interface IControllerPlayer {
 

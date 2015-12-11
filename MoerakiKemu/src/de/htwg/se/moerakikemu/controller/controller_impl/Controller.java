@@ -1,16 +1,15 @@
-package de.htwg.se.moerakikemu.b_controller;
+package de.htwg.se.moerakikemu.controller.controller_impl;
 
-import de.htwg.se.moerakikemu.b_aicontroller.IController;
-import de.htwg.se.moerakikemu.b_aicontroller.IControllerPlayer;
-import de.htwg.se.moerakikemu.c_aimodellayer.IField;
-import de.htwg.se.moerakikemu.c_aimodellayer.IPlayer;
-import de.htwg.se.moerakikemu.c_modellayer.Field;
+import de.htwg.se.moerakikemu.controller.IController;
+import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.modellayer.IField;
+import de.htwg.se.moerakikemu.modellayer.IPlayer;
+import de.htwg.se.moerakikemu.modellayer.modellayer_impl.Field;
 
 public class Controller implements IController{
 
 	private IPlayer player1;
 	private IPlayer player2;
-	private IPlayer currentPlayer;	// Pointer to one of the players above
 	
 	private IField gameField;
 	private int fieldLength;

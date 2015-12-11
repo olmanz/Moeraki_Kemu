@@ -1,6 +1,6 @@
-package de.htwg.se.moerakikemu.a_view;
+package de.htwg.se.moerakikemu.view.view_impl;
 
-import de.htwg.se.moerakikemu.a_aiview.UserInterface;
+import de.htwg.se.moerakikemu.view.UserInterface;
 
 public class GUI implements UserInterface {
 

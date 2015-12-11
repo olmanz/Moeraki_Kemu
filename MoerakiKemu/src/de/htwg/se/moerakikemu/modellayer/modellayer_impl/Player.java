@@ -1,6 +1,6 @@
-package de.htwg.se.moerakikemu.c_modellayer;
+package de.htwg.se.moerakikemu.modellayer.modellayer_impl;
 
-import de.htwg.se.moerakikemu.c_aimodellayer.IPlayer;
+import de.htwg.se.moerakikemu.modellayer.IPlayer;
 
 public class Player implements IPlayer {
 
