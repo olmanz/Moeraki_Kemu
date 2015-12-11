@@ -1,9 +1,11 @@
 package de.htwg.se.moerakikemu;
 
-import de.htwg.se.moerakikemu.a_view.TextUI;
-import de.htwg.se.moerakikemu.b_aicontroller.*;
 
 import de.htwg.se.moerakikemu.b_controller.*;
+import de.htwg.se.moerakikemu.controller.*;
+import de.htwg.se.moerakikemu.controller.controller_impl.Controller;
+import de.htwg.se.moerakikemu.controller.controller_impl.ControllerPlayer;
+import de.htwg.se.moerakikemu.view.view_impl.TextUI;
 
 public class MoerakiKemu {
 
@@ -17,10 +19,10 @@ public class MoerakiKemu {
 	 * @param args Unused parameters.
 	 */
 	public static void main(String[] args) {
-		IControllerPlayer sampler = new ControllerPlayer();
-		IController controller = new Controller(12, sampler);
+		IControllerPlayer playerController = new ControllerPlayer();
+		IController controller = new Controller(12, playerController);
 
-		TextUI tui = new TextUI(controller, sampler);
+		TextUI tui = new TextUI(controller, playerController);
 
 		boolean finished = false;
 		while (!finished) { 

@@ -1,21 +1,21 @@
-package de.htwg.se.moerakikemu.a_view;
+package de.htwg.se.moerakikemu.view.view_impl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import de.htwg.se.moerakikemu.a_aiview.UserInterface;
-import de.htwg.se.moerakikemu.b_aicontroller.*;
+import de.htwg.se.moerakikemu.controller.*;
+import de.htwg.se.moerakikemu.view.UserInterface;
 
 public class TextUI implements UserInterface {
 
 	IController myController;
-	IControllerPlayer sampler;
+	IControllerPlayer playerController;
 	static Scanner scanner;
 	String wrongInputMsg = "Falsche Eingabe!";
 
 	public TextUI(IController controller, IControllerPlayer sampler) {
 		this.myController = controller;
-		this.sampler = sampler;
+		this.playerController = sampler;
 		scanner = new Scanner(System.in);
 		queryPlayerName();
 	}
@@ -27,7 +27,7 @@ public class TextUI implements UserInterface {
 	 * @return
 	 */
 	public void processInputLine() {		
-		System.out.println(sampler.getCurrentPlayerName() + ", was tun Sie?");
+		System.out.println(playerController.getCurrentPlayerName() + ", was tun Sie?");
 		printOptions();
 		boolean endOfGame = false;
 		while(!endOfGame){
@@ -96,7 +96,7 @@ public class TextUI implements UserInterface {
 		name1 = scanner.nextLine();
 		System.out.print("Bitte Namen des zweiten Spielers eingeben: ");
 		name2 = scanner.nextLine();
-		sampler.setName(name1, name2);
+		playerController.setName(name1, name2);
 
 	}
 	
@@ -146,8 +146,8 @@ public class TextUI implements UserInterface {
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		System.out.println(sampler.getPlayer1Name() + ": " + sampler.getPlayer1Points() + " Punkte");
-		System.out.println(sampler.getPlayer2Name() + ": " + sampler.getPlayer2Points() + " Punkte");
+		System.out.println(playerController.getPlayer1Name() + ": " + playerController.getPlayer1Points() + " Punkte");
+		System.out.println(playerController.getPlayer2Name() + ": " + playerController.getPlayer2Points() + " Punkte");
 	}
 	
 	/**

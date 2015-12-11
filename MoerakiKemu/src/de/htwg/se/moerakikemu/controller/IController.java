@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.b_aicontroller;
+package de.htwg.se.moerakikemu.controller;
 
 public interface IController {
 
