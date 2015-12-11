@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.se.moerakikemu.b_controller.*;
-import de.htwg.se.moerakikemu.b_aicontroller.*;
+import de.htwg.se.moerakikemu.controller.*;
+import de.htwg.se.moerakikemu.controller.controller_impl.Controller;
+import de.htwg.se.moerakikemu.controller.controller_impl.ControllerPlayer;
 
 public class Controller_Test {
 	IController controller;

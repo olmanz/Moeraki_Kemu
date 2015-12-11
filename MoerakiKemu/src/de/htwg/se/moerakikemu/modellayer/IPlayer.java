@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.c_aimodellayer;
+package de.htwg.se.moerakikemu.modellayer;
 
 public interface IPlayer {
 

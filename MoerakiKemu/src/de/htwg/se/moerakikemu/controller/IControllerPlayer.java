@@ -1,6 +1,6 @@
-package de.htwg.se.moerakikemu.b_aicontroller;
+package de.htwg.se.moerakikemu.controller;
 
-import de.htwg.se.moerakikemu.c_aimodellayer.IPlayer;
+import de.htwg.se.moerakikemu.modellayer.IPlayer;
 
 public interface IControllerPlayer {
 
@@ -35,6 +35,12 @@ public interface IControllerPlayer {
 	int getPlayer2Points();
 	
 	/**
+	 * adds a Point to the given Player
+	 * @param A String, not null
+	 */
+	void addAPoint(IPlayer player);
+	
+	/**
 	 * Return the current Player
 	 * @return A String, not null
 	 */
@@ -46,18 +52,6 @@ public interface IControllerPlayer {
 	 * Else player1 and player2 are altering the next player.
 	 */
 	void selectNextPlayer();
-	
-	/**
-	 * adds a Point to Player 1
-	 * @param A String, not null
-	 */
-	void addAPointPlayer1();
-	
-	/**
-	 * adds a Point to Player 2
-	 * @param A String, not null
-	 */
-	void addAPointPlayer2();
 	
 	
 }

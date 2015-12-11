@@ -1,10 +1,10 @@
-package de.htwg.se.moerakikemu.a_view;
+package de.htwg.se.moerakikemu.view.view_impl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import de.htwg.se.moerakikemu.a_aiview.UserInterface;
-import de.htwg.se.moerakikemu.b_aicontroller.*;
+import de.htwg.se.moerakikemu.controller.*;
+import de.htwg.se.moerakikemu.view.UserInterface;
 
 public class TextUI implements UserInterface {
 
@@ -13,9 +13,9 @@ public class TextUI implements UserInterface {
 	static Scanner scanner;
 	String wrongInputMsg = "Falsche Eingabe!";
 
-	public TextUI(IController controller, IControllerPlayer playerController) {
+	public TextUI(IController controller, IControllerPlayer sampler) {
 		this.myController = controller;
-		this.playerController = playerController;
+		this.playerController = sampler;
 		scanner = new Scanner(System.in);
 		queryPlayerName();
 	}
