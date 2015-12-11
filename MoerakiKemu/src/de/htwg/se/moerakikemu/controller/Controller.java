@@ -134,7 +134,7 @@ public class Controller {
 			return -1;
 		}		
 		gameField.occupy(x, y, getCurrentPlayerName());
-		helper = new ControllerHelper(x, y, (fieldLength - 1));
+		helper = new ControllerHelper(x, y, fieldLength - 1);
 		helper.testSquare();
 		testListOfSquares();
 		helper.resetSquareTest();
