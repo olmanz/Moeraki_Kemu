@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.a_view.gui;
+package de.htwg.se.moerakikemu.view.view_impl.gui;
 
 import java.awt.event.KeyEvent;
 

@@ -1,8 +1,8 @@
-package de.htwg.se.moerakikemu.a_view.gui;
+package de.htwg.se.moerakikemu.view.view_impl.gui;
 
 import javax.swing.JFrame;
 
-import de.htwg.se.moerakikemu.a_aiview.UserInterface;
+import de.htwg.se.moerakikemu.view.UserInterface;
 
 public class GUI extends JFrame implements UserInterface {
 	private static final long serialVersionUID = 2078463309153663728L;
@@ -13,7 +13,6 @@ public class GUI extends JFrame implements UserInterface {
 
 	@Override
 	public void drawCurrentState() {
-		// TODO Auto-generated method stub
 		this.repaint();
 	}
 
