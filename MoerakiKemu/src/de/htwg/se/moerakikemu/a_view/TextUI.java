@@ -3,6 +3,7 @@ package de.htwg.se.moerakikemu.a_view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import de.htwg.se.moerakikemu.a_aiview.UserInterface;
 import de.htwg.se.moerakikemu.b_aicontroller.IController;
 
 public class TextUI implements UserInterface {

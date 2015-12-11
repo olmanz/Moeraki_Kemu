@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.aview;
+package de.htwg.se.moerakikemu.a_aiview;
 
 public interface UserInterface {
 
