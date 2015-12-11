@@ -195,7 +195,7 @@ public class Controller {
 	 * @param y Y-coordinates of the Spot.
 	 * @return Returns the number of the player (>=0) or -1 if no player gets a point.
 	 */
-	int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
+	private int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
 		if(!"".equals(gameField.getIsOccupiedFrom(x, y))){
 			if(gameField.getIsOccupiedFrom(x, y).equals(player1.getName())) {
 				return 0;
