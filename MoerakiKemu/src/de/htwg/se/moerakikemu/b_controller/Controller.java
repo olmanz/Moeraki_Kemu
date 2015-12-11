@@ -16,15 +16,15 @@ public class Controller implements IController{
 	private int fieldLength;
 
 	private ControllerHelper helper;
-	private IControllerPlayer sampler;
+	private IControllerPlayer playerController;
 	
 	private String playerWin;
 	private boolean gameEnds;
 	
-	public Controller(int fieldLength, IControllerPlayer sampler) {
+	public Controller(int fieldLength, IControllerPlayer playerCon) {
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
-		this.sampler = sampler;
+		this.playerController = playerCon;
 		gameEnds = false;
 		playerWin = null;
 	}
@@ -47,12 +47,12 @@ public class Controller implements IController{
 		if(gameField.getIsOccupiedFrom(x, y) != ""){
 			return -1;
 		}		
-		gameField.occupy(x, y, sampler.getCurrentPlayerName());
+		gameField.occupy(x, y, playerController.getCurrentPlayerName());
 		helper = new ControllerHelper(x, y, fieldLength - 1);
 		helper.testSquare();
 		testListOfSquares();
 		helper.resetSquareTest();
-		sampler.selectNextPlayer();
+		playerController.selectNextPlayer();
 		return 0;
 	}
 
@@ -97,9 +97,9 @@ public class Controller implements IController{
 
 	private int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
 		if(!"".equals(gameField.getIsOccupiedFrom(x, y))){
-			if(gameField.getIsOccupiedFrom(x, y).equals(sampler.getPlayer1Name())) {
+			if(gameField.getIsOccupiedFrom(x, y).equals(playerController.getPlayer1Name())) {
 				return 0;
-			} else if(gameField.getIsOccupiedFrom(x, y).equals(sampler.getPlayer2Name())) {
+			} else if(gameField.getIsOccupiedFrom(x, y).equals(playerController.getPlayer2Name())) {
 				return 1;
 			}
 		}
@@ -108,28 +108,28 @@ public class Controller implements IController{
 
 	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
-			sampler.addAPoint(player1);
+			playerController.addAPoint(player1);
 		}
 		if(counter1 == 4){ 
-			sampler.addAPoint(player1);
-			playerWin = sampler.getPlayer1Name();
+			playerController.addAPoint(player1);
+			playerWin = playerController.getPlayer1Name();
 			setEnd(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
-			sampler.addAPoint(player2);
+			playerController.addAPoint(player2);
 		} 
 		if(counter2 == 4){
-			sampler.addAPoint(player2);
-			playerWin = sampler.getPlayer2Name();
+			playerController.addAPoint(player2);
+			playerWin = playerController.getPlayer2Name();
 			setEnd(true);
 		}
 	}
 	
 	public String getWinner(){
 		if(playerWin == null){
-			if(sampler.getPlayer1Points() > sampler.getPlayer2Points()){
+			if(playerController.getPlayer1Points() > playerController.getPlayer2Points()){
 				playerWin = player1.getName();
-			} else if(sampler.getPlayer1Points() < sampler.getPlayer2Points()){
+			} else if(playerController.getPlayer1Points() < playerController.getPlayer2Points()){
 				playerWin = player2.getName();
 			}
 		}

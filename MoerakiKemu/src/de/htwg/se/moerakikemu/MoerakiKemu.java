@@ -17,10 +17,10 @@ public class MoerakiKemu {
 	 * @param args Unused parameters.
 	 */
 	public static void main(String[] args) {
-		IControllerPlayer sampler = new ControllerPlayer();
-		IController controller = new Controller(12, sampler);
+		IControllerPlayer playerController = new ControllerPlayer();
+		IController controller = new Controller(12, playerController);
 
-		TextUI tui = new TextUI(controller, sampler);
+		TextUI tui = new TextUI(controller, playerController);
 
 		boolean finished = false;
 		while (!finished) { 
