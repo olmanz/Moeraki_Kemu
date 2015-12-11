@@ -1,6 +1,6 @@
 package de.htwg.se.moerakikemu.modellayer;
 
-public class Field {
+public class Field implements IField {
 	private int edgeLength;
 	private int occupiedSpots;
 	private Spot[][] array;

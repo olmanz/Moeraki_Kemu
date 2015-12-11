@@ -1,6 +1,6 @@
 package de.htwg.se.moerakikemu.modellayer;
 
-public class Player {
+public class Player implements IPlayer {
 
 	/**
 	 * Amount of points of the Player; determines win or lost of the game.

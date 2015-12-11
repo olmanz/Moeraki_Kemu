@@ -1,15 +1,17 @@
 package de.htwg.se.moerakikemu.controller;
 
 import de.htwg.se.moerakikemu.modellayer.Field;
+import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.Player;
+import de.htwg.se.moerakikemu.modellayer.IPlayer;
 
 public class Controller implements IController{
 
-	private Player player1;
-	private Player player2;
-	private Player currentPlayer;	// Pointer to one of the players above
+	private IPlayer player1;
+	private IPlayer player2;
+	private IPlayer currentPlayer;	// Pointer to one of the players above
 	
-	private Field gameField;
+	private IField gameField;
 	private int fieldLength;
 
 	private ControllerHelper helper;
