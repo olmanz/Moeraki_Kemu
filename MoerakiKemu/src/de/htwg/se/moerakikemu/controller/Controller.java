@@ -1,6 +1,7 @@
 package de.htwg.se.moerakikemu.controller;
 
 import de.htwg.se.moerakikemu.modellayer.Field;
+import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.Player;
 
 public class Controller {
@@ -9,7 +10,7 @@ public class Controller {
 	private Player player2;
 	private Player currentPlayer;	// Pointer to one of the players above
 	
-	private Field gameField;
+	private IField gameField;
 	private int fieldLength;
 
 	private ControllerHelper helper;
