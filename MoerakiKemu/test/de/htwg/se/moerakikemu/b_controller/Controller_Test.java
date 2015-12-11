@@ -5,15 +5,18 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moerakikemu.b_controller.Controller;
+import de.htwg.se.moerakikemu.b_controller.*;
+import de.htwg.se.moerakikemu.b_aicontroller.*;
 
 public class Controller_Test {
-	Controller controller;
+	IController controller;
+	IControllerPlayer playerController;
 	
 	@Before
 	public void setUp(){
-		controller = new Controller(6);
-		controller.setName("Player1", "Player2");
+		playerController = new ControllerPlayer();
+		controller = new Controller(6, playerController);
+		playerController.setName("Player1", "Player2");
 	}
 	
 	@Test
