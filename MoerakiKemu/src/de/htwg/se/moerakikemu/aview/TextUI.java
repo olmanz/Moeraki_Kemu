@@ -3,15 +3,15 @@ package de.htwg.se.moerakikemu.aview;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import de.htwg.se.moerakikemu.controller.Controller;
+import de.htwg.se.moerakikemu.controller.IController;
 
 public class TextUI implements UserInterface {
 
-	Controller myController;
+	IController myController;
 	static Scanner scanner;
 	String wrongInputMsg = "Falsche Eingabe!";
 
-	public TextUI(Controller controller) {
+	public TextUI(IController controller) {
 		myController = controller;
 		scanner = new Scanner(System.in);
 		queryPlayerName();
