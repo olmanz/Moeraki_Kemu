@@ -10,4 +10,6 @@ public interface IViewsSubject {
 	public void attatch(IViewsObserver newObserver);
 	public void detatch(IViewsObserver observer);
 	public void notifyObservers();
+	public State returnState();
+	//public String getPlayerName(); ?
 }

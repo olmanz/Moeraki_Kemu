@@ -16,10 +16,9 @@ public class Player implements IPlayer {
 	
 	/**
 	 * Creates a new Player with a name and zero points.
-	 * @param name
 	 */
 	public Player() {
-		name = "1";
+		name = "";
 		points = 0;
 	}
 	

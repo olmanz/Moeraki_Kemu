@@ -6,6 +6,7 @@ import java.util.List;
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.IViewsSubject;
+import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
 import de.htwg.se.moerakikemu.modellayer.modellayer_impl.Field;
@@ -166,5 +167,18 @@ public class Controller implements IController, IViewsSubject {
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public State returnState() {
+		if ("".equals(player1.getName())) {
+			return State.query_player_name;
+		} else if ("".equals(player2.getName())) {
+			return State.query_player_name;
+		} else if (!gameEnds) {
+			return State.player_occupied;
+		} else {
+			return null;
+		}
 	}
 }
