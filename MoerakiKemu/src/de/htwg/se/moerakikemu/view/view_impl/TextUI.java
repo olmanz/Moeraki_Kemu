@@ -90,6 +90,7 @@ public class TextUI implements UserInterface, IViewsObserver {
 		}while(err == -1);
 	}
 	
+	@Override
 	public  void queryPlayerName() {
 		String name1;
 		String name2;
@@ -112,6 +113,7 @@ public class TextUI implements UserInterface, IViewsObserver {
 	 * Player 1: x points
 	 * Player 2: x points
 	 */
+	@Override
 	public void drawCurrentState() {
 		int edgeLength = myController.getEdgeLength();
 		
@@ -206,6 +208,7 @@ public class TextUI implements UserInterface, IViewsObserver {
 		System.out.println(headlineBuilder.toString());
 	} 
 	
+	@Override
 	public void printMessage(String msg) {
 		System.out.println(msg);
 	}
@@ -226,6 +229,8 @@ public class TextUI implements UserInterface, IViewsObserver {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		
 	}
+
 	
 }

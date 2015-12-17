@@ -49,6 +49,7 @@ public class ControllerHelper {
 		}
 	}
 	
+
 	interface SquareState{
 		public void test(Square square);
 	}

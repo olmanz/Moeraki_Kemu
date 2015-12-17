@@ -8,7 +8,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.view.IViewsObserver;
@@ -66,28 +65,28 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 	}
 
 	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void drawCurrentState() {
-		// TODO Determine which Spots are occupied by which Player
-		this.repaint();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void queryPlayerName() {
 		// TODO Auto-generated method stub
-		// Show Dialog with textfileds to query player names
-		String player1Name = JOptionPane.showInputDialog("Name für Spieler 1:", "Speiler 1");
+		
 	}
 
 	@Override
 	public void printMessage(String msg) {
 		// TODO Auto-generated method stub
-		// Print Message-Box
+		
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		drawCurrentState();
-	}
 
 }

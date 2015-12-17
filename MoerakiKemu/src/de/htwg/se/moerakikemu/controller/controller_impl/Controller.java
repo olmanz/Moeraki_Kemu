@@ -153,6 +153,7 @@ public class Controller implements IController, IViewsSubject {
 		gameEnds = end;
 	}
 
+
 	@Override
 	public void attatch(IViewsObserver newObserver) {
 		userInterfaces.add(newObserver);
