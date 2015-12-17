@@ -8,11 +8,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import de.htwg.se.moerakikemu.controller.IController;
+import de.htwg.se.moerakikemu.view.IViewsObserver;
 import de.htwg.se.moerakikemu.view.UserInterface;
 
-public class GUI extends JFrame implements UserInterface {
+public class GUI extends JFrame implements UserInterface, IViewsObserver {
 	private static final long serialVersionUID = 2078463309153663728L;
 
 	IController myController;
@@ -57,6 +59,8 @@ public class GUI extends JFrame implements UserInterface {
 		
 	}
 
+	// Listener
+	
 	void setSpotColor(final int playerNum, final int x, final  int y) {
 		field[x][y].setIcon(playerNum == 0 ? black_icon : red_icon);
 	}
@@ -70,12 +74,20 @@ public class GUI extends JFrame implements UserInterface {
 	@Override
 	public void queryPlayerName() {
 		// TODO Auto-generated method stub
+		// Show Dialog with textfileds to query player names
+		String player1Name = JOptionPane.showInputDialog("Name für Spieler 1:", "Speiler 1");
 	}
 
 	@Override
 	public void printMessage(String msg) {
 		// TODO Auto-generated method stub
-		
+		// Print Message-Box
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		drawCurrentState();
 	}
 
 }

@@ -1,12 +1,19 @@
 package de.htwg.se.moerakikemu.controller.controller_impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.controller.IViewsSubject;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
 import de.htwg.se.moerakikemu.modellayer.modellayer_impl.Field;
+import de.htwg.se.moerakikemu.view.IViewsObserver;
 
-public class Controller implements IController{
+public class Controller implements IController, IViewsSubject {
+	
+	List<IViewsObserver> userInterfaces;
 
 	private IPlayer player1;
 	private IPlayer player2;
@@ -26,6 +33,8 @@ public class Controller implements IController{
 		this.playerController = playerCon;
 		gameEnds = false;
 		playerWin = null;
+		
+		userInterfaces = new ArrayList<IViewsObserver>(3);
 	}
 	
 	public String getIsOccupiedByPlayer(int x, int y) {
@@ -141,5 +150,21 @@ public class Controller implements IController{
 	
 	public void setEnd(boolean end) {
 		gameEnds = end;
+	}
+
+	@Override
+	public void attatch(IViewsObserver newObserver) {
+		userInterfaces.add(newObserver);
+	}
+
+	@Override
+	public void detatch(IViewsObserver observer) {
+		userInterfaces.remove(observer);
+	}
+
+	@Override
+	public void notifyObservers() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -4,9 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import de.htwg.se.moerakikemu.controller.*;
+import de.htwg.se.moerakikemu.view.IViewsObserver;
 import de.htwg.se.moerakikemu.view.UserInterface;
 
-public class TextUI implements UserInterface {
+public class TextUI implements UserInterface, IViewsObserver {
 
 	IController myController;
 	IControllerPlayer playerController;
@@ -221,4 +222,10 @@ public class TextUI implements UserInterface {
 			System.out.println("Unentschieden");
 		}
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+	}
+	
 }
