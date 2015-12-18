@@ -31,8 +31,8 @@ jar {
     
 sonarqube {
     properties {
-    property "sonar.projectName", "de.htwg.se.MoerakiKemu"
-    property "sonar.projectKey", "de.htwg.se.MoerakiKemu"
+    property "sonar.projectName", "SE2015WS-14-MoerakiKemu"
+    property "sonar.projectKey", "SE2015WS-14-MoerakiKemu"
     property "sonar.projectVersion", "2.0"
     property "sonar.binaries", "build/classes"
     property "sonar.java.coveragePlugin", "jacoco"
