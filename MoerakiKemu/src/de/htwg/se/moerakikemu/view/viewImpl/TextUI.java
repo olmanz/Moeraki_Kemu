@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.view.view_impl;
+package de.htwg.se.moerakikemu.view.viewImpl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

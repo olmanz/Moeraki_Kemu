@@ -1,15 +1,12 @@
-package de.htwg.se.moerakikemu.controller.controller_impl;
+package de.htwg.se.moerakikemu.controller.controllerImpl;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
-import de.htwg.se.moerakikemu.modellayer.modellayer_impl.Field;
+import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Field;
 
 public class Controller implements IController{
-
-	private IPlayer player1;
-	private IPlayer player2;
 	
 	private IField gameField;
 	private int fieldLength;
@@ -125,7 +122,7 @@ public class Controller implements IController{
 	}
 	
 	public String getWinner(){
-		if(playerWin.equals("")){
+		if("".equals(playerWin)){
 			if(playerController.getPlayer1Points() > playerController.getPlayer2Points()){
 				playerWin = playerController.getPlayer1Name();
 			} else if(playerController.getPlayer1Points() < playerController.getPlayer2Points()){

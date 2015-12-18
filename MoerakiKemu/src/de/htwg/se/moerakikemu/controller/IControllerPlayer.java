@@ -1,7 +1,5 @@
 package de.htwg.se.moerakikemu.controller;
 
-import de.htwg.se.moerakikemu.modellayer.IPlayer;
-
 public interface IControllerPlayer {
 
 	public void setName(String player1name, String player2name);
