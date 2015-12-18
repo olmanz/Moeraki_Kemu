@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.view.viewImpl;
+package de.htwg.se.moerakikemu.view.viewimpl;
 
 import de.htwg.se.moerakikemu.view.UserInterface;
 

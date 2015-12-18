@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.controller.controllerImpl;
+package de.htwg.se.moerakikemu.controller.controllerimpl;
 
 public class ControllerHelper {
 	private int x,y, maxLength;

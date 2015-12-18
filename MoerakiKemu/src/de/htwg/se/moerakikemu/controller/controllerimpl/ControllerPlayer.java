@@ -1,8 +1,8 @@
-package de.htwg.se.moerakikemu.controller.controllerImpl;
+package de.htwg.se.moerakikemu.controller.controllerimpl;
 
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
-import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Player;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 
 public class ControllerPlayer implements IControllerPlayer {
 	private IPlayer player1;

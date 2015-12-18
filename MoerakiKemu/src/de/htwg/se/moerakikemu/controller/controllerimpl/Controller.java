@@ -1,10 +1,9 @@
-package de.htwg.se.moerakikemu.controller.controllerImpl;
+package de.htwg.se.moerakikemu.controller.controllerimpl;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.modellayer.IField;
-import de.htwg.se.moerakikemu.modellayer.IPlayer;
-import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Field;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 
 public class Controller implements IController{
 	

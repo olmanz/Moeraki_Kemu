@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.modellayer.modellayerImpl;
+package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
 

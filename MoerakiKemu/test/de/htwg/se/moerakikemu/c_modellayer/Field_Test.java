@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Field;
-import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Player;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 
 public class Field_Test {
 	

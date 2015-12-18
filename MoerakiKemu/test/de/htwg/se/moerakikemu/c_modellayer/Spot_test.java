@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Spot;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Spot;
 
 public class Spot_test {
 	Spot spot;

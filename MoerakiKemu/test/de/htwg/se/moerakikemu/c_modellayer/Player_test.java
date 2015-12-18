@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.se.moerakikemu.modellayer.modellayerImpl.Player;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 
 
 public class Player_test {
