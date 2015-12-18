@@ -5,10 +5,11 @@ import org.apache.logging.log4j.core.Logger;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.view.IViewsObserver;
 import de.htwg.se.moerakikemu.view.UserInterface;
 
 
-public class TextUI implements UserInterface {
+public class TextUI implements UserInterface, IViewsObserver {
 
 	static Logger logger = (Logger) LogManager.getLogger(TextUI.class);
 	
@@ -157,5 +158,11 @@ public class TextUI implements UserInterface {
 		} else {
 			logger.info("Unentschieden");
 		}
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }
