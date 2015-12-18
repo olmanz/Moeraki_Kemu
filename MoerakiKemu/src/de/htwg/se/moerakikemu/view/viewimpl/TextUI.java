@@ -19,6 +19,24 @@ public class TextUI implements UserInterface {
 		scanner = new Scanner(System.in);
 		queryPlayerName();
 	}
+	
+	public boolean testEndTrue(){
+		String s;
+		
+		System.out.println("Wirklich beenden?");
+		System.out.println("Ja[j] oder Nein[n]");
+		while(true){
+			s = scanner.next();
+			if(s.equals("j") || s.equals("J")){
+				return true;
+			} else if(s.equals("n") || s.equals("N")){
+				return false;
+			} else {
+				System.out.println("Falsche Eingabe, erneut!");
+				scanner.next();
+			}
+		}
+	}
 
 	/**
 	 * Parses the input from the user and call controller things.
@@ -36,11 +54,15 @@ public class TextUI implements UserInterface {
 				setSpot();
 				endOfGame = true;
 			} else if("2".equals(line)){
-				System.out.println("Spiel beendet!");
-				printPoints();
-				myController.setEnd(true);
+				if(testEndTrue()){
+					System.out.println("Spiel beendet!");
+					printPoints();
+					myController.setEnd(true);
+					endOfGame = true;
+				}
 				endOfGame = true;
 			} else {
+				System.out.println("a");
 				System.out.println(wrongInputMsg);
 				printOptions();
 			}
@@ -215,7 +237,7 @@ public class TextUI implements UserInterface {
 	 */
 	public void Quit(){
 		String winner = myController.getWinner();
-		if(winner != null){
+		if(!"".equals(winner)){
 			System.out.println("Der Gewinner ist " + winner + "!!!");
 		} else {
 			System.out.println("Unentschieden");
