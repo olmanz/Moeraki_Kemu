@@ -49,6 +49,7 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 			}
 		}//END OUTTER FOR
 
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(1024, 768);
 		this.setVisible(true);
 		
@@ -56,7 +57,7 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 		Image black_icon_img = black_icon.getImage();
 		black_icon.setImage(black_icon_img.getScaledInstance(field[0][0].getWidth(), field[0][0].getHeight(), Image.SCALE_SMOOTH));
 		red_icon = new ImageIcon("Spot_red.png");
-		Image red_icon_img = black_icon.getImage();
+		Image red_icon_img = red_icon.getImage();
 		red_icon.setImage(red_icon_img.getScaledInstance(field[0][0].getWidth(), field[0][0].getHeight(), Image.SCALE_SMOOTH));
 		
 	}
@@ -66,7 +67,7 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 		public void mousePressed(MouseEvent me) {
 			JButton pressedButton = (JButton) me.getSource();
 			
-			pressedButton.setIcon(black_icon);
+			pressedButton.setIcon(red_icon);
 			
             System.out.println(pressedButton.getText());
           }
