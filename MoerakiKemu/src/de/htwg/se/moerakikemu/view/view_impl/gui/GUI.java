@@ -1,14 +1,7 @@
 package de.htwg.se.moerakikemu.view.view_impl.gui;
 
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.view.IViewsObserver;
@@ -18,12 +11,6 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 	private static final long serialVersionUID = 2078463309153663728L;
 
 	IController myController;
-
-	ImageIcon black_icon;
-	ImageIcon red_icon;
-	
-	GridLayout gridForSpots;
-	JButton field[][];
 	
 	
 	public GUI(IController newController) {
@@ -33,6 +20,7 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 		this.setJMenuBar(new MainMenu());
 
 		this.add(new MainPanel(myController.getEdgeLength()));
+		this.add(new JTextField("Spiel-Informationen"));
 
 		this.setSize(1024, 768);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,16 +28,6 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 		
 	}
 
-	// Listener
-	MouseListener listener = new MouseAdapter() {
-		public void mousePressed(MouseEvent me) {
-			JButton pressedButton = (JButton) me.getSource();
-			
-			pressedButton.setIcon(red_icon);
-			
-            System.out.println(pressedButton.getText());
-          }
-	};
 	/*
 	void setSpotColor(final int playerNum, final int x, final  int y) {
 		field[x][y].setIcon(playerNum == 0 ? black_icon : red_icon);

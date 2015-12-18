@@ -47,48 +47,52 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1050</x>
+      <x>1100</x>
       <y>420</y>
-      <w>210</w>
-      <h>190</h>
+      <w>200</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>View::GUI
 --
-+Update()
+IController myController;
 --</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1130</x>
+      <x>1180</x>
       <y>170</y>
-      <w>100</w>
+      <w>50</w>
       <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>80;30;30;250</additional_attributes>
+    <additional_attributes>30;30;30;250</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>950</x>
       <y>150</y>
-      <w>170</w>
+      <w>220</w>
       <h>290</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>30;30;150;270</additional_attributes>
+    <additional_attributes>30;30;200;270</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>790</x>
       <y>420</y>
-      <w>210</w>
-      <h>190</h>
+      <w>280</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>View::TextUI
+--
+logger : Logger
+myController : IController
+myPlayerController : IControllerPlayer
 --</panel_attributes>
     <additional_attributes/>
   </element>
@@ -117,10 +121,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>450</x>
-      <y>430</y>
+      <x>440</x>
+      <y>420</y>
       <w>210</w>
-      <h>190</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Controller::Controller
 --
@@ -148,23 +152,23 @@ setEnd(boolean end)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
+      <x>550</x>
       <y>190</y>
-      <w>130</w>
-      <h>260</h>
+      <w>140</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>110;30;30;240</additional_attributes>
+    <additional_attributes>120;30;30;230</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>460</x>
       <y>210</y>
-      <w>90</w>
-      <h>240</h>
+      <w>80</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>30;30;70;220</additional_attributes>
+    <additional_attributes>30;30;60;210</additional_attributes>
   </element>
 </diagram>
