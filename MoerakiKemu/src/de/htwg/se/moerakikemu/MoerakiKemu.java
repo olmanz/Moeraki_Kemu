@@ -13,6 +13,8 @@ public class MoerakiKemu {
 		// Private Constructor because it must not be used elsewhere
 	}
 
+	// Module for Dependency Injection with GoogleGuice
+	
 	/**
 	 * Starts the game with TUI, GUI.
 	 *
@@ -26,7 +28,8 @@ public class MoerakiKemu {
 		GUI myGui = new GUI(controller);
 
 		boolean finished = false;
-		while (!finished) { 
+		while (!finished) {
+			myGui.drawCurrentState();
 			tui.drawCurrentState();
 			tui.processInputLine();
 			finished = controller.testIfWinnerExists();
