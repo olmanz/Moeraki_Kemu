@@ -1,23 +1,11 @@
-package de.htwg.se.moerakikemu.controller.controller_impl;
-
-import java.util.ArrayList;
-import java.util.List;
+package de.htwg.se.moerakikemu.controller.controllerimpl;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
-import de.htwg.se.moerakikemu.controller.IViewsSubject;
-import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
-import de.htwg.se.moerakikemu.modellayer.IPlayer;
-import de.htwg.se.moerakikemu.modellayer.modellayer_impl.Field;
-import de.htwg.se.moerakikemu.view.IViewsObserver;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 
-public class Controller implements IController, IViewsSubject {
-	
-	List<IViewsObserver> userInterfaces;
-
-	private IPlayer player1;
-	private IPlayer player2;
+public class Controller implements IController{
 	
 	private IField gameField;
 	private int fieldLength;
@@ -33,9 +21,7 @@ public class Controller implements IController, IViewsSubject {
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
 		gameEnds = false;
-		playerWin = null;
-		
-		userInterfaces = new ArrayList<IViewsObserver>(3);
+		playerWin = "";
 	}
 	
 	public String getIsOccupiedByPlayer(int x, int y) {
@@ -117,29 +103,29 @@ public class Controller implements IController, IViewsSubject {
 
 	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
-			playerController.addAPoint(player1);
+			playerController.addAPointPlayer1();
 		}
 		if(counter1 == 4){ 
-			playerController.addAPoint(player1);
+			playerController.addAPointPlayer1();
 			playerWin = playerController.getPlayer1Name();
 			setEnd(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
-			playerController.addAPoint(player2);
+			playerController.addAPointPlayer2();
 		} 
 		if(counter2 == 4){
-			playerController.addAPoint(player2);
+			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
 			setEnd(true);
 		}
 	}
 	
 	public String getWinner(){
-		if(playerWin == null){
+		if("".equals(playerWin)){
 			if(playerController.getPlayer1Points() > playerController.getPlayer2Points()){
-				playerWin = player1.getName();
+				playerWin = playerController.getPlayer1Name();
 			} else if(playerController.getPlayer1Points() < playerController.getPlayer2Points()){
-				playerWin = player2.getName();
+				playerWin = playerController.getPlayer2Name();
 			}
 		}
 		return playerWin;
@@ -151,35 +137,5 @@ public class Controller implements IController, IViewsSubject {
 	
 	public void setEnd(boolean end) {
 		gameEnds = end;
-	}
-
-
-	@Override
-	public void attatch(IViewsObserver newObserver) {
-		userInterfaces.add(newObserver);
-	}
-
-	@Override
-	public void detatch(IViewsObserver observer) {
-		userInterfaces.remove(observer);
-	}
-
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public State returnState() {
-		if ("".equals(player1.getName())) {
-			return State.query_player_name;
-		} else if ("".equals(player2.getName())) {
-			return State.query_player_name;
-		} else if (!gameEnds) {
-			return State.player_occupied;
-		} else {
-			return null;
-		}
 	}
 }

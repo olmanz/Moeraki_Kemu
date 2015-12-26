@@ -1,8 +1,8 @@
-package de.htwg.se.moerakikemu.controller.controller_impl;
+package de.htwg.se.moerakikemu.controller.controllerimpl;
 
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
-import de.htwg.se.moerakikemu.modellayer.modellayer_impl.Player;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 
 public class ControllerPlayer implements IControllerPlayer {
 	private IPlayer player1;
@@ -37,12 +37,16 @@ public class ControllerPlayer implements IControllerPlayer {
 		return player2.getPoints();
 	}
 	
-	public void addAPoint(IPlayer player){
-		if(player.getName() == player1.getName()){
-			player1.addPoints(1);
-		} else if(player2.getName() == player2.getName()){
-			player2.addPoints(1);
-		}
+	public void addAPointPlayer1(){
+		player1.addPoints(1);
+	}
+	
+	public void addApointPlayer1(){
+		player1.addPoints(1);
+	}
+
+	public void addAPointPlayer2() {
+		player2.addPoints(2);
 	}
 	
 	public void selectNextPlayer() {

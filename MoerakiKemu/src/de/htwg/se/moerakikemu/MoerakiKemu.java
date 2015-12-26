@@ -1,10 +1,12 @@
 package de.htwg.se.moerakikemu;
 
-import de.htwg.se.moerakikemu.controller.*;
-import de.htwg.se.moerakikemu.controller.controller_impl.Controller;
-import de.htwg.se.moerakikemu.controller.controller_impl.ControllerPlayer;
-import de.htwg.se.moerakikemu.view.view_impl.TextUI;
-import de.htwg.se.moerakikemu.view.view_impl.gui.GUI;
+
+import de.htwg.se.moerakikemu.controller.IController;
+import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.controller.controllerimpl.Controller;
+import de.htwg.se.moerakikemu.controller.controllerimpl.ControllerPlayer;
+import de.htwg.se.moerakikemu.view.viewimpl.TextUI;
+import de.htwg.se.moerakikemu.view.viewimpl.gui.GUI;
 
 
 public class MoerakiKemu {

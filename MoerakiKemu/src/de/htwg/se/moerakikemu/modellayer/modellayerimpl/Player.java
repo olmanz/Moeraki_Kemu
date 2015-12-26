@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.modellayer.modellayer_impl;
+package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
 
@@ -16,9 +16,10 @@ public class Player implements IPlayer {
 	
 	/**
 	 * Creates a new Player with a name and zero points.
+	 * @param name
 	 */
 	public Player() {
-		name = "";
+		name = "1";
 		points = 0;
 	}
 	

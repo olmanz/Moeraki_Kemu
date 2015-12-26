@@ -1,4 +1,4 @@
-package de.htwg.se.moerakikemu.modellayer.modellayer_impl;
+package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
 

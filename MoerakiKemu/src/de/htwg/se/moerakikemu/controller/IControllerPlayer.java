@@ -1,7 +1,5 @@
 package de.htwg.se.moerakikemu.controller;
 
-import de.htwg.se.moerakikemu.modellayer.IPlayer;
-
 public interface IControllerPlayer {
 
 	public void setName(String player1name, String player2name);
@@ -35,10 +33,16 @@ public interface IControllerPlayer {
 	int getPlayer2Points();
 	
 	/**
-	 * adds a Point to the given Player
+	 * adds a Point to Player 1
 	 * @param A String, not null
 	 */
-	void addAPoint(IPlayer player);
+	void addAPointPlayer1();
+	
+	/**
+	 * adds a Point to Player 2
+	 * @param A String, not null
+	 */
+	void addAPointPlayer2();
 	
 	/**
 	 * Return the current Player
