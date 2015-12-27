@@ -40,7 +40,7 @@ public class GUI extends JFrame implements UserInterface, IViewsObserver {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		drawCurrentState();
 	}
 
 	@Override

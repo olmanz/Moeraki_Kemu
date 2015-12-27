@@ -19,7 +19,7 @@ public class Player implements IPlayer {
 	 * @param name
 	 */
 	public Player() {
-		name = "1";
+		name = "";
 		points = 0;
 	}
 	

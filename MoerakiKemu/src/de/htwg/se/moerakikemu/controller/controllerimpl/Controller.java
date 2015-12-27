@@ -1,11 +1,19 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.controller.IViewsSubject;
+import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
+import de.htwg.se.moerakikemu.view.IViewsObserver;
 
-public class Controller implements IController{
+public class Controller implements IController, IViewsSubject {
+	
+	private List<IViewsObserver> uiObservers;
 	
 	private IField gameField;
 	private int fieldLength;
@@ -17,6 +25,8 @@ public class Controller implements IController{
 	private boolean gameEnds;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
+		uiObservers = new ArrayList<IViewsObserver>();
+
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
@@ -118,6 +128,7 @@ public class Controller implements IController{
 			playerWin = playerController.getPlayer2Name();
 			setEnd(true);
 		}
+		
 	}
 	
 	public String getWinner(){
@@ -137,5 +148,35 @@ public class Controller implements IController{
 	
 	public void setEnd(boolean end) {
 		gameEnds = end;
+	}
+
+	
+	@Override
+	public void attatch(IViewsObserver newObserver) {
+		uiObservers.add(newObserver);
+	}
+
+	@Override
+	public void detatch(IViewsObserver observer) {
+		uiObservers.remove(observer);
+	}
+
+	@Override
+	public void notifyObservers() {
+		for(IViewsObserver ui : uiObservers) {
+			ui.update();
+		}
+	}
+
+	@Override
+	public State returnState() {
+		// TODO Auto-generated method stub
+		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
+			return State.query_player_name;
+		} else if (gameEnds) {
+			return State.game_finished;
+		} else {
+			return State.player_occupied;
+		}
 	}
 }

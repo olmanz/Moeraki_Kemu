@@ -163,6 +163,6 @@ public class TextUI implements UserInterface, IViewsObserver {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+		drawCurrentState();
 	}
 }
