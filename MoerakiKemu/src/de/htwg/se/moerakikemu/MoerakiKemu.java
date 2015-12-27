@@ -1,6 +1,8 @@
 package de.htwg.se.moerakikemu;
 
 
+import javax.swing.JOptionPane;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.controllerimpl.Controller;
@@ -29,13 +31,13 @@ public class MoerakiKemu {
 	public static void main(String[] args) {
 		IControllerPlayer playerController = new ControllerPlayer();
 		IController controller = new Controller(12, playerController);
-
+		
 		interfaces = new UserInterface[2];
 		interfaces[0] = new TextUI(controller, playerController);
-		interfaces[1] = new GUI(controller);
+		interfaces[1] = new GUI(controller, playerController);
 		
 		TextUI tui = new TextUI(controller, playerController);
-		GUI myGui = new GUI(controller);
+		GUI myGui = new GUI(controller, playerController);
 
 		boolean finished = false;
 		while (!finished) {

@@ -1,6 +1,6 @@
 package de.htwg.se.moerakikemu.controller;
 
-public interface IController {
+public interface IController extends IViewsSubject {
 
 	/**
 	 * Returns the name of the player that occupies the field with the coordinates.
