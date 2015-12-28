@@ -5,11 +5,10 @@ import org.apache.logging.log4j.core.Logger;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
-import de.htwg.se.moerakikemu.view.IViewsObserver;
 import de.htwg.se.moerakikemu.view.UserInterface;
 
 
-public class TextUI implements UserInterface, IViewsObserver {
+public class TextUI implements UserInterface {
 
 	static Logger logger = (Logger) LogManager.getLogger(TextUI.class);
 	

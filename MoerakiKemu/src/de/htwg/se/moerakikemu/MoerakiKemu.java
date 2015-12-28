@@ -1,8 +1,6 @@
 package de.htwg.se.moerakikemu;
 
 
-import javax.swing.JOptionPane;
-
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.controllerimpl.Controller;
@@ -21,8 +19,6 @@ public class MoerakiKemu {
 	// Module for Dependency Injection with GoogleGuice
 	
 	
-	static UserInterface interfaces[];
-	
 	/**
 	 * Starts the game with TUI, GUI.
 	 *
@@ -31,21 +27,21 @@ public class MoerakiKemu {
 	public static void main(String[] args) {
 		IControllerPlayer playerController = new ControllerPlayer();
 		IController controller = new Controller(12, playerController);
-		
+	
+		UserInterface interfaces[];
 		interfaces = new UserInterface[2];
 		interfaces[0] = new TextUI(controller, playerController);
 		interfaces[1] = new GUI(controller, playerController);
 		
-		TextUI tui = new TextUI(controller, playerController);
-		GUI myGui = new GUI(controller, playerController);
-
 		boolean finished = false;
 		while (!finished) {
-			myGui.drawCurrentState();
-			tui.drawCurrentState();
+			for (int i = 0; i < interfaces.length; i++) {
+				controller.attatch(interfaces[i]);
+				interfaces[i].drawCurrentState();
+			}
 			finished = controller.testIfWinnerExists();
 			if(finished)
-				tui.Quit();
+				((TextUI)interfaces[0]).Quit();
 		}
 
 	}

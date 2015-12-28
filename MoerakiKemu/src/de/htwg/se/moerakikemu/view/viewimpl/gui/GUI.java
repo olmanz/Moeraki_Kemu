@@ -9,10 +9,9 @@ import javax.swing.JTextField;
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
-import de.htwg.se.moerakikemu.view.IViewsObserver;
 import de.htwg.se.moerakikemu.view.UserInterface;
 
-public class GUI extends JFrame implements UserInterface, IViewsObserver {
+public class GUI extends JFrame implements UserInterface {
 	private static final long serialVersionUID = 2078463309153663728L;
 
 	IController myController;
