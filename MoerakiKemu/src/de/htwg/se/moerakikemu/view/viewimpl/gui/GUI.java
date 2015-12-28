@@ -28,7 +28,8 @@ public class GUI extends JFrame implements UserInterface {
 		this.setJMenuBar(new MainMenu(myController));
 		
 		this.setLayout(new BorderLayout());
-		this.add(new MainPanel(myController.getEdgeLength()), BorderLayout.CENTER);
+		this.add(new MainPanel(myController, myPlayerController, myController.getEdgeLength()),
+				 BorderLayout.CENTER);
 		this.add(messageField, BorderLayout.EAST);
 
 		this.setSize(1024, 768);

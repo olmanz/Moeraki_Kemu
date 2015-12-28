@@ -5,15 +5,21 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import de.htwg.se.moerakikemu.controller.IController;
+import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+
 
 public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
+	IController myController;
+	IControllerPlayer myPlayerController;
 
 	ImageIcon black_icon;
 	ImageIcon red_icon;
@@ -21,23 +27,45 @@ public class MainPanel extends JPanel {
 	GridLayout gridForSpots;
 	JButton field[][];
 
-	/*
-	void setSpotColor(final int playerNum, final int x, final  int y) {
-		field[x][y].setIcon(playerNum == 0 ? black_icon : red_icon);
-	}*/
+	
+	private int[] getButtonCoordinates(JButton button) {
+		int []xyCoordinates = new int[2];
+		
+		Scanner getNumbers = new Scanner(button.getText()); 
+		getNumbers.useDelimiter("[()/]");
+		xyCoordinates[0] = getNumbers.nextInt();
+		xyCoordinates[1] = getNumbers.nextInt();
+		getNumbers.close();
+		System.out.println("(" + xyCoordinates[0] + "/" + xyCoordinates[1] + ")");
+		
+		return xyCoordinates;
+	}
+	
+	private void setSpotColor(JButton bottonToChange) {
+		if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer1Name())) {
+			bottonToChange.setIcon(black_icon);
+		} else if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer2Name())) {
+			bottonToChange.setIcon(red_icon);
+		}
+	}
 
-	MouseListener listener = new MouseAdapter() {
+	private MouseListener listener = new MouseAdapter() {
 		public void mousePressed(MouseEvent me) {
 			JButton pressedButton = (JButton) me.getSource();
 			
-			pressedButton.setIcon(red_icon);
-			
-            System.out.println(pressedButton.getText());
+			// Occupy Spot
+			int []coordinates = getButtonCoordinates(pressedButton);
+			String name = myController.getIsOccupiedByPlayer(coordinates[0], coordinates[1]);
+			if (!"".equals(name)) {
+				setSpotColor(pressedButton);
+			}
           }
 	};
 
-	public MainPanel(final int fieldLength) {
+	public MainPanel(IController controller, IControllerPlayer playerController, final int fieldLength) {
 		super();
+		this.myController = controller;
+		this.myPlayerController = playerController;
 		
 		gridForSpots = new GridLayout(fieldLength, fieldLength);
 		this.setLayout(gridForSpots);
