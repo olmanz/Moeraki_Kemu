@@ -21,7 +21,6 @@ public class MainPanel extends JPanel {
 	GridLayout gridForSpots;
 	JButton field[][];
 
-	// Listener
 	MouseListener listener = new MouseAdapter() {
 		public void mousePressed(MouseEvent me) {
 			JButton pressedButton = (JButton) me.getSource();
@@ -44,8 +43,9 @@ public class MainPanel extends JPanel {
 				this.add(field[i][j]);
 				field[i][j].addMouseListener(listener);
 			}
-		}//END OUTTER FOR
+		}
 		
+		// Read and scale images for occupied spots
 		black_icon = new ImageIcon("Spot_black.png");
 		Image black_icon_img = black_icon.getImage();
 		black_icon.setImage(black_icon_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
