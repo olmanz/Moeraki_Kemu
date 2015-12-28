@@ -25,7 +25,7 @@ public class GUI extends JFrame implements UserInterface {
 		this.myPlayerController = playerController;
 		this.messageField = new JTextField("Spiel-Informationen");
 
-		this.setJMenuBar(new MainMenu());
+		this.setJMenuBar(new MainMenu(myController));
 		
 		this.setLayout(new BorderLayout());
 		this.add(new MainPanel(myController.getEdgeLength()), BorderLayout.CENTER);
@@ -35,11 +35,6 @@ public class GUI extends JFrame implements UserInterface {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-
-	/*
-	void setSpotColor(final int playerNum, final int x, final  int y) {
-		field[x][y].setIcon(playerNum == 0 ? black_icon : red_icon);
-	}*/
 
 	@Override
 	public void update() {
@@ -84,7 +79,6 @@ public class GUI extends JFrame implements UserInterface {
 
 	@Override
 	public void printMessage(String msg) {
-		// TODO Auto-generated method stub
 		messageField.setText(messageField.getText() + "\n" + msg);
 	}
 

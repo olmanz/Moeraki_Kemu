@@ -21,6 +21,11 @@ public class MainPanel extends JPanel {
 	GridLayout gridForSpots;
 	JButton field[][];
 
+	/*
+	void setSpotColor(final int playerNum, final int x, final  int y) {
+		field[x][y].setIcon(playerNum == 0 ? black_icon : red_icon);
+	}*/
+
 	MouseListener listener = new MouseAdapter() {
 		public void mousePressed(MouseEvent me) {
 			JButton pressedButton = (JButton) me.getSource();
