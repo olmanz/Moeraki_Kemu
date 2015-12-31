@@ -72,7 +72,7 @@ public class GUI extends JFrame implements UserInterface {
 		}
 
 		while ("".equals(player2Name)) {
-			player1Name = (String) JOptionPane.showInputDialog("Name für Spieler 1 eigeben:", "Spieler 1");
+			player2Name = (String) JOptionPane.showInputDialog("Name für Spieler 2 eigeben:", "Spieler 2");
 		}
 
 		myPlayerController.setName(player1Name, player2Name);

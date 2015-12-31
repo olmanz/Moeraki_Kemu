@@ -32,12 +32,15 @@ public class MoerakiKemu {
 		interfaces = new UserInterface[2];
 		interfaces[0] = new TextUI(controller, playerController);
 		interfaces[1] = new GUI(controller, playerController);
+		for (int i = 0; i < interfaces.length; i++) {
+			controller.attatch(interfaces[i]);
+			interfaces[i].drawCurrentState();
+		}
 		
 		boolean finished = false;
 		while (!finished) {
 			for (int i = 0; i < interfaces.length; i++) {
-				controller.attatch(interfaces[i]);
-				interfaces[i].drawCurrentState();
+				interfaces[i].update();
 			}
 			finished = controller.testIfWinnerExists();
 			if(finished)
