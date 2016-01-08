@@ -46,10 +46,11 @@ public class MoerakiKemu {
 				interfaces[i].update();
 			}*/
 			finished = controller.testIfWinnerExists();
-			if(finished)
+			if(finished){
 				((TextUI)interfaces[0]).Quit();
+				((GUI)interfaces[1]).Quit();
+			}
 		}
-
 	}
 
 }

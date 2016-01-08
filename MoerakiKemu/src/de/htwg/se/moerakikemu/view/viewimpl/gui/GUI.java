@@ -37,6 +37,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 
 		this.setSize(1024, 768);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
@@ -61,7 +62,6 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 
 	@Override
 	public void drawCurrentState() {
-		// TODO Auto-generated method stub
 		this.myMainPanel.updateField();
 		this.repaint();
 	}
@@ -72,11 +72,11 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		String player2Name = "";
 
 		while ("".equals(player1Name)) {
-			player1Name = (String) JOptionPane.showInputDialog("Name für Spieler 1 eigeben:", "Spieler 1");
+			player1Name = (String) JOptionPane.showInputDialog("Name fuer Spieler 1 eigeben:", "Spieler 1");
 		}
 
 		while ("".equals(player2Name)) {
-			player2Name = (String) JOptionPane.showInputDialog("Name für Spieler 2 eigeben:", "Spieler 2");
+			player2Name = (String) JOptionPane.showInputDialog("Name fuer Spieler 2 eigeben:", "Spieler 2");
 		}
 
 		myPlayerController.setName(player1Name, player2Name);
@@ -87,5 +87,15 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		messageField.setText(messageField.getText() + "\n" + msg);
 	}
 
+	public void Quit(){
+		String winner = myController.getWinner();
+		if("".equals(winner)){
+			JOptionPane.showMessageDialog(null, "Ein Unentschieden!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Der Gewinner ist: " + winner + "!!!");
+
+		}
+		this.dispose();
+	}
 
 }
