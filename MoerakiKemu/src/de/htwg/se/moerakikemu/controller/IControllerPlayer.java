@@ -5,6 +5,11 @@ public interface IControllerPlayer {
 	public void setName(String player1name, String player2name);
 	
 	/**
+	 * set the points of the player to zero
+	 */
+	void newGame();
+	
+	/**
 	 * Returns the name of player1.
 	 *
 	 * @return A String, not null.

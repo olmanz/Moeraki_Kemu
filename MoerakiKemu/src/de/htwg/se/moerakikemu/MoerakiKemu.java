@@ -42,7 +42,7 @@ public class MoerakiKemu {
 			for (int i = 0; i < interfaces.length; i++) {
 				interfaces[i].update();
 			}
-			finished = controller.testIfWinnerExists();
+			finished = controller.testIfEnd();
 			if(finished){
 				((TextUI)interfaces[0]).Quit();
 				((GUI)interfaces[1]).Quit();
