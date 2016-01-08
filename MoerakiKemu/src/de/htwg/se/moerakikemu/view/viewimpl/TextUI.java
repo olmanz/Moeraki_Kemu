@@ -6,9 +6,10 @@ import org.apache.logging.log4j.core.Logger;
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.view.UserInterface;
+import de.htwg.se.util.observer.ObserverObserver;
 
 
-public class TextUI implements UserInterface {
+public class TextUI implements UserInterface, ObserverObserver {
 
 	static Logger logger = (Logger) LogManager.getLogger(TextUI.class);
 	

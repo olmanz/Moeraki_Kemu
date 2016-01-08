@@ -1,19 +1,16 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
-import de.htwg.se.moerakikemu.controller.IViewsSubject;
 import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
-import de.htwg.se.moerakikemu.view.IViewsObserver;
+import de.htwg.se.moerakikemu.view.UserInterface;
+import de.htwg.se.util.observer.IObserverSubject;
+import de.htwg.se.util.observer.ObserverObserver;
+import de.htwg.se.util.observer.ObserverSubject;
 
-public class Controller implements IController, IViewsSubject {
-	
-	private List<IViewsObserver> uiObservers;
+public class Controller extends ObserverSubject implements IController, IObserverSubject {
 	
 	private IField gameField;
 	private int fieldLength;
@@ -25,8 +22,6 @@ public class Controller implements IController, IViewsSubject {
 	private boolean gameEnds;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
-		uiObservers = new ArrayList<IViewsObserver>();
-
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
@@ -128,7 +123,7 @@ public class Controller implements IController, IViewsSubject {
 			playerWin = playerController.getPlayer2Name();
 			setEnd(true);
 		}
-		
+		printPointsAllUIs();
 	}
 	
 	public String getWinner(){
@@ -150,27 +145,15 @@ public class Controller implements IController, IViewsSubject {
 		gameEnds = end;
 	}
 
-	
-	@Override
-	public void attatch(IViewsObserver newObserver) {
-		uiObservers.add(newObserver);
-	}
-
-	@Override
-	public void detatch(IViewsObserver observer) {
-		uiObservers.remove(observer);
-	}
-
-	@Override
-	public void notifyObservers() {
-		for(IViewsObserver ui : uiObservers) {
-			ui.update();
+	private void printPointsAllUIs() {
+		String pointString = "";
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage(pointString);
 		}
 	}
 
 	@Override
 	public State returnState() {
-		// TODO Auto-generated method stub
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
 			return State.query_player_name;
 		} else if (gameEnds) {

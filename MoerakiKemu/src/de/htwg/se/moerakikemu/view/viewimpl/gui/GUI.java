@@ -10,26 +10,29 @@ import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.view.UserInterface;
+import de.htwg.se.util.observer.ObserverObserver;
 
-public class GUI extends JFrame implements UserInterface {
+public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	private static final long serialVersionUID = 2078463309153663728L;
 
-	IController myController;
-	IControllerPlayer myPlayerController;
+	private IController myController;
+	private IControllerPlayer myPlayerController;
 	
-	JTextField messageField;
+	private MainPanel myMainPanel;
+	
+	private JTextField messageField;
 	
 	public GUI(IController newController, IControllerPlayer playerController) {
 		super("Moeraki Kemu");
 		this.myController = newController;
 		this.myPlayerController = playerController;
 		this.messageField = new JTextField("Spiel-Informationen");
+		this.myMainPanel = new MainPanel(myController, myPlayerController, myController.getEdgeLength());
 
 		this.setJMenuBar(new MainMenu(myController));
 		
 		this.setLayout(new BorderLayout());
-		this.add(new MainPanel(myController, myPlayerController, myController.getEdgeLength()),
-				 BorderLayout.CENTER);
+		this.add(myMainPanel, BorderLayout.CENTER);
 		this.add(messageField, BorderLayout.EAST);
 
 		this.setSize(1024, 768);
@@ -59,6 +62,7 @@ public class GUI extends JFrame implements UserInterface {
 	@Override
 	public void drawCurrentState() {
 		// TODO Auto-generated method stub
+		this.myMainPanel.updateField();
 		this.repaint();
 	}
 
