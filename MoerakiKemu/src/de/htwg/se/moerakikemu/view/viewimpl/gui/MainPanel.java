@@ -41,11 +41,11 @@ public class MainPanel extends JPanel {
 		return xyCoordinates;
 	}
 	
-	private void setSpotColor(JButton bottonToChange) {
+	private void setSpotColor(JButton buttonToChange) {
 		if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer1Name())) {
-			bottonToChange.setIcon(black_icon);
+			buttonToChange.setIcon(black_icon);
 		} else if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer2Name())) {
-			bottonToChange.setIcon(red_icon);
+			buttonToChange.setIcon(red_icon);
 		}
 	}
 
@@ -75,6 +75,9 @@ public class MainPanel extends JPanel {
 				field[i][j] = new JButton("(" + i + "/" + j + ")");
 				this.add(field[i][j]);
 				field[i][j].addMouseListener(listener);
+				field[i][j].setOpaque(false);
+				field[i][j].setContentAreaFilled(false);
+				field[i][j].setBorderPainted(false);
 			}
 		}
 		

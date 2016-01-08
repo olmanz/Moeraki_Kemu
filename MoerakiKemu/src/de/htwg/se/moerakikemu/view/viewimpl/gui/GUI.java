@@ -58,7 +58,6 @@ public class GUI extends JFrame implements UserInterface {
 
 	@Override
 	public void drawCurrentState() {
-		// TODO Auto-generated method stub
 		this.repaint();
 	}
 
@@ -68,11 +67,11 @@ public class GUI extends JFrame implements UserInterface {
 		String player2Name = "";
 
 		while ("".equals(player1Name)) {
-			player1Name = (String) JOptionPane.showInputDialog("Name für Spieler 1 eigeben:", "Spieler 1");
+			player1Name = (String) JOptionPane.showInputDialog("Name fuer Spieler 1 eigeben:", "Spieler 1");
 		}
 
 		while ("".equals(player2Name)) {
-			player2Name = (String) JOptionPane.showInputDialog("Name für Spieler 2 eigeben:", "Spieler 2");
+			player2Name = (String) JOptionPane.showInputDialog("Name fuer Spieler 2 eigeben:", "Spieler 2");
 		}
 
 		myPlayerController.setName(player1Name, player2Name);
@@ -83,5 +82,8 @@ public class GUI extends JFrame implements UserInterface {
 		messageField.setText(messageField.getText() + "\n" + msg);
 	}
 
+	public void Quit(){
+		this.dispose();
+	}
 
 }
