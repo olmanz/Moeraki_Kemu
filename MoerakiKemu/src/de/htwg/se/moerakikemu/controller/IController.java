@@ -41,7 +41,13 @@ public interface IController {
 	boolean testIfWinnerExists();
 	
 	/**
-	 * return the boolean value "end";
+	 * test if the game is over
+	 * @return true if there is a winner, false when there isnt one;
+	 */
+	boolean testIfEnd();
+	
+	/**
+	 * set if the game ends
 	 * @param a boolean Value
 	 */
 	void setEnd(boolean end);
@@ -52,4 +58,9 @@ public interface IController {
 	 */
 	public abstract State returnState();
 	//public abstract String getPlayerName(); ?
+	
+	/**
+	 * set all Values without the playernames to zero
+	 */
+	void newGame();
 }

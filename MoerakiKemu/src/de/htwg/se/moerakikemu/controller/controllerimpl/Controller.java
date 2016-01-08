@@ -20,6 +20,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	
 	private String playerWin;
 	private boolean gameEnds;
+	private boolean winner;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
 		gameField = new Field(fieldLength);
@@ -113,7 +114,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(counter1 == 4){ 
 			playerController.addAPointPlayer1();
 			playerWin = playerController.getPlayer1Name();
-			setEnd(true);
+			setWinner(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
 			playerController.addAPointPlayer2();
@@ -121,7 +122,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(counter2 == 4){
 			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
-			setEnd(true);
+			setWinner(true);
 		}
 		printPointsAllUIs();
 	}
@@ -138,11 +139,24 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 
 	public boolean testIfWinnerExists() {
-		return gameEnds;
+		return winner;
+	}
+	
+	private void setWinner(boolean win){
+		winner = win;
 	}
 	
 	public void setEnd(boolean end) {
 		gameEnds = end;
+	}
+	
+	public boolean testIfEnd(){
+		return gameEnds;
+	}
+	
+	public void newGame(){
+		gameField = new Field(fieldLength);
+		playerController.newGame();
 	}
 
 	private void printPointsAllUIs() {

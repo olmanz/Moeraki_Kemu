@@ -6,5 +6,6 @@ public interface IPlayer {
 	String getName();
 	void addPoints(int amount);
 	void setName (String name);
+	void refreshPoints();
 
 }
