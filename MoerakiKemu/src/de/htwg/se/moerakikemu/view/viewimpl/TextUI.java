@@ -152,7 +152,7 @@ public class TextUI implements UserInterface {
 	 */
 	public void Quit(){
 		String winner = myController.getWinner();
-		if(winner != null){
+		if(!"".equals(winner)){
 			logger.info("Der Gewinner ist " + winner + "!!!\n");
 		} else {
 			logger.info("Unentschieden");
@@ -161,7 +161,6 @@ public class TextUI implements UserInterface {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		drawCurrentState();
 	}
 }

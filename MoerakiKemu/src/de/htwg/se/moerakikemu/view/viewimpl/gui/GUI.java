@@ -34,6 +34,7 @@ public class GUI extends JFrame implements UserInterface {
 
 		this.setSize(1024, 768);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
@@ -83,6 +84,13 @@ public class GUI extends JFrame implements UserInterface {
 	}
 
 	public void Quit(){
+		String winner = myController.getWinner();
+		if("".equals(winner)){
+			JOptionPane.showMessageDialog(null, "Ein Unentschieden!");
+		} else {
+			JOptionPane.showMessageDialog(null, "Der Gewinner ist: " + winner + "!!!");
+
+		}
 		this.dispose();
 	}
 

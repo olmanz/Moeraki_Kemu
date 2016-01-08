@@ -170,7 +170,6 @@ public class Controller implements IController, IViewsSubject {
 
 	@Override
 	public State returnState() {
-		// TODO Auto-generated method stub
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
 			return State.query_player_name;
 		} else if (gameEnds) {
