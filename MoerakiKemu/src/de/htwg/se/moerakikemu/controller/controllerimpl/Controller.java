@@ -44,8 +44,8 @@ public class Controller implements IController, IViewsSubject {
 	}
 	
 	public int occupy(int xCoordinate, int yCoordinate) {
-		int x = xCoordinate - 1;
-		int y = yCoordinate - 1;
+		int x = xCoordinate;
+		int y = yCoordinate;
 		if(gameField.isFilled()){
 			setEnd(true);
 		}
@@ -162,6 +162,11 @@ public class Controller implements IController, IViewsSubject {
 	public void newGame(){
 		gameField = new Field(fieldLength);
 		playerController.newGame();
+		playerWin = "";
+		gameEnds = false;
+		winner = false;
+		
+		notify();
 	}
 
 	

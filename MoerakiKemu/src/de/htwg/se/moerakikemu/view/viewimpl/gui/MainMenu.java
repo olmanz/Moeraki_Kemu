@@ -71,7 +71,7 @@ public class MainMenu extends JMenuBar implements ActionListener{
 		if(source == quit){
 			myController.setEnd(true);
 		} else if(source == newGame){
-			//myController.newGame();
+			myController.newGame();
 		} else if(source == help){
 			printHelper();
 		} else if(source == info){

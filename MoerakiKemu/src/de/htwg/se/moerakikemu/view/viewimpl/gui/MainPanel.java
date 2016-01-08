@@ -57,11 +57,12 @@ public class MainPanel extends JPanel {
 			
 			// Occupy Spot
 			int []coordinates = getButtonCoordinates(pressedButton);
-			String name = myController.getIsOccupiedByPlayer(coordinates[0], coordinates[1]);
+			String name = myController.getIsOccupiedByPlayer(coordinates[0]-1, coordinates[1]-1);
 			if ("".equals(name)) {
-				myController.occupy(coordinates[0], coordinates[1]);
+				setSpotColor(pressedButton);
+				myController.occupy(coordinates[0]-1, coordinates[1]-1);
 			}
-			setSpotColor(pressedButton);
+			
 		}
 	};
 
