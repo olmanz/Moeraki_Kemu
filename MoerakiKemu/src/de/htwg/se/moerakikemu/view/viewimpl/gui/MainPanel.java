@@ -29,6 +29,16 @@ public class MainPanel extends JPanel {
 	JButton field[][];
 
 	
+	public void updateField() {
+		int fieldLength = myController.getEdgeLength();
+		for (int i = 0; i < fieldLength; i++) {
+			for (int j = 0; j < fieldLength; j++) {
+				setSpotColor(field[i][j]);
+			}
+		}
+		this.repaint();
+	}
+	
 	private int[] getButtonCoordinates(JButton button) {
 		int []xyCoordinates = new int[2];
 		
@@ -41,7 +51,7 @@ public class MainPanel extends JPanel {
 		
 		return xyCoordinates;
 	}
-	
+
 	private void setSpotColor(JButton buttonToChange) {
 		System.out.println(myPlayerController.getCurrentPlayerName());
 		if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer1Name())) {

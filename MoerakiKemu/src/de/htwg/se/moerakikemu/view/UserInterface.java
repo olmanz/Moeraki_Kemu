@@ -1,6 +1,6 @@
 package de.htwg.se.moerakikemu.view;
 
-public interface UserInterface extends IViewsObserver {
+public interface UserInterface {
 
 	/**
 	 * Print game field and points for each player.

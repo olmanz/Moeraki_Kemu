@@ -8,6 +8,8 @@ import de.htwg.se.moerakikemu.controller.controllerimpl.ControllerPlayer;
 import de.htwg.se.moerakikemu.view.UserInterface;
 import de.htwg.se.moerakikemu.view.viewimpl.TextUI;
 import de.htwg.se.moerakikemu.view.viewimpl.gui.GUI;
+import de.htwg.se.util.observer.ObserverObserver;
+import de.htwg.se.util.observer.IObserverSubject;
 
 
 public class MoerakiKemu {
@@ -33,15 +35,16 @@ public class MoerakiKemu {
 		interfaces[0] = new TextUI(controller, playerController);
 		interfaces[1] = new GUI(controller, playerController);
 		for (int i = 0; i < interfaces.length; i++) {
-			controller.attatch(interfaces[i]);
+			((IObserverSubject) controller).attatch((ObserverObserver) interfaces[i]);
 			interfaces[i].drawCurrentState();
 		}
 		
 		boolean finished = false;
 		while (!finished) {
+			/*
 			for (int i = 0; i < interfaces.length; i++) {
 				interfaces[i].update();
-			}
+			}*/
 			finished = controller.testIfEnd();
 			if(finished){
 				((TextUI)interfaces[0]).Quit();

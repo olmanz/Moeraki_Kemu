@@ -1,6 +1,6 @@
 package de.htwg.se.moerakikemu.controller;
 
-public interface IController extends IViewsSubject {
+public interface IController {
 
 	/**
 	 * Returns the name of the player that occupies the field with the coordinates.
@@ -50,7 +50,14 @@ public interface IController extends IViewsSubject {
 	 * set if the game ends
 	 * @param a boolean Value
 	 */
-	void setEnd(boolean end);	
+	void setEnd(boolean end);
+
+	/**
+	 * Returns the current State for the Controller to determine the correct UI response.
+	 * @return A constant from the enum State.
+	 */
+	public abstract State returnState();
+	//public abstract String getPlayerName(); ?
 	
 	/**
 	 * set all Values without the playernames to zero

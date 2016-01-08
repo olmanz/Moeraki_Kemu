@@ -1,9 +1,9 @@
-package de.htwg.se.moerakikemu.view;
+package de.htwg.se.util.observer;
 
 /**
  * Observer that receives changes from Subjects.
  * UserInterface?!
  */
-public interface IViewsObserver {
+public interface ObserverObserver {
 	public void update();
 }
