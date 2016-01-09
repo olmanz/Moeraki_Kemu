@@ -41,7 +41,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 	
 	public int occupy(int xCoordinate, int yCoordinate) {
-		printPointsAllUIs(xCoordinate, yCoordinate);
+		printInfoAllUIs(xCoordinate, yCoordinate);
 		int x = xCoordinate;
 		int y = yCoordinate;
 		if(gameField.isFilled()){
@@ -116,18 +116,22 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
 			playerController.addAPointPlayer1();
+			printInfoALLUIs(playerController.getPlayer1Name());
 		}
 		if(counter1 == 4){ 
 			playerController.addAPointPlayer1();
 			playerWin = playerController.getPlayer1Name();
+			printInfoALLUIs(playerController.getPlayer1Name());
 			setWinner(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
 			playerController.addAPointPlayer2();
+			printInfoALLUIs(playerController.getPlayer2Name());
 		} 
 		if(counter2 == 4){
 			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
+			printInfoALLUIs(playerController.getPlayer2Name());
 			setWinner(true);
 		}
 	}
@@ -153,6 +157,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	
 	public void setEnd(boolean end) {
 		gameEnds = end;
+		printInfoALLUIs();
 	}
 	
 	public boolean testIfEnd(){
@@ -168,8 +173,22 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		
 		notifyObservers();
 	}
+	
+	private void printInfoALLUIs(){
+		String pointString = "Das Spiel endet";
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage(pointString);
+		}
+	}
+	
+	private void printInfoALLUIs(String player){
+		String pointString = "Ein Punkt fuer " + player;
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage(pointString);
+		}
+	}
 
-	private void printPointsAllUIs(int x, int y) {
+	private void printInfoAllUIs(int x, int y) {
 		System.out.println("anzahl");
 		int a = x+1;
 		int b = y+1;
