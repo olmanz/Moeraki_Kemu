@@ -161,7 +161,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		gameEnds = false;
 		winner = false;
 		
-		notify();
+		notifyObservers();
 	}
 
 	private void printPointsAllUIs() {
@@ -172,7 +172,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 
 	@Override
-	public State returnState() {
+	public State getState() {
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
 			return State.query_player_name;
 		} else if (gameEnds) {

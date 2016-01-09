@@ -56,7 +56,7 @@ public interface IController {
 	 * Returns the current State for the Controller to determine the correct UI response.
 	 * @return A constant from the enum State.
 	 */
-	public abstract State returnState();
+	public abstract State getState();
 	//public abstract String getPlayerName(); ?
 	
 	/**
