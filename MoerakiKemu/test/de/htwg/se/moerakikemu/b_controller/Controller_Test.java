@@ -21,27 +21,27 @@ public class Controller_Test {
 	
 	@Test
 	public void test_occupy_returnNullIfOccupied(){
-		for(int i = 1; i < 5; i++){
-			for(int j = 1; j <= 6; j++){
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j <= 5; j++){
 					assertEquals(0, controller.occupy(i, j));
 			}
 		}	
 		
+		assertEquals(0, controller.occupy(4, 0));
+		assertEquals(0, controller.occupy(4, 2));
+		assertEquals(0, controller.occupy(4, 1));
+		assertEquals(0, controller.occupy(4, 3));
+		assertEquals(0, controller.occupy(5, 0));
+		assertEquals(0, controller.occupy(5, 2));
 		assertEquals(0, controller.occupy(5, 1));
 		assertEquals(0, controller.occupy(5, 3));
-		assertEquals(0, controller.occupy(5, 2));
+		assertEquals(0, controller.occupy(4, 4));
+		assertEquals(0, controller.occupy(4, 5));
 		assertEquals(0, controller.occupy(5, 4));
-		assertEquals(0, controller.occupy(6, 1));
-		assertEquals(0, controller.occupy(6, 3));
-		assertEquals(0, controller.occupy(6, 2));
-		assertEquals(0, controller.occupy(6, 4));
 		assertEquals(0, controller.occupy(5, 5));
-		assertEquals(0, controller.occupy(5, 6));
-		assertEquals(0, controller.occupy(6, 5));
-		assertEquals(0, controller.occupy(6, 6));
 		
-		for(int i = 1; i <= 6; i++){
-			for(int j = 1; j <= 6; j++){
+		for(int i = 0; i <= 5; i++){
+			for(int j = 0; j <= 5; j++){
 					assertEquals(-1, controller.occupy(i, j));
 			}
 		}
@@ -89,11 +89,11 @@ public class Controller_Test {
 		controller = new Controller(5, playerController);
 		assertFalse(controller.testIfWinnerExists());
 		
+		controller.occupy(0, 0);
 		controller.occupy(1, 1);
-		controller.occupy(2, 2);
+		controller.occupy(0, 1);
 		controller.occupy(1, 2);
-		controller.occupy(2, 3);
-		controller.occupy(2, 1);
+		controller.occupy(1, 0);
 		
 		assertEquals("Player1", controller.getWinner());
 		
@@ -102,15 +102,14 @@ public class Controller_Test {
 		controller = new Controller(5, playerController);
 		assertEquals("", controller.getWinner());
 
-		controller.occupy(5, 5);
-		controller.occupy(1, 1);
 		controller.occupy(4, 4);
-		controller.occupy(2, 1);
+		controller.occupy(0, 0);
 		controller.occupy(3, 3);
-		controller.occupy(1, 2);
-		controller.occupy(2, 2);
+		controller.occupy(1, 0);
+		controller.occupy(2, 3);
+		controller.occupy(0, 1);
+		controller.occupy(1, 1);
 		
-		assertEquals("Player2", controller.getWinner());
 		assertEquals("Player2", controller.getWinner());
 	}
 	
@@ -118,7 +117,7 @@ public class Controller_Test {
 	public void test_getIsOccupiedByPlayer_ifOccupiedFromAPlayer(){
 		controller = new Controller(5, playerController);
 		
-		controller.occupy(1, 1);
+		controller.occupy(0, 0);
 		
 		String a = controller.getIsOccupiedByPlayer(0, 0); //0,0 because occupy get the direkt input from a player, so there is a -1, -1 needed
 		assertEquals("Player1", a);
