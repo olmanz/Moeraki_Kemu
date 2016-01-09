@@ -28,4 +28,11 @@ public interface UserInterface {
 	 * This updates the GUI and the TUI
 	 */
 	void update();
+
+	/**
+	 * Add points to the panels
+	 * @param points from Player 1
+	 * @param points from Player 2
+	 */
+	void addPoints(int pointsPlayer1, int pointsPlayer2);
 }

@@ -78,6 +78,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		}
 
 		myPlayerController.setName(player1Name, player2Name);
+		myMessagePanel.setPlayerNames(player1Name, player2Name);
 	}
 
 	@Override
@@ -93,6 +94,11 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	@Override
 	public void printMessage(String msg) {
 		myMessagePanel.printMessage(msg);		
+	}
+	
+	@Override
+	public void addPoints(int pointsPlayer1, int pointsPlayer2){
+		myMessagePanel.setPlayerPoints(pointsPlayer1, pointsPlayer2);
 	}
 
 }

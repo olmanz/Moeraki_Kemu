@@ -176,4 +176,11 @@ public class TextUI implements UserInterface, ObserverObserver {
 			// TODO
 		}
 	}
+
+	
+	//useless at moment?
+	@Override
+	public void addPoints(int pointsPlayer1, int pointsPlayer2) {
+		// TODO Auto-generated method stub
+	}
 }

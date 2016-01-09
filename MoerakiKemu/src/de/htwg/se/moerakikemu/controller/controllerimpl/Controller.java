@@ -184,6 +184,9 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private void printInfoALLUIs(String player){
 		String pointString = "Ein Punkt fuer " + player;
 		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).addPoints(playerController.getPlayer1Points(), playerController.getPlayer2Points());;
+		}
+		for (ObserverObserver ui : observers) {
 			((UserInterface) ui).printMessage(pointString);
 		}
 	}
