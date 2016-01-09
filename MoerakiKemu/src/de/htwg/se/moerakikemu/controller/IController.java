@@ -41,8 +41,26 @@ public interface IController {
 	boolean testIfWinnerExists();
 	
 	/**
-	 * return the boolean value "end";
+	 * test if the game is over
+	 * @return true if there is a winner, false when there isnt one;
+	 */
+	boolean testIfEnd();
+	
+	/**
+	 * set if the game ends
 	 * @param a boolean Value
 	 */
-	void setEnd(boolean end);	
+	void setEnd(boolean end);
+
+	/**
+	 * Returns the current State for the Controller to determine the correct UI response.
+	 * @return A constant from the enum State.
+	 */
+	public abstract State getState();
+	//public abstract String getPlayerName(); ?
+	
+	/**
+	 * set all Values without the playernames to zero
+	 */
+	void newGame();
 }

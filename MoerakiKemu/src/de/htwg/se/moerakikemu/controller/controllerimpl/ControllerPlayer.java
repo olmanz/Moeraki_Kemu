@@ -16,6 +16,12 @@ public class ControllerPlayer implements IControllerPlayer {
 		currentPlayer = player1;
 	}
 	
+	public void newGame(){
+		player1.refreshPoints();
+		player2.refreshPoints();
+		currentPlayer = player1;
+	}
+	
 	public void setName(String player1name, String player2name) {
 		player1.setName(player1name);
 		player2.setName(player2name);

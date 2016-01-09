@@ -2,10 +2,15 @@ package de.htwg.se.moerakikemu.controller.controllerimpl;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
+import de.htwg.se.moerakikemu.view.UserInterface;
+import de.htwg.se.util.observer.IObserverSubject;
+import de.htwg.se.util.observer.ObserverObserver;
+import de.htwg.se.util.observer.ObserverSubject;
 
-public class Controller implements IController{
+public class Controller extends ObserverSubject implements IController, IObserverSubject {
 	
 	private IField gameField;
 	private int fieldLength;
@@ -15,13 +20,16 @@ public class Controller implements IController{
 	
 	private String playerWin;
 	private boolean gameEnds;
+	private boolean winner;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
+		super();
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
 		gameEnds = false;
 		playerWin = "";
+		notifyObservers();
 	}
 	
 	public String getIsOccupiedByPlayer(int x, int y) {
@@ -33,8 +41,8 @@ public class Controller implements IController{
 	}
 	
 	public int occupy(int xCoordinate, int yCoordinate) {
-		int x = xCoordinate - 1;
-		int y = yCoordinate - 1;
+		int x = xCoordinate;
+		int y = yCoordinate;
 		if(gameField.isFilled()){
 			setEnd(true);
 		}
@@ -48,6 +56,9 @@ public class Controller implements IController{
 		testListOfSquares();
 		helper.resetSquareTest();
 		playerController.selectNextPlayer();
+		
+		notifyObservers();
+		
 		return 0;
 	}
 
@@ -108,7 +119,7 @@ public class Controller implements IController{
 		if(counter1 == 4){ 
 			playerController.addAPointPlayer1();
 			playerWin = playerController.getPlayer1Name();
-			setEnd(true);
+			setWinner(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
 			playerController.addAPointPlayer2();
@@ -116,8 +127,9 @@ public class Controller implements IController{
 		if(counter2 == 4){
 			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
-			setEnd(true);
+			setWinner(true);
 		}
+		printPointsAllUIs();
 	}
 	
 	public String getWinner(){
@@ -132,10 +144,46 @@ public class Controller implements IController{
 	}
 
 	public boolean testIfWinnerExists() {
-		return gameEnds;
+		return winner;
+	}
+	
+	private void setWinner(boolean win){
+		winner = win;
 	}
 	
 	public void setEnd(boolean end) {
 		gameEnds = end;
+	}
+	
+	public boolean testIfEnd(){
+		return gameEnds;
+	}
+	
+	public void newGame(){
+		gameField = new Field(fieldLength);
+		playerController.newGame();
+		playerWin = "";
+		gameEnds = false;
+		winner = false;
+		
+		notifyObservers();
+	}
+
+	private void printPointsAllUIs() {
+		String pointString = "";
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage(pointString);
+		}
+	}
+
+	@Override
+	public State getState() {
+		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
+			return State.query_player_name;
+		} else if (gameEnds) {
+			return State.game_finished;
+		} else {
+			return State.player_occupied;
+		}
 	}
 }
