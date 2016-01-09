@@ -23,11 +23,13 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private boolean winner;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
+		super();
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
 		gameEnds = false;
 		playerWin = "";
+		notifyObservers();
 	}
 	
 	public String getIsOccupiedByPlayer(int x, int y) {
@@ -54,6 +56,9 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		testListOfSquares();
 		helper.resetSquareTest();
 		playerController.selectNextPlayer();
+		
+		notifyObservers();
+		
 		return 0;
 	}
 
