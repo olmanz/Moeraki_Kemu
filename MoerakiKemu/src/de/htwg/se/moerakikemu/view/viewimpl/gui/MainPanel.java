@@ -33,7 +33,7 @@ public class MainPanel extends JPanel {
 		int fieldLength = myController.getEdgeLength();
 		for (int i = 0; i < fieldLength; i++) {
 			for (int j = 0; j < fieldLength; j++) {
-				setSpotColor(field[i][j]);
+				setSpotColor(field[i][j], myController.getIsOccupiedByPlayer(i, j));
 			}
 		}
 		this.repaint();
@@ -52,11 +52,13 @@ public class MainPanel extends JPanel {
 		return xyCoordinates;
 	}
 
-	private void setSpotColor(JButton buttonToChange) {
-		System.out.println(myPlayerController.getCurrentPlayerName());
-		if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer1Name())) {
+	private void setSpotColor(JButton buttonToChange, String playerNameOnSpot) {
+		if(playerNameOnSpot == null || "".equals(playerNameOnSpot)){
+			return;
+		}
+		if (myPlayerController.getPlayer1Name().equals(playerNameOnSpot)) {
 			buttonToChange.setIcon(black_icon);
-		} else if (myPlayerController.getCurrentPlayerName().equals(myPlayerController.getPlayer2Name())) {
+		} else if (myPlayerController.getPlayer2Name().equals(playerNameOnSpot)) {
 			buttonToChange.setIcon(red_icon);
 		}
 	}
@@ -69,7 +71,7 @@ public class MainPanel extends JPanel {
 			int []coordinates = getButtonCoordinates(pressedButton);
 			String name = myController.getIsOccupiedByPlayer(coordinates[0]-1, coordinates[1]-1);
 			if ("".equals(name)) {
-				setSpotColor(pressedButton);
+				setSpotColor(pressedButton, myPlayerController.getCurrentPlayerName());
 				myController.occupy(coordinates[0]-1, coordinates[1]-1);
 			}
 			

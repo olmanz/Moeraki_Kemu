@@ -28,7 +28,7 @@ public class ObserverSubject implements IObserverSubject {
 	@Override
 	public void notifyObservers() {
 		for (ObserverObserver currentObserver : observers) {
-			currentObserver.notify();
+			currentObserver.update();
 		}
 	}
 	
