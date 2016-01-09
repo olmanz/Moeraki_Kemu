@@ -54,9 +54,8 @@ public class MainPanel extends JPanel {
 
 	private void setSpotColor(JButton buttonToChange, String playerNameOnSpot) {
 		if(playerNameOnSpot == null || "".equals(playerNameOnSpot)){
-			return;
-		}
-		if (myPlayerController.getPlayer1Name().equals(playerNameOnSpot)) {
+			buttonToChange.setIcon(null);
+		} else if (myPlayerController.getPlayer1Name().equals(playerNameOnSpot)) {
 			buttonToChange.setIcon(black_icon);
 		} else if (myPlayerController.getPlayer2Name().equals(playerNameOnSpot)) {
 			buttonToChange.setIcon(red_icon);
