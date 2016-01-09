@@ -17,4 +17,10 @@ public interface UserInterface {
 	 * @param msg Message to print.
 	 */
 	void printMessage(String msg);
+	
+	/**
+	 * This prints a a message or popup to disply
+	 * that the game will terminated.
+	 */
+	public void Quit();
 }

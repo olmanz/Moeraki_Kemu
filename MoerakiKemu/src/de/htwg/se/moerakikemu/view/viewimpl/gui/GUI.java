@@ -43,7 +43,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 
 	@Override
 	public void update() {
-		State controllerState = myController.returnState();
+		State controllerState = myController.getState();
 		
 		switch (controllerState) {
 		case game_finished:
@@ -87,14 +87,13 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		messageField.setText(messageField.getText() + "\n" + msg);
 	}
 
+	@Override
 	public void Quit(){
 		String winner = myController.getWinner();
-		if("".equals(winner)){
-			JOptionPane.showMessageDialog(null, "Ein Unentschieden!");
-		} else {
-			JOptionPane.showMessageDialog(null, "Der Gewinner ist: " + winner + "!!!");
+		String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
+												"Der Gewinner ist: " + winner + "!!!";
+		JOptionPane.showMessageDialog(null, display);
 
-		}
 		this.dispose();
 	}
 

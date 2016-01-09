@@ -2,8 +2,10 @@ package de.htwg.se.moerakikemu.controller;
 
 public enum State {
 
-	player_occupied,
-	query_player_name,
-	game_finished;
+	player_occupied,	// A Player is occupying a Spot
+	query_player_name,	// At least the name of one Player is not set
+	player_won,			// A Player won the game
+	game_finished
+	;
 	
 }

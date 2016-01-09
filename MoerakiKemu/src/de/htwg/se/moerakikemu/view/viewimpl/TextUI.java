@@ -5,6 +5,7 @@ import org.apache.logging.log4j.core.Logger;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.view.UserInterface;
 import de.htwg.se.util.observer.ObserverObserver;
 
@@ -31,7 +32,8 @@ public class TextUI implements UserInterface, ObserverObserver {
 	public void processInputLine() {
 	}
 	
-	public  void queryPlayerName() {
+	public void queryPlayerName() {
+		logger.error("Noch keine Spieler-Namen eingegeben!");
 		logger.info("Bitte Namen des ersten Spielers eingeben: ");
 		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
 	}
@@ -151,6 +153,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 *
 	 * @return the boolean  - value for the MoerakiKemu - class to finish the game.
 	 */
+	@Override
 	public void Quit(){
 		String winner = myController.getWinner();
 		if(!"".equals(winner)){
@@ -162,6 +165,15 @@ public class TextUI implements UserInterface, ObserverObserver {
 
 	@Override
 	public void update() {
-		drawCurrentState();
+		State controllerState = myController.getState();
+		if (controllerState == State.player_occupied) {
+			drawCurrentState();
+		} else if (controllerState == State.game_finished) {
+			logger.info("Spiel ist beendet");
+		} else if (controllerState == State.query_player_name) {
+			queryPlayerName();
+		} else if (controllerState == State.player_won) {
+			// TODO
+		}
 	}
 }
