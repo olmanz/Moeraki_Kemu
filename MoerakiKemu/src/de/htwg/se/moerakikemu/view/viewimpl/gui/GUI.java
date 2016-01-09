@@ -89,6 +89,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 
 	@Override
 	public void Quit(){
+		System.out.println("aufgerufen2");
 		String winner = myController.getWinner();
 		String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
 												"Der Gewinner ist: " + winner + "!!!";

@@ -45,6 +45,8 @@ public class MoerakiKemu {
 		boolean finished = false;
 		while (!finished) {
 			finished = controller.testIfEnd();
+			interfaces[0].update();
+			interfaces[1].update();
 		}
 		interfaces[0].Quit();
 		interfaces[1].Quit();
