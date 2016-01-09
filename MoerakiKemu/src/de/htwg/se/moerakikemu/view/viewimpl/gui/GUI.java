@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.htwg.se.moerakikemu.controller.IController;
@@ -19,21 +20,20 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	private IControllerPlayer myPlayerController;
 	
 	private MainPanel myMainPanel;
-	
-	private JTextField messageField;
+	private MessagePanel myMessagePanel;
 	
 	public GUI(IController newController, IControllerPlayer playerController) {
 		super("Moeraki Kemu");
 		this.myController = newController;
 		this.myPlayerController = playerController;
-		this.messageField = new JTextField("Spiel-Informationen");
 		this.myMainPanel = new MainPanel(myController, myPlayerController, myController.getEdgeLength());
+		this.myMessagePanel = new MessagePanel(myController, myPlayerController);
 
 		this.setJMenuBar(new MainMenu(myController));
 		
 		this.setLayout(new BorderLayout());
 		this.add(myMainPanel, BorderLayout.CENTER);
-		this.add(messageField, BorderLayout.EAST);
+		this.add(myMessagePanel, BorderLayout.EAST);
 
 		this.setSize(1024, 768);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -83,19 +83,18 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	}
 
 	@Override
-	public void printMessage(String msg) {
-		messageField.setText(messageField.getText() + "\n" + msg);
-	}
-
-	@Override
 	public void Quit(){
-		System.out.println("aufgerufen2");
 		String winner = myController.getWinner();
 		String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
 												"Der Gewinner ist: " + winner + "!!!";
 		JOptionPane.showMessageDialog(null, display);
 
 		this.dispose();
+	}
+
+	@Override
+	public void printMessage(String msg) {
+		myMessagePanel.printMessage(msg);		
 	}
 
 }

@@ -41,6 +41,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 	
 	public int occupy(int xCoordinate, int yCoordinate) {
+		printPointsAllUIs(xCoordinate, yCoordinate);
 		int x = xCoordinate;
 		int y = yCoordinate;
 		if(gameField.isFilled()){
@@ -129,7 +130,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			playerWin = playerController.getPlayer2Name();
 			setWinner(true);
 		}
-		printPointsAllUIs();
 	}
 	
 	public String getWinner(){
@@ -169,8 +169,13 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		notifyObservers();
 	}
 
-	private void printPointsAllUIs() {
-		String pointString = "";
+	private void printPointsAllUIs(int x, int y) {
+		System.out.println("anzahl");
+		int a = x+1;
+		int b = y+1;
+		String xValue = String.valueOf(a);
+		String yValue = String.valueOf(b);
+		String pointString = "Gewaehlter Punkt: " + xValue + "/" +yValue;
 		for (ObserverObserver ui : observers) {
 			((UserInterface) ui).printMessage(pointString);
 		}
