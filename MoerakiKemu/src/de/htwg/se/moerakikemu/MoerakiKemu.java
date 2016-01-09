@@ -38,19 +38,16 @@ public class MoerakiKemu {
 			((IObserverSubject) controller).attatch((ObserverObserver) interfaces[i]);
 			interfaces[i].drawCurrentState();
 		}
+
+		// Used to query Player names
+		((ObserverObserver) interfaces[1]).update();
 		
 		boolean finished = false;
 		while (!finished) {
-			/*
-			for (int i = 0; i < interfaces.length; i++) {
-				interfaces[i].update();
-			}*/
 			finished = controller.testIfEnd();
-			if(finished){
-				((TextUI)interfaces[0]).Quit();
-				((GUI)interfaces[1]).Quit();
-			}
 		}
+		interfaces[0].Quit();
+		interfaces[1].Quit();
 	}
 
 }
