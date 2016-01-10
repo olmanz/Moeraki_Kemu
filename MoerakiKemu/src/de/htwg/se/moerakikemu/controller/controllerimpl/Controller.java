@@ -192,9 +192,8 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 
 	private void printInfoAllUIs(int x, int y) {
-		System.out.println("anzahl");
-		int a = x+1;
-		int b = y+1;
+		int a = x + 1;
+		int b = y + 1;
 		String xValue = String.valueOf(a);
 		String yValue = String.valueOf(b);
 		String pointString = "Gewaehlter Punkt: " + xValue + "/" +yValue;
