@@ -60,6 +60,9 @@ public class MessagePanel extends JPanel {
 	}
 
 	public void printMessage(String msg) {
+		if("".equals(msg)){
+			messages.setText(null);
+		}
 		messages.append("\n" + msg);
 	}	
 	

@@ -166,6 +166,12 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	
 	public void newGame(){
 		gameField = new Field(fieldLength);
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage("");
+		}
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).addPoints(0, 0);;
+		}
 		playerController.newGame();
 		playerWin = "";
 		gameEnds = false;
