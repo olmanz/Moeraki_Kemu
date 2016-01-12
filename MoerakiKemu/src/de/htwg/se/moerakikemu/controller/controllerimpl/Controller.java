@@ -19,7 +19,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private IControllerPlayer playerController;
 	
 	private String playerWin;
-	private boolean gameEnds;
+	private boolean quitGame;
 	private boolean winner;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
@@ -27,7 +27,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
-		gameEnds = false;
+		quitGame = false;
 		playerWin = "";
 		notifyObservers();
 	}
@@ -159,12 +159,12 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 	
 	public void setEnd(boolean end) {
-		gameEnds = end;
+		quitGame = end;
 		printInfoALLUIs();
 	}
 	
 	public boolean testIfEnd(){
-		return gameEnds;
+		return quitGame;
 	}
 	
 	public void newGame(){
@@ -177,7 +177,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		}
 		playerController.newGame();
 		playerWin = "";
-		gameEnds = false;
+		quitGame = false;
 		winner = false;
 		
 		notifyObservers();
@@ -215,8 +215,10 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	public State getState() {
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
 			return State.query_player_name;
-		} else if (gameEnds) {
+		} else if (quitGame) {
 			return State.game_finished;
+		} else if (winner) {
+			return State.player_won;
 		} else {
 			return State.player_occupied;
 		}

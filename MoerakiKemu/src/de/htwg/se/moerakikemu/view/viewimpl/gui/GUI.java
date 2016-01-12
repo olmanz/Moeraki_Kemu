@@ -46,6 +46,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		switch (controllerState) {
 		case game_finished:
 			myController.setEnd(true);
+			this.Quit();
 			break;
 		case player_occupied:
 			drawCurrentState();
@@ -53,6 +54,9 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		case query_player_name:
 			queryPlayerName();
 			break;
+		case player_won:
+			this.printWinnerPopup();
+			myController.newGame();
 		default:
 			break;
 		}
@@ -81,14 +85,16 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		myMessagePanel.setPlayerNames(player1Name, player2Name);
 	}
 
-	@Override
-	public void Quit(){
-		System.out.println("Quit von Gui aufgerufen");
+	private void printWinnerPopup() {
 		String winner = myController.getWinner();
 		String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
 												"Der Gewinner ist: " + winner + "!!!";
 		JOptionPane.showMessageDialog(null, display);
-
+	}
+	
+	@Override
+	public void Quit(){
+		printWinnerPopup();
 		this.dispose();
 	}
 
