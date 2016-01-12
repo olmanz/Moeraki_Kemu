@@ -118,6 +118,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(counter1 == 3  && counter2 == 1){
 			playerController.addAPointPlayer1();
 			printInfoALLUIs(playerController.getPlayer1Name());
+			System.out.println(playerController.getPlayer1Points());
 		}
 		if(counter1 == 4){ 
 			playerController.addAPointPlayer1();
@@ -128,6 +129,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(counter2 == 3 && counter1 == 1){
 			playerController.addAPointPlayer2();
 			printInfoALLUIs(playerController.getPlayer2Name());
+			System.out.println(playerController.getPlayer2Points());
 		} 
 		if(counter2 == 4){
 			playerController.addAPointPlayer2();
