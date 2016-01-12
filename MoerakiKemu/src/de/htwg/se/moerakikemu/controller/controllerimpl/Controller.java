@@ -44,9 +44,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		printInfoAllUIs(xCoordinate, yCoordinate);
 		int x = xCoordinate;
 		int y = yCoordinate;
-		if(gameField.isFilled()){
-			setEnd(true);
-		}
 		
 		if(gameField.getIsOccupiedFrom(x, y) != ""){
 			return -1;
@@ -57,7 +54,11 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		testListOfSquares();
 		helper.resetSquareTest();
 		playerController.selectNextPlayer();
-		
+
+		if(gameField.isFilled()){
+			setEnd(true);
+		}
+
 		notifyObservers();
 		
 		return 0;
