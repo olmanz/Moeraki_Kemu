@@ -152,9 +152,9 @@ public class TextUI implements UserInterface, ObserverObserver {
 	public void quit(){
 		String winner = myController.getWinner();
 		if(!"".equals(winner)){
-			LOGGER.info("Der Gewinner ist " + winner + "!!!\n");
+			LOGGER.error("Der Gewinner ist " + winner + "!!!\n");
 		} else {
-			LOGGER.info("Unentschieden");
+			LOGGER.error("Unentschieden");
 		}
 	}
 
@@ -168,14 +168,16 @@ public class TextUI implements UserInterface, ObserverObserver {
 		} else if (controllerState == State.query_player_name) {
 			queryPlayerName();
 		} else if (controllerState == State.player_won) {
-			// TODO
+			String winner = myController.getWinner();
+			String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
+				"Der Gewinner ist: " + winner + "!!!";
+			LOGGER.error(display);
 		}
 	}
 
-	
-	//useless at moment?
 	@Override
 	public void addPoints(int pointsPlayer1, int pointsPlayer2) {
-		// TODO Auto-generated method stub
+		LOGGER.error(myPlayerController.getPlayer1Name() + " hat " + pointsPlayer1 + "Punkte");
+		LOGGER.error(myPlayerController.getPlayer2Name() + " hat " + pointsPlayer2 + "Punkte");
 	}
 }
