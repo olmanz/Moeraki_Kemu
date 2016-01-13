@@ -74,8 +74,19 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 	
 	public boolean setStartDot(int xCoordinate, int yCoordinate){
-		int radiusLow = (fieldLength/2)-1;
-		int radiusUp = (fieldLength/2)+1;
+		int radiusLow;
+		int radiusUp;
+		int Length = fieldLength - 1;
+		if(fieldLength%2 != 0){
+			radiusLow = (Length/2) - 1;
+			radiusUp = (Length/2) + 1;
+		} else {
+			radiusLow = (Length/2) -1;
+			radiusUp = (Length/2) + 2;
+		}
+		System.out.println(xCoordinate);
+		System.out.println(yCoordinate);
+		
 		if(xCoordinate >= radiusLow && xCoordinate <= radiusUp){
 			if(yCoordinate >= radiusLow && yCoordinate <= radiusUp){
 				xCoordinateStartDot = xCoordinate;
@@ -165,19 +176,40 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(!testIfNearStartDot(x, y)){
 			return;
 		}
-		int distanceTop = yCoordinateStartDot;
-		int distanceBot = fieldLength - (yCoordinateStartDot+1);
-		int distanceRight = fieldLength - (xCoordinateStartDot+1);
-		int distanceLeft = xCoordinateStartDot;
-		if(x == xCoordinateStartDot && y < yCoordinateStartDot){
-			testDistanceOccupys(false, false, x, y, distanceLeft);
+		int distanceTop = xCoordinateStartDot;
+		int distanceBot = fieldLength;
+		int distanceRight = fieldLength;
+		int distanceLeft = yCoordinateStartDot;
+		
+		if(x > xCoordinateStartDot && y == yCoordinateStartDot){
+			testInLine("x",xCoordinateStartDot, distanceBot, y, fieldLength-xCoordinateStartDot - 1);
 		} else if(x == xCoordinateStartDot && y < yCoordinateStartDot){
-			testDistanceOccupys(false, true, x, y, distanceRight);
+			testInLine("y",0, distanceLeft, x, distanceLeft);
+		} else if(x == xCoordinateStartDot && y > yCoordinateStartDot){
+			testInLine("y",yCoordinateStartDot, distanceRight, x, fieldLength-yCoordinateStartDot - 1);
 		} else if(x < xCoordinateStartDot && y == yCoordinateStartDot){
-			testDistanceOccupys(true, false, x, y, distanceTop);
-		} else if(x > xCoordinateStartDot && y == yCoordinateStartDot){
-			testDistanceOccupys(true, true, x, y, distanceBot);
+			testInLine("x",0, distanceTop, y, distanceTop);
 		}
+
+
+	}
+	
+	private void testInLine(String xy, int start, int end, int secondValue, int counterEnd){
+		int counter = 0;
+			for(int i = start; i < end;i++){
+				if("x".equals(xy)){
+					if(gameField.getIsOccupiedFrom(i, secondValue).equals(playerController.getCurrentPlayerName())){
+						counter++;
+					}
+				} else if("y".equals(xy)){
+					if(gameField.getIsOccupiedFrom(secondValue, i).equals(playerController.getCurrentPlayerName())){
+						counter++;
+					}
+				}
+			}
+			if(counter == counterEnd){
+				setWinner(true);
+			}
 	}
 
 	private boolean testIfNearStartDot(int x, int y){
@@ -187,38 +219,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		return false;
 	}
 	
-	private void testDistanceOccupys(boolean itsX, boolean Addition, int x, int y, int distance){
-		System.out.println(distance);
-		int counter = 0;
-		int adder = 0;
-		if(Addition){
-			adder = 1;
-		} else {
-			adder = -1;
-		}
-		
-		if(itsX){
-			for(int i = 1; i < distance; i++){
-				System.out.println("Xadder" + (x+(adder*i)));
-				if(gameField.getIsOccupiedFrom(x+adder*i, y).equals(playerController.getCurrentPlayerName())){
-					counter++;
-					System.out.println("x");
-				}
-			}
-		} else {
-			for(int i = 1; i < distance; i++){
-				if(gameField.getIsOccupiedFrom(x, y+(adder*i)).equals(playerController.getCurrentPlayerName())){
-					System.out.println("Yadder" + (y+(adder*i)));
-					counter++;
-					System.out.println("y");
-				}
-			}
-		}
-		System.out.println(counter);
-		if(counter == distance){
-			setWinner(true);
-		}
-	}
 	
 	public String getWinner(){
 		if("".equals(playerWin)){
