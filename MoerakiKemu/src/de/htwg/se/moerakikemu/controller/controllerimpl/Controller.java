@@ -19,7 +19,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private IControllerPlayer playerController;
 	
 	private String playerWin;
-	private boolean gameEnds;
+	private boolean quitGame;
 	private boolean winner;
 	
 	public Controller(int fieldLength, IControllerPlayer playerCon) {
@@ -27,7 +27,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
-		gameEnds = false;
+		quitGame = false;
 		playerWin = "";
 		notifyObservers();
 	}
@@ -41,11 +41,9 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 	
 	public int occupy(int xCoordinate, int yCoordinate) {
+		printInfoAllUIs(xCoordinate, yCoordinate);
 		int x = xCoordinate;
 		int y = yCoordinate;
-		if(gameField.isFilled()){
-			setEnd(true);
-		}
 		
 		if(gameField.getIsOccupiedFrom(x, y) != ""){
 			return -1;
@@ -56,7 +54,11 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		testListOfSquares();
 		helper.resetSquareTest();
 		playerController.selectNextPlayer();
-		
+
+		if(gameField.isFilled()){
+			setEnd(true);
+		}
+
 		notifyObservers();
 		
 		return 0;
@@ -115,21 +117,24 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private void setPointsOfPlayer(int counter1, int counter2){
 		if(counter1 == 3  && counter2 == 1){
 			playerController.addAPointPlayer1();
+			printInfoALLUIs(playerController.getPlayer1Name());
 		}
 		if(counter1 == 4){ 
 			playerController.addAPointPlayer1();
 			playerWin = playerController.getPlayer1Name();
+			printInfoALLUIs(playerController.getPlayer1Name());
 			setWinner(true);
 		}
 		if(counter2 == 3 && counter1 == 1){
 			playerController.addAPointPlayer2();
+			printInfoALLUIs(playerController.getPlayer2Name());
 		} 
 		if(counter2 == 4){
 			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
+			printInfoALLUIs(playerController.getPlayer2Name());
 			setWinner(true);
 		}
-		printPointsAllUIs();
 	}
 	
 	public String getWinner(){
@@ -152,25 +157,53 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 	
 	public void setEnd(boolean end) {
-		gameEnds = end;
+		quitGame = end;
+		printInfoALLUIs();
 	}
 	
 	public boolean testIfEnd(){
-		return gameEnds;
+		return quitGame;
 	}
 	
 	public void newGame(){
 		gameField = new Field(fieldLength);
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage("");
+		}
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).addPoints(0, 0);;
+		}
 		playerController.newGame();
 		playerWin = "";
-		gameEnds = false;
+		quitGame = false;
 		winner = false;
 		
 		notifyObservers();
 	}
+	
+	private void printInfoALLUIs(){
+		String pointString = "Das Spiel endet";
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage(pointString);
+		}
+	}
+	
+	private void printInfoALLUIs(String player){
+		String pointString = "Ein Punkt fuer " + player;
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).addPoints(playerController.getPlayer1Points(), playerController.getPlayer2Points());;
+		}
+		for (ObserverObserver ui : observers) {
+			((UserInterface) ui).printMessage(pointString);
+		}
+	}
 
-	private void printPointsAllUIs() {
-		String pointString = "";
+	private void printInfoAllUIs(int x, int y) {
+		int a = x + 1;
+		int b = y + 1;
+		String xValue = String.valueOf(a);
+		String yValue = String.valueOf(b);
+		String pointString = "Gewaehlter Punkt: " + xValue + "/" +yValue;
 		for (ObserverObserver ui : observers) {
 			((UserInterface) ui).printMessage(pointString);
 		}
@@ -180,8 +213,10 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	public State getState() {
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
 			return State.query_player_name;
-		} else if (gameEnds) {
+		} else if (quitGame) {
 			return State.game_finished;
+		} else if (winner) {
+			return State.player_won;
 		} else {
 			return State.player_occupied;
 		}

@@ -19,8 +19,20 @@ public interface UserInterface {
 	void printMessage(String msg);
 	
 	/**
-	 * This prints a a message or popup to disply
-	 * that the game will terminated.
+	 * This prints a a message or popup to display
+	 * that the game will get sterminated.
 	 */
 	public void Quit();
+
+	/**
+	 * This updates the GUI and the TUI
+	 */
+	void update();
+
+	/**
+	 * Add points to the panels
+	 * @param points from Player 1
+	 * @param points from Player 2
+	 */
+	void addPoints(int pointsPlayer1, int pointsPlayer2);
 }

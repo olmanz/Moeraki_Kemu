@@ -34,6 +34,7 @@ public class MoerakiKemu {
 		interfaces = new UserInterface[2];
 		interfaces[0] = new TextUI(controller, playerController);
 		interfaces[1] = new GUI(controller, playerController);
+
 		for (int i = 0; i < interfaces.length; i++) {
 			((IObserverSubject) controller).attatch((ObserverObserver) interfaces[i]);
 			interfaces[i].drawCurrentState();
@@ -45,9 +46,13 @@ public class MoerakiKemu {
 		boolean finished = false;
 		while (!finished) {
 			finished = controller.testIfEnd();
+			interfaces[0].update();
+			interfaces[1].update();
 		}
-		interfaces[0].Quit();
-		interfaces[1].Quit();
+		
+		for (UserInterface ui : interfaces) {
+			ui.Quit();
+		}
 	}
 
 }

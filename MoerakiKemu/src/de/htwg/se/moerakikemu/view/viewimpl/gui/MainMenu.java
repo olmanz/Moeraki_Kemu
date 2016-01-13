@@ -84,12 +84,13 @@ public class MainMenu extends JMenuBar implements ActionListener{
 	}
 	
 	private void printHelper(){
-		JOptionPane.showMessageDialog(null, "Spielregeln: \n "
-										  + "Ziel: \n"
-										  + "    Das Ziel dieses Spiels ist es so viele Punkte bei Beenden des Spiels zu haben wie moeglich.\n"
-										  + "Punkte:\n"
-										  + "    Einen Punkt bekommt man in dem man bei einem Quadrat mehr Eckpunkte eingenommen hat als der Gegenspieler\n"
-										  + "Spielende:\n"
-										  + "    Sobald ein Spieler vier Eckpunkte eines Quadrates eingenommen hat oder das komplette Spielfeld belegt ist, endet das Spiel\n");
+		final String rules = "Spielregeln: \n "
+				  + "Ziel: \n"
+				  + "    Das Ziel dieses Spiels ist es so viele Punkte bei Beenden des Spiels zu haben wie moeglich.\n"
+				  + "Punkte:\n"
+				  + "    Einen Punkt bekommt man in dem man bei einem Quadrat mehr Eckpunkte eingenommen hat als der Gegenspieler\n"
+				  + "Spielende:\n"
+				  + "    Sobald ein Spieler vier Eckpunkte eines Quadrates eingenommen hat oder das komplette Spielfeld belegt ist, endet das Spiel\n";
+		JOptionPane.showMessageDialog(null, rules);
 	}
 }

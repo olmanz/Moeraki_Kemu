@@ -42,22 +42,24 @@ public class MainPanel extends JPanel {
 	private int[] getButtonCoordinates(JButton button) {
 		int []xyCoordinates = new int[2];
 		
-		Scanner getNumbers = new Scanner(button.getText()); 
+		Scanner getNumbers = new Scanner(button.getToolTipText()); 
 		getNumbers.useDelimiter("[()/]");
 		xyCoordinates[0] = getNumbers.nextInt();
 		xyCoordinates[1] = getNumbers.nextInt();
 		getNumbers.close();
-		System.out.println("(" + xyCoordinates[0] + "/" + xyCoordinates[1] + ")");
 		
 		return xyCoordinates;
 	}
 
 	private void setSpotColor(JButton buttonToChange, String playerNameOnSpot) {
 		if(playerNameOnSpot == null || "".equals(playerNameOnSpot)){
+			buttonToChange.setText("+");
 			buttonToChange.setIcon(null);
 		} else if (myPlayerController.getPlayer1Name().equals(playerNameOnSpot)) {
+			buttonToChange.setText("");
 			buttonToChange.setIcon(black_icon);
 		} else if (myPlayerController.getPlayer2Name().equals(playerNameOnSpot)) {
+			buttonToChange.setText("");
 			buttonToChange.setIcon(red_icon);
 		}
 	}
@@ -98,7 +100,8 @@ public class MainPanel extends JPanel {
 				field[i][j] = new JButton();
 				this.add(field[i][j]);
 				field[i][j].addMouseListener(listener);
-				field[i][j].setText("(" + (i+1) + "/" + (j+1) + ")");
+				field[i][j].setToolTipText("(" + (i+1) + "/" + (j+1) + ")");
+				field[i][j].setText("+");
 				field[i][j].setHorizontalTextPosition(SwingConstants.CENTER);
 				field[i][j].setVerticalTextPosition(SwingConstants.CENTER);
 				field[i][j].setOpaque(false);

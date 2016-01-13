@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
@@ -19,21 +18,20 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	private IControllerPlayer myPlayerController;
 	
 	private MainPanel myMainPanel;
-	
-	private JTextField messageField;
+	private MessagePanel myMessagePanel;
 	
 	public GUI(IController newController, IControllerPlayer playerController) {
 		super("Moeraki Kemu");
 		this.myController = newController;
 		this.myPlayerController = playerController;
-		this.messageField = new JTextField("Spiel-Informationen");
 		this.myMainPanel = new MainPanel(myController, myPlayerController, myController.getEdgeLength());
+		this.myMessagePanel = new MessagePanel(myController, myPlayerController);
 
 		this.setJMenuBar(new MainMenu(myController));
 		
 		this.setLayout(new BorderLayout());
 		this.add(myMainPanel, BorderLayout.CENTER);
-		this.add(messageField, BorderLayout.EAST);
+		this.add(myMessagePanel, BorderLayout.EAST);
 
 		this.setSize(1024, 768);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -48,6 +46,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		switch (controllerState) {
 		case game_finished:
 			myController.setEnd(true);
+			this.Quit();
 			break;
 		case player_occupied:
 			drawCurrentState();
@@ -55,6 +54,9 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		case query_player_name:
 			queryPlayerName();
 			break;
+		case player_won:
+			this.printWinnerPopup();
+			myController.newGame();
 		default:
 			break;
 		}
@@ -80,21 +82,30 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		}
 
 		myPlayerController.setName(player1Name, player2Name);
+		myMessagePanel.setPlayerNames(player1Name, player2Name);
 	}
 
-	@Override
-	public void printMessage(String msg) {
-		messageField.setText(messageField.getText() + "\n" + msg);
-	}
-
-	@Override
-	public void Quit(){
+	private void printWinnerPopup() {
 		String winner = myController.getWinner();
 		String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
 												"Der Gewinner ist: " + winner + "!!!";
 		JOptionPane.showMessageDialog(null, display);
-
+	}
+	
+	@Override
+	public void Quit(){
+		printWinnerPopup();
 		this.dispose();
+	}
+
+	@Override
+	public void printMessage(String msg) {
+		myMessagePanel.printMessage(msg);		
+	}
+	
+	@Override
+	public void addPoints(int pointsPlayer1, int pointsPlayer2){
+		myMessagePanel.setPlayerPoints(pointsPlayer1, pointsPlayer2);
 	}
 
 }

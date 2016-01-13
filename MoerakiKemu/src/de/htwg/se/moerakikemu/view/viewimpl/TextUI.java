@@ -55,20 +55,21 @@ public class TextUI implements UserInterface, ObserverObserver {
 		printColumnIdentifiers(edgeLength);
 		for(int i = 0; i < edgeLength; i++) {
 			printLine(edgeLength);
-			printLeadingNumber(i + 1, edgeLength);
+
+			StringBuilder line = new StringBuilder(printLeadingNumber(i + 1, edgeLength));
 			for(int j = 0; j < edgeLength; j++) {
 				String playerString = myController.getIsOccupiedByPlayer(i, j);
 				char id = playerString.isEmpty() ? ' ' : playerString.charAt(0);
-				drawSpot(id);
+				line.append(drawSpot(id));
 			}
-			logger.info("\n");
+			logger.info(line);
 		}
 		printLine(edgeLength);
 		printPoints();
 		
 	}
 
-	private void printLeadingNumber(final int currentNumber, final int edgeLength) {
+	private String printLeadingNumber(final int currentNumber, final int edgeLength) {
 		int offset = offset(edgeLength).length();
 		
 		StringBuilder builder = new StringBuilder(Integer.toString(currentNumber));
@@ -77,7 +78,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 			builder.append(" ");
 		}
 		
-		logger.info(builder.toString());
+		return builder.toString();
 	}
 	
 	/**
@@ -93,8 +94,8 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 *
 	 * @param playerChar Identifier for the player or ' ' if not occupied by player.
 	 */
-	private void drawSpot(final char playerChar) {
-		logger.info("|" + playerChar + "|");
+	private String drawSpot(final char playerChar) {
+		return "|" + playerChar + "|";
 	}
 	
 	/**
@@ -120,11 +121,11 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 * @param edgeLength Number of Spots per edge.
 	 */
 	private void printLine(int edgeLength) {
-		logger.info(offset(edgeLength));
+		StringBuilder line = new StringBuilder(offset(edgeLength));
 		for(int i = 0; i < edgeLength; i++) {
-			logger.info("---");
+			line.append("---");
 		}
-		logger.info("\n");
+		logger.info(line.toString());
 	}
 	
 	/**
@@ -141,7 +142,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 				headlineBuilder.append(i).append(" ");
 			}
 		}
-		logger.info(headlineBuilder.toString() + "\n");
+		logger.info(headlineBuilder.toString());
 	} 
 	
 	public void printMessage(String msg) {
@@ -175,5 +176,12 @@ public class TextUI implements UserInterface, ObserverObserver {
 		} else if (controllerState == State.player_won) {
 			// TODO
 		}
+	}
+
+	
+	//useless at moment?
+	@Override
+	public void addPoints(int pointsPlayer1, int pointsPlayer2) {
+		// TODO Auto-generated method stub
 	}
 }
