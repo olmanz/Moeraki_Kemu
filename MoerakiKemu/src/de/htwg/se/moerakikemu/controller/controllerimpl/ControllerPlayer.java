@@ -1,9 +1,12 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
+import com.google.inject.Singleton;
+
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 
+@Singleton
 public class ControllerPlayer implements IControllerPlayer {
 	private IPlayer player1;
 	private IPlayer player2;

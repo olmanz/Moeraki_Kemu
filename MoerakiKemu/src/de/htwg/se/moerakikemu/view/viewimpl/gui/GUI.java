@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.google.inject.Inject;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
@@ -19,7 +21,8 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	
 	private MainPanel myMainPanel;
 	private MessagePanel myMessagePanel;
-	
+
+	@Inject
 	public GUI(IController newController, IControllerPlayer playerController) {
 		super("Moeraki Kemu");
 		this.myController = newController;

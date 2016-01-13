@@ -1,5 +1,9 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.inject.name.Named;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
@@ -10,6 +14,7 @@ import de.htwg.se.util.observer.IObserverSubject;
 import de.htwg.se.util.observer.ObserverObserver;
 import de.htwg.se.util.observer.ObserverSubject;
 
+@Singleton
 public class Controller extends ObserverSubject implements IController, IObserverSubject {
 	
 	private IField gameField;
@@ -22,7 +27,8 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private boolean quitGame;
 	private boolean winner;
 	
-	public Controller(int fieldLength, IControllerPlayer playerCon) {
+	@Inject
+	public Controller(@Named("fieldLength") int fieldLength, IControllerPlayer playerCon) {
 		super();
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;

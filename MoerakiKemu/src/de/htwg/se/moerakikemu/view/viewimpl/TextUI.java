@@ -3,6 +3,8 @@ package de.htwg.se.moerakikemu.view.viewimpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
+import com.google.inject.Inject;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
@@ -17,6 +19,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 	IController myController;
 	IControllerPlayer myPlayerController;
 
+	@Inject
 	public TextUI(IController controller, IControllerPlayer playerController) {
 		myController = controller;
 		myPlayerController = playerController;
