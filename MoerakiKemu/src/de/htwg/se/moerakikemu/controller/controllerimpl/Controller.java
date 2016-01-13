@@ -177,7 +177,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			((UserInterface) ui).printMessage("");
 		}
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).addPoints(0, 0);;
+			((UserInterface) ui).addPoints(0, 0);
 		}
 		playerController.newGame();
 		playerWin = "";
@@ -197,7 +197,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private void printInfoALLUIs(String player){
 		String pointString = "Ein Punkt fuer " + player;
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).addPoints(playerController.getPlayer1Points(), playerController.getPlayer2Points());;
+			((UserInterface) ui).addPoints(playerController.getPlayer1Points(), playerController.getPlayer2Points());
 		}
 		for (ObserverObserver ui : observers) {
 			((UserInterface) ui).printMessage(pointString);
