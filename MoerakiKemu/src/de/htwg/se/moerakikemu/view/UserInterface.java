@@ -8,7 +8,7 @@ public interface UserInterface {
 	void drawCurrentState();
 
 	/**
-	 * Set the player name in the controller
+	 * Set the player name in the controller.
 	 */
 	void queryPlayerName();
 
@@ -19,18 +19,17 @@ public interface UserInterface {
 	void printMessage(String msg);
 	
 	/**
-	 * This prints a a message or popup to display
-	 * that the game will get sterminated.
+	 * This prints a popup to display with wich State the game terminates.
 	 */
 	public void quit();
 
 	/**
-	 * This updates the GUI and the TUI
+	 * This updates the GUI and the TUI.
 	 */
 	void update();
 
 	/**
-	 * Add points to the panels
+	 * Prints points on the panels.
 	 * @param points from Player 1
 	 * @param points from Player 2
 	 */

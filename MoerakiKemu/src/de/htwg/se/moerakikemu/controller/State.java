@@ -1,5 +1,8 @@
 package de.htwg.se.moerakikemu.controller;
 
+/**
+ * This enum represents the State of the controller.
+ */
 public enum State {
 
 	player_occupied,	// A Player is occupying a Spot
