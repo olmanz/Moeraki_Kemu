@@ -29,20 +29,20 @@ public interface IController {
 	int occupy(int xCoordinate, int yCoordinate);
 	
 	/**
-	 * returns if a player has won
-	 * @return A String, not null
+	 * Returns the name of the player if a player has won, else an empty String.
+	 * @return A String, not null.
 	 */
 	String getWinner();
 	
 	/**
-	 * test if there is a winner
-	 * @return true if there is a winner, false when there isnt one;
+	 * Tests if there is a winner:
+	 * @return True if there is a winner, false when there isn't one;
 	 */
 	boolean testIfWinnerExists();
 	
 	/**
-	 * test if the game is over
-	 * @return true if there is a winner, false when there isnt one;
+	 * Test if the game is over os must be terminated.
+	 * @return true if there is a winner, false when there isn't one.
 	 */
 	boolean testIfEnd();
 	
@@ -57,10 +57,9 @@ public interface IController {
 	 * @return A constant from the enum State.
 	 */
 	public abstract State getState();
-	//public abstract String getPlayerName(); ?
 	
 	/**
-	 * set all Values without the playernames to zero
+	 * Reset all values without the names of the players to zero.
 	 */
 	void newGame();
 }
