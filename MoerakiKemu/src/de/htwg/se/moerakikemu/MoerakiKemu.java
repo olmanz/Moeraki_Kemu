@@ -30,7 +30,7 @@ public class MoerakiKemu {
 		
 		IController controller = injector.getInstance(Controller.class);
 	
-		UserInterface interfaces[];
+		UserInterface[] interfaces;
 		interfaces = new UserInterface[2];
 		interfaces[0] = injector.getInstance(TextUI.class);
 		interfaces[1] = injector.getInstance(GUI.class);
@@ -51,7 +51,7 @@ public class MoerakiKemu {
 		}
 		
 		for (UserInterface ui : interfaces) {
-			ui.Quit();
+			ui.quit();
 		}
 	}
 

@@ -22,7 +22,7 @@ public interface UserInterface {
 	 * This prints a a message or popup to display
 	 * that the game will get sterminated.
 	 */
-	public void Quit();
+	public void quit();
 
 	/**
 	 * This updates the GUI and the TUI

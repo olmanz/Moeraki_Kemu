@@ -149,7 +149,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 * @return the boolean  - value for the MoerakiKemu - class to finish the game.
 	 */
 	@Override
-	public void Quit(){
+	public void quit(){
 		String winner = myController.getWinner();
 		if(!"".equals(winner)){
 			LOGGER.info("Der Gewinner ist " + winner + "!!!\n");

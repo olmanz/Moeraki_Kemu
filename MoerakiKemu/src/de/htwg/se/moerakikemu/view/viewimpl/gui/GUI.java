@@ -49,7 +49,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		switch (controllerState) {
 		case game_finished:
 			myController.setEnd(true);
-			this.Quit();
+			this.quit();
 			break;
 		case player_occupied:
 			drawCurrentState();
@@ -97,7 +97,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	}
 	
 	@Override
-	public void Quit(){
+	public void quit(){
 		printWinnerPopup();
 		this.dispose();
 	}
