@@ -79,7 +79,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		LOGGER.info(myPlayerController.getPlayer1Name() + ": " + myPlayerController.getPlayer1Points() + " Punkte\n");
+		LOGGER.info(myPlayerController.getPlayer1Name() + ": " + myPlayerController.getPlayer1Points() + " Punkte");
 		LOGGER.info(myPlayerController.getPlayer2Name() + ": " + myPlayerController.getPlayer2Points() + " Punkte\n");
 	}
 	
