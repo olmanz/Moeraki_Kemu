@@ -14,7 +14,7 @@ import de.htwg.se.util.observer.ObserverObserver;
 
 public class TextUI implements UserInterface, ObserverObserver {
 
-	static Logger logger = (Logger) LogManager.getLogger(TextUI.class);
+	private static final Logger LOGGER = (Logger) LogManager.getLogger(TextUI.class);
 	
 	IController myController;
 	IControllerPlayer myPlayerController;
@@ -25,20 +25,11 @@ public class TextUI implements UserInterface, ObserverObserver {
 		myPlayerController = playerController;
 		queryPlayerName();
 	}
-
-	/**
-	 * Parses the input from the user and call controller things.
-	 * 
-	 * @param line Input from the user.
-	 * @return
-	 */
-	public void processInputLine() {
-	}
 	
 	public void queryPlayerName() {
-		logger.error("Noch keine Spieler-Namen eingegeben!");
-		logger.info("Bitte Namen des ersten Spielers eingeben: ");
-		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
+		LOGGER.error("Noch keine Spieler-Namen eingegeben!");
+		LOGGER.info("Bitte Namen des ersten Spielers eingeben: ");
+		LOGGER.info("Bitte Namen des zweiten Spielers eingeben: ");
 	}
 	
 	/**
@@ -65,7 +56,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 				char id = playerString.isEmpty() ? ' ' : playerString.charAt(0);
 				line.append(drawSpot(id));
 			}
-			logger.info(line);
+			LOGGER.info(line);
 		}
 		printLine(edgeLength);
 		printPoints();
@@ -88,8 +79,8 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		logger.info(myPlayerController.getPlayer1Name() + ": " + myPlayerController.getPlayer1Points() + " Punkte\n");
-		logger.info(myPlayerController.getPlayer2Name() + ": " + myPlayerController.getPlayer2Points() + " Punkte\n");
+		LOGGER.info(myPlayerController.getPlayer1Name() + ": " + myPlayerController.getPlayer1Points() + " Punkte\n");
+		LOGGER.info(myPlayerController.getPlayer2Name() + ": " + myPlayerController.getPlayer2Points() + " Punkte\n");
 	}
 	
 	/**
@@ -128,7 +119,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 		for(int i = 0; i < edgeLength; i++) {
 			line.append("---");
 		}
-		logger.info(line.toString());
+		LOGGER.info(line.toString());
 	}
 	
 	/**
@@ -145,11 +136,11 @@ public class TextUI implements UserInterface, ObserverObserver {
 				headlineBuilder.append(i).append(" ");
 			}
 		}
-		logger.info(headlineBuilder.toString());
+		LOGGER.info(headlineBuilder.toString());
 	} 
 	
 	public void printMessage(String msg) {
-		logger.info(msg + "\n");
+		LOGGER.info(msg + "\n");
 	}
 	
 	/**
@@ -161,9 +152,9 @@ public class TextUI implements UserInterface, ObserverObserver {
 	public void Quit(){
 		String winner = myController.getWinner();
 		if(!"".equals(winner)){
-			logger.info("Der Gewinner ist " + winner + "!!!\n");
+			LOGGER.info("Der Gewinner ist " + winner + "!!!\n");
 		} else {
-			logger.info("Unentschieden");
+			LOGGER.info("Unentschieden");
 		}
 	}
 
@@ -173,7 +164,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 		if (controllerState == State.player_occupied) {
 			drawCurrentState();
 		} else if (controllerState == State.game_finished) {
-			logger.info("Spiel ist beendet");
+			LOGGER.info("Spiel ist beendet");
 		} else if (controllerState == State.query_player_name) {
 			queryPlayerName();
 		} else if (controllerState == State.player_won) {
