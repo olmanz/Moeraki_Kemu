@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
+import java.awt.Color;
 
 
 public class MainPanel extends JPanel {
@@ -91,15 +92,16 @@ public class MainPanel extends JPanel {
 		super();
 		this.myController = controller;
 		this.myPlayerController = playerController;
+		this.setBackground(new Color(200, 120, 40));
 		
 		// Read and scale images for occupied spots
 		black_icon = new ImageIcon("Spot_black.png");
 		Image black_icon_img = black_icon.getImage();
 		black_icon.setImage(black_icon_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-		red_icon = new ImageIcon("Spot_red.png");
+		red_icon = new ImageIcon("Spot_blue.png");
 		Image red_icon_img = red_icon.getImage();
 		red_icon.setImage(red_icon_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-		green_icon = new ImageIcon("Spot_red.png");
+		green_icon = new ImageIcon("Spot_green.png");
 		Image green_icon_img = green_icon.getImage();
 		green_icon.setImage(green_icon_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 		

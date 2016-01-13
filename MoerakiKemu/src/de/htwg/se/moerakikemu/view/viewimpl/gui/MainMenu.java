@@ -1,5 +1,6 @@
 package de.htwg.se.moerakikemu.view.viewimpl.gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -89,8 +90,10 @@ public class MainMenu extends JMenuBar implements ActionListener{
 				  + "    Das Ziel dieses Spiels ist es so viele Punkte bei Beenden des Spiels zu haben wie moeglich.\n"
 				  + "Punkte:\n"
 				  + "    Einen Punkt bekommt man in dem man bei einem Quadrat mehr Eckpunkte eingenommen hat als der Gegenspieler\n"
+				  + "    Der Startpunkt wird als neutral betrachtet und gibt nimanden Punkte\n"
 				  + "Spielende:\n"
-				  + "    Sobald ein Spieler vier Eckpunkte eines Quadrates eingenommen hat oder das komplette Spielfeld belegt ist, endet das Spiel\n";
+				  + "    Sobald ein Spieler vier Eckpunkte eines Quadrates eingenommen hat oder das komplette Spielfeld belegt ist, endet das Spiel\n"
+				  + "    Alternativ ist es auch moeglich sich vom Startstein in gerader Richtung zu einem beliebigen Rand zu \"bewegen\" um das SPiel zu beenden";
 		JOptionPane.showMessageDialog(null, rules);
 	}
 }
