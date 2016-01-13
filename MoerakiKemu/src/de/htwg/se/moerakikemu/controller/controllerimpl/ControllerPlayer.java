@@ -50,10 +50,6 @@ public class ControllerPlayer implements IControllerPlayer {
 		player1.addPoints(1);
 	}
 	
-	public void addApointPlayer1(){
-		player1.addPoints(1);
-	}
-
 	public void addAPointPlayer2() {
 		player2.addPoints(2);
 	}
