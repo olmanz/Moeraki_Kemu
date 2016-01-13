@@ -33,5 +33,24 @@ public class Player_test {
 		player.addPoints(-2);
 		assertEquals(0, player.getPoints());
 	}
+	
+	@Test
+	public void test_tryToSetNameToNull_staysTheSame() {
+		String oldPlayerName = player.getName();
+		player.setName(null);
+		assertEquals(oldPlayerName, player.getName());
+	}
+	
+	@Test
+	public void test_refreshPoints_pointsAreZero() {
+		player.refreshPoints();
+		assertEquals(0, player.getPoints());
+
+		player.addPoints(20);
+		assertEquals(20, player.getPoints());
+
+		player.refreshPoints();
+		assertEquals(0, player.getPoints());
+	}
 }
 
