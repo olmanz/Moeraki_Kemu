@@ -1,10 +1,12 @@
 package de.htwg.se.moerakikemu;
 
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import de.htwg.se.moerakikemu.controller.ControllerModuleWithController;
 import de.htwg.se.moerakikemu.controller.IController;
-import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.controllerimpl.Controller;
-import de.htwg.se.moerakikemu.controller.controllerimpl.ControllerPlayer;
 import de.htwg.se.moerakikemu.view.UserInterface;
 import de.htwg.se.moerakikemu.view.viewimpl.TextUI;
 import de.htwg.se.moerakikemu.view.viewimpl.gui.GUI;
@@ -18,22 +20,20 @@ public class MoerakiKemu {
 		// Private Constructor because it must not be used elsewhere
 	}
 
-	// Module for Dependency Injection with GoogleGuice
-	
-	
 	/**
 	 * Starts the game with TUI, GUI.
 	 *
 	 * @param args Unused parameters.
 	 */
 	public static void main(String[] args) {
-		IControllerPlayer playerController = new ControllerPlayer();
-		IController controller = new Controller(12, playerController);
+		Injector injector = Guice.createInjector(new ControllerModuleWithController());
+		
+		IController controller = injector.getInstance(Controller.class);
 	
-		UserInterface interfaces[];
+		UserInterface[] interfaces;
 		interfaces = new UserInterface[2];
-		interfaces[0] = new TextUI(controller, playerController);
-		interfaces[1] = new GUI(controller, playerController);
+		interfaces[0] = injector.getInstance(TextUI.class);
+		interfaces[1] = injector.getInstance(GUI.class);
 
 		for (int i = 0; i < interfaces.length; i++) {
 			((IObserverSubject) controller).attatch((ObserverObserver) interfaces[i]);
@@ -51,7 +51,7 @@ public class MoerakiKemu {
 		}
 		
 		for (UserInterface ui : interfaces) {
-			ui.Quit();
+			ui.quit();
 		}
 	}
 

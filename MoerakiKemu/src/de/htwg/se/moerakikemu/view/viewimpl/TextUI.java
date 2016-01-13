@@ -3,6 +3,8 @@ package de.htwg.se.moerakikemu.view.viewimpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
+import com.google.inject.Inject;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
@@ -12,30 +14,22 @@ import de.htwg.se.util.observer.ObserverObserver;
 
 public class TextUI implements UserInterface, ObserverObserver {
 
-	static Logger logger = (Logger) LogManager.getLogger(TextUI.class);
+	private static final Logger LOGGER = (Logger) LogManager.getLogger(TextUI.class);
 	
 	IController myController;
 	IControllerPlayer myPlayerController;
 
+	@Inject
 	public TextUI(IController controller, IControllerPlayer playerController) {
 		myController = controller;
 		myPlayerController = playerController;
 		queryPlayerName();
 	}
-
-	/**
-	 * Parses the input from the user and call controller things.
-	 * 
-	 * @param line Input from the user.
-	 * @return
-	 */
-	public void processInputLine() {
-	}
 	
 	public void queryPlayerName() {
-		logger.error("Noch keine Spieler-Namen eingegeben!");
-		logger.info("Bitte Namen des ersten Spielers eingeben: ");
-		logger.info("Bitte Namen des zweiten Spielers eingeben: ");
+		LOGGER.error("Noch keine Spieler-Namen eingegeben!");
+		LOGGER.info("Bitte Namen des ersten Spielers eingeben: ");
+		LOGGER.info("Bitte Namen des zweiten Spielers eingeben: ");
 	}
 	
 	/**
@@ -62,7 +56,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 				char id = playerString.isEmpty() ? ' ' : playerString.charAt(0);
 				line.append(drawSpot(id));
 			}
-			logger.info(line);
+			LOGGER.info(line);
 		}
 		printLine(edgeLength);
 		printPoints();
@@ -85,8 +79,8 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 * Prints the points for both players.
 	 */
 	private void printPoints(){
-		logger.info(myPlayerController.getPlayer1Name() + ": " + myPlayerController.getPlayer1Points() + " Punkte\n");
-		logger.info(myPlayerController.getPlayer2Name() + ": " + myPlayerController.getPlayer2Points() + " Punkte\n");
+		LOGGER.info(myPlayerController.getPlayer1Name() + ": " + myPlayerController.getPlayer1Points() + " Punkte");
+		LOGGER.info(myPlayerController.getPlayer2Name() + ": " + myPlayerController.getPlayer2Points() + " Punkte\n");
 	}
 	
 	/**
@@ -125,7 +119,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 		for(int i = 0; i < edgeLength; i++) {
 			line.append("---");
 		}
-		logger.info(line.toString());
+		LOGGER.info(line.toString());
 	}
 	
 	/**
@@ -142,11 +136,11 @@ public class TextUI implements UserInterface, ObserverObserver {
 				headlineBuilder.append(i).append(" ");
 			}
 		}
-		logger.info(headlineBuilder.toString());
+		LOGGER.info(headlineBuilder.toString());
 	} 
 	
 	public void printMessage(String msg) {
-		logger.info(msg + "\n");
+		LOGGER.error(msg + "\n");
 	}
 	
 	/**
@@ -155,12 +149,12 @@ public class TextUI implements UserInterface, ObserverObserver {
 	 * @return the boolean  - value for the MoerakiKemu - class to finish the game.
 	 */
 	@Override
-	public void Quit(){
+	public void quit(){
 		String winner = myController.getWinner();
 		if(!"".equals(winner)){
-			logger.info("Der Gewinner ist " + winner + "!!!\n");
+			LOGGER.error("Der Gewinner ist " + winner + "!!!\n");
 		} else {
-			logger.info("Unentschieden");
+			LOGGER.error("Unentschieden");
 		}
 	}
 
@@ -170,18 +164,20 @@ public class TextUI implements UserInterface, ObserverObserver {
 		if (controllerState == State.player_occupied) {
 			drawCurrentState();
 		} else if (controllerState == State.game_finished) {
-			logger.info("Spiel ist beendet");
+			LOGGER.info("Spiel ist beendet");
 		} else if (controllerState == State.query_player_name) {
 			queryPlayerName();
 		} else if (controllerState == State.player_won) {
-			// TODO
+			String winner = myController.getWinner();
+			String display = ("".equals(winner)) ?  "Ein Unentschieden!" :
+				"Der Gewinner ist: " + winner + "!!!";
+			LOGGER.error(display);
 		}
 	}
 
-	
-	//useless at moment?
 	@Override
 	public void addPoints(int pointsPlayer1, int pointsPlayer2) {
-		// TODO Auto-generated method stub
+		LOGGER.error(myPlayerController.getPlayer1Name() + " hat " + pointsPlayer1 + "Punkte");
+		LOGGER.error(myPlayerController.getPlayer2Name() + " hat " + pointsPlayer2 + "Punkte");
 	}
 }

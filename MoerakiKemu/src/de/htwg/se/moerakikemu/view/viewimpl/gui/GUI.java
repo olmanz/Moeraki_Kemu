@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.google.inject.Inject;
+
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
@@ -19,7 +21,8 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	
 	private MainPanel myMainPanel;
 	private MessagePanel myMessagePanel;
-	
+
+	@Inject
 	public GUI(IController newController, IControllerPlayer playerController) {
 		super("Moeraki Kemu");
 		this.myController = newController;
@@ -46,7 +49,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		switch (controllerState) {
 		case game_finished:
 			myController.setEnd(true);
-			this.Quit();
+			this.quit();
 			break;
 		case player_occupied:
 			drawCurrentState();
@@ -57,6 +60,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		case player_won:
 			this.printWinnerPopup();
 			myController.newGame();
+			break;
 		default:
 			break;
 		}
@@ -74,11 +78,11 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		String player2Name = "";
 
 		while ("".equals(player1Name)) {
-			player1Name = (String) JOptionPane.showInputDialog("Name fuer Spieler 1 eigeben:", "Spieler 1");
+			player1Name = JOptionPane.showInputDialog("Name fuer Spieler 1 eigeben:", "Spieler 1");
 		}
 
 		while ("".equals(player2Name)) {
-			player2Name = (String) JOptionPane.showInputDialog("Name fuer Spieler 2 eigeben:", "Spieler 2");
+			player2Name = JOptionPane.showInputDialog("Name fuer Spieler 2 eigeben:", "Spieler 2");
 		}
 
 		myPlayerController.setName(player1Name, player2Name);
@@ -93,7 +97,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 	}
 	
 	@Override
-	public void Quit(){
+	public void quit(){
 		printWinnerPopup();
 		this.dispose();
 	}

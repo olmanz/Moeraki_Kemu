@@ -28,7 +28,9 @@ public class Player implements IPlayer {
 	 }
 	 
 	 public void setName (String name){
-		 this.name = name;
+		 if (name != null) {
+			 this.name = name;
+		 }
 	 }
 	 
 	 public void refreshPoints(){

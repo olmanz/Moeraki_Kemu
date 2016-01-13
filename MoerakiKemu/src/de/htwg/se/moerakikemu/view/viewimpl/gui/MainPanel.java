@@ -22,14 +22,31 @@ public class MainPanel extends JPanel {
 	IController myController;
 	IControllerPlayer myPlayerController;
 
+
 	ImageIcon black_icon;
 	ImageIcon red_icon;
 	ImageIcon green_icon;
 
-	GridLayout gridForSpots;
-	JButton field[][];
 
-	
+	GridLayout gridForSpots;
+	JButton[][] field;
+
+	private MouseListener listener = new MouseAdapter() {
+		@Override
+		public void mousePressed(MouseEvent me) {
+			JButton pressedButton = (JButton) me.getSource();
+			
+			// Occupy Spot
+			int []coordinates = getButtonCoordinates(pressedButton);
+			String name = myController.getIsOccupiedByPlayer(coordinates[0]-1, coordinates[1]-1);
+			if ("".equals(name)) {
+				setSpotColor(pressedButton, myPlayerController.getCurrentPlayerName());
+				myController.occupy(coordinates[0]-1, coordinates[1]-1);
+			}
+			
+		}
+	};
+
 	public void updateField() {
 		int fieldLength = myController.getEdgeLength();
 		for (int i = 0; i < fieldLength; i++) {
@@ -65,23 +82,10 @@ public class MainPanel extends JPanel {
 		} else if("StartDot".equals(playerNameOnSpot)){
 			buttonToChange.setText("");
 			buttonToChange.setIcon(green_icon);
+
 		}
 	}
 
-	private MouseListener listener = new MouseAdapter() {
-		public void mousePressed(MouseEvent me) {
-			JButton pressedButton = (JButton) me.getSource();
-			
-			// Occupy Spot
-			int []coordinates = getButtonCoordinates(pressedButton);
-			String name = myController.getIsOccupiedByPlayer(coordinates[0]-1, coordinates[1]-1);
-			if ("".equals(name)) {
-				setSpotColor(pressedButton, myPlayerController.getCurrentPlayerName());
-				myController.occupy(coordinates[0]-1, coordinates[1]-1);
-			}
-			
-		}
-	};
 
 	public MainPanel(IController controller, IControllerPlayer playerController, final int fieldLength) {
 		super();

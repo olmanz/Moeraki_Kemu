@@ -19,7 +19,6 @@ public class MainMenu extends JMenuBar implements ActionListener{
 	JMenu game;
 	JMenuItem quit;
 	JMenuItem newGame;
-	//JMenuItem options;
 	JMenu moreInfos;
 	JMenuItem help;
 	JMenuItem info;
@@ -66,6 +65,7 @@ public class MainMenu extends JMenuBar implements ActionListener{
 		this.add(moreInfos);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if(source == quit){

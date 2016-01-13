@@ -5,16 +5,18 @@
     <Console name="Console" target="SYSTEM_OUT">
      	<PatternLayout pattern="[%t] %-5level %logger{36} - %msg%n"/>
     </Console>
-    <File name="MyFile" filename="logs/moerakikemu.log">
+    <RollingFile name="MyFile" filename="logs/moerakikemu.log"
+    			 filePattern="logs/moeraki-kemu-%d{yyyy-MM-dd}-%i.log">
     	<PatternLayout pattern="[%t] %-5level %logger{36} - %msg%n"/>
-    </File>
+		<Policies>
+			<SizeBasedTriggeringPolicy size="15 MB" />
+		</Policies>
+    </RollingFile>
   </Appenders>
 
   <Loggers>
     <Root level="error">
       <AppenderRef ref="Console"/>
-    </Root>
-    <Root level="info">
     	<AppenderRef ref="MyFile"/>
     </Root>
   </Loggers>

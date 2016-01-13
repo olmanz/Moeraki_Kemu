@@ -122,4 +122,38 @@ public class Controller_Test {
 		String a = controller.getIsOccupiedByPlayer(0, 0); //0,0 because occupy get the direkt input from a player, so there is a -1, -1 needed
 		assertEquals("Player1", a);
 	}
+	
+	@Test
+	public void test_newGame_resetController() {
+		controller.newGame();
+		assertEquals(false, controller.testIfEnd());
+		assertEquals(false, controller.testIfWinnerExists());
+		assertTrue("".equals(controller.getWinner()));
+	}
+	
+	@Test
+	public void test_getState_returnsStates() {
+		controller = new Controller(6, playerController);
+		
+		// Test player names
+		playerController.setName("", "");
+		assertEquals(State.query_player_name, controller.getState());
+		playerController.setName("A", "");
+		assertEquals(State.query_player_name, controller.getState());
+		
+		// Test normal occupation state
+		playerController.setName("A", "B");
+		assertEquals(State.player_occupied, controller.getState());
+		
+		// Player occupies a square.
+		controller.occupy(2, 2);controller.occupy(1, 1);
+		controller.occupy(2, 3);controller.occupy(1, 2);
+		controller.occupy(3, 2);controller.occupy(1, 3);
+		controller.occupy(3, 3);controller.occupy(1, 4);
+		assertEquals(State.player_won, controller.getState());
+		
+		// SetEnd
+		controller.setEnd(true);
+		assertEquals(State.game_finished, controller.getState());
+	}
 }
