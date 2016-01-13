@@ -1,13 +1,22 @@
 package de.htwg.se.moerakikemu.controller;
 
-public interface IControllerPlayer {
-
+public interface IControllerPlayer {	
+	/**
+	 * set the Names of the two players
+	 * @param name of player 1
+	 * @param name of player 2
+	 */
 	public void setName(String player1name, String player2name);
 	
 	/**
 	 * set the points of the player to zero
 	 */
 	void newGame();
+	
+	/**
+	 * looks if the start Dot is set
+	 */
+	boolean startDotSet();
 	
 	/**
 	 * Returns the name of player1.

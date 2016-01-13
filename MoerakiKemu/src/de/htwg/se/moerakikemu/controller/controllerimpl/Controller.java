@@ -18,6 +18,8 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private ControllerHelper helper;
 	private IControllerPlayer playerController;
 	
+	private int xCoordinateStartDot, yCoordinateStartDot;
+	
 	private String playerWin;
 	private boolean quitGame;
 	private boolean winner;
@@ -29,6 +31,8 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		this.playerController = playerCon;
 		quitGame = false;
 		playerWin = "";
+		xCoordinateStartDot = 0;
+		yCoordinateStartDot = 0;
 		notifyObservers();
 	}
 	
@@ -47,11 +51,16 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		
 		if(gameField.getIsOccupiedFrom(x, y) != ""){
 			return -1;
-		}		
+		} if(!playerController.startDotSet()){
+			if(!setStartDot(x, y)){
+				return -1;
+			}
+		}
 		gameField.occupy(x, y, playerController.getCurrentPlayerName());
 		helper = new ControllerHelper(x, y, fieldLength - 1);
 		helper.testSquare();
 		testListOfSquares();
+		testAllInLine(xCoordinate, yCoordinate);
 		helper.resetSquareTest();
 		playerController.selectNextPlayer();
 
@@ -62,6 +71,21 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		notifyObservers();
 		
 		return 0;
+	}
+	
+	public boolean setStartDot(int xCoordinate, int yCoordinate){
+		int radiusLow = (fieldLength/2)-1;
+		int radiusUp = (fieldLength/2)+1;
+		if(xCoordinate >= radiusLow && xCoordinate <= radiusUp){
+			if(yCoordinate >= radiusLow && yCoordinate <= radiusUp){
+				gameField.occupy(xCoordinate, yCoordinate, "startDot");
+				xCoordinateStartDot = xCoordinate;
+				yCoordinateStartDot = yCoordinate;
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	private void testListOfSquares(){
@@ -129,12 +153,62 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(counter2 == 3 && counter1 == 1){
 			playerController.addAPointPlayer2();
 			printInfoALLUIs(playerController.getPlayer2Name());
-			System.out.println(playerController.getPlayer2Points());
 		} 
 		if(counter2 == 4){
 			playerController.addAPointPlayer2();
 			playerWin = playerController.getPlayer2Name();
 			printInfoALLUIs(playerController.getPlayer2Name());
+			setWinner(true);
+		}
+	}
+	
+	private void testAllInLine(int x, int y){
+		if(!testIfNearStartDot(x, y)){
+			return;
+		}
+		int distanceTop = 0;
+		int distanceBot = fieldLength - (y+1);
+		int distanceRight = fieldLength - (x+1);
+		int distanceLeft = 0;
+		testDistanceOccupys(true, false, x, y, distanceLeft);
+		testDistanceOccupys(true, true, x, y, distanceRight);
+		testDistanceOccupys(false, false, x, y, distanceTop);
+		testDistanceOccupys(false, true, x, y, distanceBot);
+	}
+
+	private boolean testIfNearStartDot(int x, int y){
+		if(xCoordinateStartDot == x || yCoordinateStartDot == y){
+			return true;
+		}
+		return false;
+	}
+	
+	private void testDistanceOccupys(boolean itsX, boolean Addition, int x, int y, int distance){
+		int counter = 0;
+		int adder = 0;
+		if(Addition){
+			adder = 1;
+		} else {
+			adder = -1;
+		}
+		
+		if(itsX){
+			for(int i = 0; i < distance; i++){
+				if(gameField.getIsOccupiedFrom(x+adder, y).equals(playerController.getCurrentPlayerName())){
+					counter++;
+				}
+			}
+		} else {
+			for(int i = 0; i < distance; i++){
+				if(gameField.getIsOccupiedFrom(x, y+adder).equals(playerController.getCurrentPlayerName())){
+					counter++;
+				}
+			}
+		}
+		
+		if(counter == distance){
+			setWinner(true);
+		} else {		
 			setWinner(true);
 		}
 	}
@@ -223,4 +297,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			return State.player_occupied;
 		}
 	}
+	
+	
 }

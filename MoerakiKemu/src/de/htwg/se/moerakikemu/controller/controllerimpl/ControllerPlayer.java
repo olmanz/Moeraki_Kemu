@@ -7,19 +7,22 @@ import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 public class ControllerPlayer implements IControllerPlayer {
 	private IPlayer player1;
 	private IPlayer player2;
+	private IPlayer startDot;
 	
 	private IPlayer currentPlayer;
 	
 	public ControllerPlayer(){
 		player1 = new Player();
 		player2 = new Player();
-		currentPlayer = player1;
+		startDot = new Player();
+		currentPlayer = startDot;
+		startDot.setName("StartDot");
 	}
 	
 	public void newGame(){
 		player1.refreshPoints();
 		player2.refreshPoints();
-		currentPlayer = player1;
+		currentPlayer = startDot;
 	}
 	
 	public void setName(String player1name, String player2name) {
@@ -46,25 +49,31 @@ public class ControllerPlayer implements IControllerPlayer {
 	public void addAPointPlayer1(){
 		player1.addPoints(1);
 	}
-	
-	public void addApointPlayer1(){
-		player1.addPoints(1);
-	}
 
 	public void addAPointPlayer2() {
-		player2.addPoints(2);
+		player2.addPoints(1);
 	}
 	
 	public void selectNextPlayer() {
 		if(currentPlayer == player1) {
 			currentPlayer = player2;
+		} else if (currentPlayer == player2){
+			currentPlayer = player1;
 		} else {
 			currentPlayer = player1;
 		}
+	}
+	
+	public boolean startDotSet(){
+		if("StartDot".equals(currentPlayer.getName())){
+			return false;
+		}
+		return true;
 	}
 
 	public String getCurrentPlayerName() {
 		return currentPlayer.getName();
 	}
+
 
 }

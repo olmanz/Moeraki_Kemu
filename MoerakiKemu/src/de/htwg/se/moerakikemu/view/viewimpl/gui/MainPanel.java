@@ -24,6 +24,7 @@ public class MainPanel extends JPanel {
 
 	ImageIcon black_icon;
 	ImageIcon red_icon;
+	ImageIcon green_icon;
 
 	GridLayout gridForSpots;
 	JButton field[][];
@@ -61,6 +62,9 @@ public class MainPanel extends JPanel {
 		} else if (myPlayerController.getPlayer2Name().equals(playerNameOnSpot)) {
 			buttonToChange.setText("");
 			buttonToChange.setIcon(red_icon);
+		} else if("StartDot".equals(playerNameOnSpot)){
+			buttonToChange.setText("");
+			buttonToChange.setIcon(green_icon);
 		}
 	}
 
@@ -91,6 +95,9 @@ public class MainPanel extends JPanel {
 		red_icon = new ImageIcon("Spot_red.png");
 		Image red_icon_img = red_icon.getImage();
 		red_icon.setImage(red_icon_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+		green_icon = new ImageIcon("Spot_red.png");
+		Image green_icon_img = green_icon.getImage();
+		green_icon.setImage(green_icon_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 		
 		gridForSpots = new GridLayout(fieldLength, fieldLength);
 		this.setLayout(gridForSpots);
