@@ -140,7 +140,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 	} 
 	
 	public void printMessage(String msg) {
-		LOGGER.info(msg + "\n");
+		LOGGER.error(msg + "\n");
 	}
 	
 	/**
