@@ -50,16 +50,17 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		return fieldLength;
 	}
 	
+	private boolean noProperStartDot(final int x, final int y) {
+		return !playerController.startDotSet() && !setStartDot(x, y);
+	}
+	
 	public int occupy(int x, int y) {
 		printInfoAllUIs(x, y);
 		
-		if(gameField.getIsOccupiedFrom(x, y) != ""){
+		if(gameField.getIsOccupiedFrom(x, y) != "" || noProperStartDot(x, y)){
 			return -1;
-		} if(!playerController.startDotSet()){
-			if(!setStartDot(x, y)){
-				return -1;
-			}
 		}
+		
 		gameField.occupy(x, y, playerController.getCurrentPlayerName());
 		helper = new ControllerHelper(x, y, fieldLength - 1);
 		helper.testSquare();
@@ -82,23 +83,21 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	public boolean setStartDot(int xCoordinate, int yCoordinate){
 		int radiusLow;
 		int radiusUp;
-		int Length = fieldLength - 1;
-		if(fieldLength%2 != 0){
-			radiusLow = (Length/2) - 1;
-			radiusUp = (Length/2) + 1;
+		int length = fieldLength - 1;
+		if(fieldLength % 2 != 0){
+			radiusLow = (length / 2) - 1;
+			radiusUp = (length/2) + 1;
 		} else {
-			radiusLow = (Length/2) -1;
-			radiusUp = (Length/2) + 2;
+			radiusLow = (length / 2) - 1;
+			radiusUp = (length / 2) + 2;
 		}
-		System.out.println(xCoordinate);
-		System.out.println(yCoordinate);
 		
-		if(xCoordinate >= radiusLow && xCoordinate <= radiusUp){
-			if(yCoordinate >= radiusLow && yCoordinate <= radiusUp){
-				xCoordinateStartDot = xCoordinate;
-				yCoordinateStartDot = yCoordinate;
-				return true;
-			}
+		boolean isInMidX = xCoordinate >= radiusLow && xCoordinate <= radiusUp;
+		boolean isInMidY = yCoordinate >= radiusLow && yCoordinate <= radiusUp;
+		if(isInMidX && isInMidY){
+			xCoordinateStartDot = xCoordinate;
+			yCoordinateStartDot = yCoordinate;
+			return true;
 		}
 		return false;
 
@@ -158,7 +157,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		if(counter1 == 3  && counter2 == 1){
 			playerController.addAPointPlayer1();
 			printInfoALLUIs(playerController.getPlayer1Name());
-			System.out.println(playerController.getPlayer1Points());
 		}
 		if(counter1 == 4){ 
 			playerController.addAPointPlayer1();
@@ -187,17 +185,20 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		int distanceRight = fieldLength;
 		int distanceLeft = yCoordinateStartDot;
 		
-		if(x > xCoordinateStartDot && y == yCoordinateStartDot){
-			testInLine("x",xCoordinateStartDot, distanceBot, y, fieldLength-xCoordinateStartDot - 1);
-		} else if(x == xCoordinateStartDot && y < yCoordinateStartDot){
-			testInLine("y",0, distanceLeft, x, distanceLeft);
-		} else if(x == xCoordinateStartDot && y > yCoordinateStartDot){
-			testInLine("y",yCoordinateStartDot, distanceRight, x, fieldLength-yCoordinateStartDot - 1);
-		} else if(x < xCoordinateStartDot && y == yCoordinateStartDot){
-			testInLine("x",0, distanceTop, y, distanceTop);
+		if (y == yCoordinateStartDot) {
+			if (x > xCoordinateStartDot) {
+				testInLine("x",xCoordinateStartDot, distanceBot, y, fieldLength-xCoordinateStartDot - 1);
+			} else {
+
+				testInLine("x",0, distanceTop, y, distanceTop);
+			}
+		} else if (x == xCoordinateStartDot) {
+			if (y < yCoordinateStartDot) {
+				testInLine("y",0, distanceLeft, x, distanceLeft);
+			} else {
+				testInLine("y",yCoordinateStartDot, distanceRight, x, fieldLength-yCoordinateStartDot - 1);
+			}
 		}
-
-
 	}
 	
 	private void testInLine(String xy, int start, int end, int secondValue, int counterEnd){
