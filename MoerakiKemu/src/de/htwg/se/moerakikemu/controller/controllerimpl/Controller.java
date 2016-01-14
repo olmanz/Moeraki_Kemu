@@ -201,17 +201,17 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		}
 	}
 	
+	private boolean isOccupiedByCurrentPlayer(final int x, final int y) {
+		return gameField.getIsOccupiedFrom(x, y).equals(playerController.getCurrentPlayerName());
+	}
+	
 	private void testInLine(String xy, int start, int end, int secondValue, int counterEnd){
 		int counter = 0;
 			for(int i = start; i < end;i++){
-				if("x".equals(xy)){
-					if(gameField.getIsOccupiedFrom(i, secondValue).equals(playerController.getCurrentPlayerName())){
-						counter++;
-					}
-				} else if("y".equals(xy)){
-					if(gameField.getIsOccupiedFrom(secondValue, i).equals(playerController.getCurrentPlayerName())){
-						counter++;
-					}
+				if("x".equals(xy) && isOccupiedByCurrentPlayer(i, secondValue)){
+					counter++;
+				} else if("y".equals(xy) && isOccupiedByCurrentPlayer(secondValue, i)){
+					counter++;
 				}
 			}
 			if(counter == counterEnd){
