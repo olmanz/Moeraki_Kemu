@@ -1,6 +1,7 @@
 package de.htwg.se.moerakikemu.view.viewimpl.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -33,6 +34,8 @@ public class MessagePanel extends JPanel {
 		this.myController = controller;
 		this.myPlayerController = playerController;
 		this.setPreferredSize(new Dimension(200,200));
+		this.setBackground(new Color(180, 100, 10));
+
 		
 		playerPanel = new JPanel();
 		playerPanel.setLayout(new GridLayout(0, 2));
