@@ -21,9 +21,15 @@ public class Controller_Test {
 	
 	@Test
 	public void test_occupy_returnNullIfOccupied(){
+		
+		controller.occupy(3, 3);
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j <= 5; j++){
+				if(i == 3 && j == 3) {
+					assertEquals(-1, controller.occupy(i, j));
+				} else {
 					assertEquals(0, controller.occupy(i, j));
+				}
 			}
 		}	
 		
@@ -65,6 +71,8 @@ public class Controller_Test {
 	
 	@Test
 	public void test_selectNextPlayer_wasPlayerOneIsPlayerTwoNextPlayerOne() {
+		assertEquals(playerController.getCurrentPlayerName(), "StartDot");
+		playerController.selectNextPlayer();
 		assertEquals(playerController.getCurrentPlayerName(), "Player1");
 		playerController.selectNextPlayer();
 		assertEquals(playerController.getCurrentPlayerName(), "Player2");
@@ -89,6 +97,8 @@ public class Controller_Test {
 		controller = new Controller(5, playerController);
 		assertFalse(controller.testIfWinnerExists());
 		
+		controller.occupy(3, 3);	// Set start Spot
+		
 		controller.occupy(0, 0);
 		controller.occupy(1, 1);
 		controller.occupy(0, 1);
@@ -102,6 +112,8 @@ public class Controller_Test {
 		controller = new Controller(5, playerController);
 		assertEquals("", controller.getWinner());
 
+		controller.occupy(2, 2);	// Set start Spot
+		
 		controller.occupy(4, 4);
 		controller.occupy(0, 0);
 		controller.occupy(3, 3);
@@ -117,6 +129,7 @@ public class Controller_Test {
 	public void test_getIsOccupiedByPlayer_ifOccupiedFromAPlayer(){
 		controller = new Controller(5, playerController);
 		
+		controller.occupy(2, 2);	// Set start Spot
 		controller.occupy(0, 0);
 		
 		String a = controller.getIsOccupiedByPlayer(0, 0); //0,0 because occupy get the direkt input from a player, so there is a -1, -1 needed
@@ -133,6 +146,7 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getState_returnsStates() {
+		playerController = new ControllerPlayer();
 		controller = new Controller(6, playerController);
 		
 		// Test player names
@@ -146,10 +160,11 @@ public class Controller_Test {
 		assertEquals(State.player_occupied, controller.getState());
 		
 		// Player occupies a square.
-		controller.occupy(2, 2);controller.occupy(1, 1);
-		controller.occupy(2, 3);controller.occupy(1, 2);
-		controller.occupy(3, 2);controller.occupy(1, 3);
-		controller.occupy(3, 3);controller.occupy(1, 4);
+		controller.occupy(3, 3);	// Set start Spot
+		controller.occupy(1, 1);controller.occupy(2, 3);
+		controller.occupy(1, 2);controller.occupy(3, 2);
+		controller.occupy(2, 1);controller.occupy(3, 4);
+		controller.occupy(2, 2);controller.occupy(4, 3);
 		assertEquals(State.player_won, controller.getState());
 		
 		// SetEnd
