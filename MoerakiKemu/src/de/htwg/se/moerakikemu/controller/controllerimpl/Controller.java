@@ -302,13 +302,13 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	@Override
 	public State getState() {
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
-			return State.query_player_name;
+			return State.QUERY_PLAYER_NAME;
 		} else if (quitGame) {
-			return State.game_finished;
+			return State.GAME_FINISHED;
 		} else if (winner) {
-			return State.player_won;
+			return State.PLAYER_WON;
 		} else {
-			return State.player_occupied;
+			return State.PLAYER_OCCUPIED;
 		}
 	}
 	

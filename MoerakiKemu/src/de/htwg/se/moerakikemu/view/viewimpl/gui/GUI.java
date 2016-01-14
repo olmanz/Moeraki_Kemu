@@ -47,17 +47,17 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		State controllerState = myController.getState();
 		
 		switch (controllerState) {
-		case game_finished:
+		case GAME_FINISHED:
 			myController.setEnd(true);
 			this.quit();
 			break;
-		case player_occupied:
+		case PLAYER_OCCUPIED:
 			drawCurrentState();
 			break;
-		case query_player_name:
+		case QUERY_PLAYER_NAME:
 			queryPlayerName();
 			break;
-		case player_won:
+		case PLAYER_WON:
 			this.printWinnerPopup();
 			myController.newGame();
 			break;

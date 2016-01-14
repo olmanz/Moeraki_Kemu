@@ -151,13 +151,13 @@ public class Controller_Test {
 		
 		// Test player names
 		playerController.setName("", "");
-		assertEquals(State.query_player_name, controller.getState());
+		assertEquals(State.QUERY_PLAYER_NAME, controller.getState());
 		playerController.setName("A", "");
-		assertEquals(State.query_player_name, controller.getState());
+		assertEquals(State.QUERY_PLAYER_NAME, controller.getState());
 		
 		// Test normal occupation state
 		playerController.setName("A", "B");
-		assertEquals(State.player_occupied, controller.getState());
+		assertEquals(State.PLAYER_OCCUPIED, controller.getState());
 		
 		// Player occupies a square.
 		controller.occupy(3, 3);	// Set start Spot
@@ -165,10 +165,10 @@ public class Controller_Test {
 		controller.occupy(1, 2);controller.occupy(3, 2);
 		controller.occupy(2, 1);controller.occupy(3, 4);
 		controller.occupy(2, 2);controller.occupy(4, 3);
-		assertEquals(State.player_won, controller.getState());
+		assertEquals(State.PLAYER_WON, controller.getState());
 		
 		// SetEnd
 		controller.setEnd(true);
-		assertEquals(State.game_finished, controller.getState());
+		assertEquals(State.GAME_FINISHED, controller.getState());
 	}
 }
