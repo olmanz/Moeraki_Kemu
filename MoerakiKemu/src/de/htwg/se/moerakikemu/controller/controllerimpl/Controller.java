@@ -10,6 +10,7 @@ import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.view.UserInterface;
+import de.htwg.se.util.StringHelper;
 import de.htwg.se.util.observer.IObserverSubject;
 import de.htwg.se.util.observer.ObserverObserver;
 import de.htwg.se.util.observer.ObserverSubject;
@@ -301,11 +302,12 @@ public class Controller extends ObserverSubject implements IController, IObserve
 
 	@Override
 	public String getPlayer1Name() {
-		return playerController.getPlayer1Name();
+		return StringHelper.getDefaultEmptyString(playerController.getPlayer1Name());
 	}
 
 	@Override
 	public String getPlayer2Name() {
-		return playerController.getPlayer2Name();
+		return StringHelper.getDefaultEmptyString(playerController.getPlayer2Name());
 	}
+	
 }
