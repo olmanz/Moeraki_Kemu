@@ -60,18 +60,13 @@ public class ControllerPlayer implements IControllerPlayer {
 	public void selectNextPlayer() {
 		if(currentPlayer == player1) {
 			currentPlayer = player2;
-		} else if (currentPlayer == player2){
-			currentPlayer = player1;
 		} else {
 			currentPlayer = player1;
 		}
 	}
 	
 	public boolean startDotSet(){
-		if("StartDot".equals(currentPlayer.getName())){
-			return false;
-		}
-		return true;
+		return !"StartDot".equals(currentPlayer.getName());
 	}
 
 	public String getCurrentPlayerName() {

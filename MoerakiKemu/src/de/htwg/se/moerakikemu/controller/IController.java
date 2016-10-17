@@ -62,4 +62,10 @@ public interface IController {
 	 * Reset all values without the names of the players to zero.
 	 */
 	void newGame();
+
+	/**
+	 * Added for web-controller.
+	 */
+	String getPlayer1Name();
+	String getPlayer2Name();
 }
