@@ -17,6 +17,14 @@ import de.htwg.se.util.observer.ObserverSubject;
 
 @Singleton
 public class Controller extends ObserverSubject implements IController, IObserverSubject {
+
+	/**
+	 * Replece the for-loop in the main program with update-calls from the Controller to keep UIs updated.
+	 * When to update UIs:
+	 *  - newGame()
+	 *  - setEnd()
+	 *  - occupy()
+	 */
 	
 	private IField gameField;
 	private int fieldLength;
@@ -55,7 +63,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		return !playerController.startDotSet() && !setStartDot(x, y);
 	}
 	
-	public int occupy(int x, int y) {
+	public int occupy(final int x, final int y) {
 		printInfoAllUIs(x, y);
 		
 		if (!"".equals(gameField.getIsOccupiedFrom(x, y)) || noProperStartDot(x, y)) {
