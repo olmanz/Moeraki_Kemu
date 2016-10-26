@@ -6,8 +6,13 @@ import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.modellayer.IPlayer;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Player;
 
+
 @Singleton
 public class ControllerPlayer implements IControllerPlayer {
+	private static final String PLAYERONENAME = "Spieler 1";
+	private static final String PLAYERTWONAME = "Spieler 2";
+	private static final String PLAYERSTARTDOTNAME = "StartDot";
+
 	private IPlayer player1;
 	private IPlayer player2;
 	private IPlayer startDot;
@@ -15,11 +20,11 @@ public class ControllerPlayer implements IControllerPlayer {
 	private IPlayer currentPlayer;
 	
 	public ControllerPlayer(){
-		player1 = new Player("Spieler 1");
-		player2 = new Player("Spieler 2");
+		player1 = new Player(PLAYERONENAME);
+		player2 = new Player(PLAYERTWONAME);
 		startDot = new Player();
 		currentPlayer = startDot;
-		startDot.setName("StartDot");
+		startDot.setName(PLAYERSTARTDOTNAME);
 	}
 	
 	public void newGame(){
@@ -28,7 +33,7 @@ public class ControllerPlayer implements IControllerPlayer {
 		currentPlayer = startDot;
 	}
 	
-	public void setName(String player1name, String player2name) {
+	public void setName(final String player1name, final String player2name) {
 		player1.setName(player1name);
 		player2.setName(player2name);
 	}
@@ -66,7 +71,7 @@ public class ControllerPlayer implements IControllerPlayer {
 	}
 	
 	public boolean startDotSet(){
-		return !"StartDot".equals(currentPlayer.getName());
+		return !PLAYERSTARTDOTNAME.equals(currentPlayer.getName());
 	}
 
 	public String getCurrentPlayerName() {
