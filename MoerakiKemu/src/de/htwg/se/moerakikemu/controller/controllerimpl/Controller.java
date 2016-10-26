@@ -197,21 +197,21 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		return gameField.getIsOccupiedFrom(x, y).equals(playerController.getCurrentPlayerName());
 	}
 	
-	private void testInLine(String xy, int start, int end, int secondValue, int counterEnd){
+	private void testInLine(String xy, int start, int end, int secondValue, int counterEnd) {
 		int counter = 0;
-			for(int i = start; i < end;i++){
-				if("x".equals(xy) && isOccupiedByCurrentPlayer(i, secondValue)){
-					counter++;
-				} else if("y".equals(xy) && isOccupiedByCurrentPlayer(secondValue, i)){
-					counter++;
-				}
+		for(int i = start; i < end;i++){
+			if("x".equals(xy) && isOccupiedByCurrentPlayer(i, secondValue)){
+				counter++;
+			} else if("y".equals(xy) && isOccupiedByCurrentPlayer(secondValue, i)){
+				counter++;
 			}
-			if(counter == counterEnd){
-				setWinner(true);
-			}
+		}
+		if(counter == counterEnd){
+			setWinner(true);
+		}
 	}
 
-	private boolean testIfNearStartDot(int x, int y){
+	private boolean testIfNearStartDot(final int x, final int y){
 		return xCoordinateStartDot == x || yCoordinateStartDot == y;
 	}
 	

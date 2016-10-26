@@ -4,13 +4,17 @@ import de.htwg.se.moerakikemu.modellayer.IPlayer;
 
 public class Player implements IPlayer {
 
-	int points;
+	private int points;
 	
 	private String name;
 	
 	public Player() {
-		name = "";
-		points = 0;
+		this("");
+	}
+	
+	public Player(final String name) {
+		this.name = name;
+		this.points = 0;
 	}
 	
 	public int getPoints(){

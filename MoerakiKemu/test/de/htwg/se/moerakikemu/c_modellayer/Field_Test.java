@@ -12,16 +12,13 @@ public class Field_Test {
 	
 	private static final int EDGELENGTH = 6;
 
-	Field errorField;
-	Field field;
-	Player player1;
-	Player player2;
+	private Field field;
+	private Player player1;
 
 	@Before
 	public void setUp() {
 		field = new Field(EDGELENGTH);
 		player1 = new Player();
-		player2 = new Player();
 	}
 
 	@Test
@@ -77,6 +74,6 @@ public class Field_Test {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void test_constructor_negativeEdgelengthThrowsException() {
-		errorField = new Field(-1);
+		Field errorField = new Field(-1);
 	}
 }

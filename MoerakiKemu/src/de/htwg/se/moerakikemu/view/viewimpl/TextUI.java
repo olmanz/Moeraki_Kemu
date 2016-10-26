@@ -23,7 +23,7 @@ public class TextUI implements UserInterface, ObserverObserver {
 	public TextUI(IController controller, IControllerPlayer playerController) {
 		myController = controller;
 		myPlayerController = playerController;
-		queryPlayerName();
+		//queryPlayerName();
 	}
 	
 	public void queryPlayerName() {

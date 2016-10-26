@@ -15,8 +15,8 @@ public class ControllerPlayer implements IControllerPlayer {
 	private IPlayer currentPlayer;
 	
 	public ControllerPlayer(){
-		player1 = new Player();
-		player2 = new Player();
+		player1 = new Player("Spieler 1");
+		player2 = new Player("Spieler 2");
 		startDot = new Player();
 		currentPlayer = startDot;
 		startDot.setName("StartDot");
