@@ -51,7 +51,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		notifyObservers();
 	}
 	
-	public String getIsOccupiedByPlayer(int x, int y) {
+	public String getIsOccupiedByPlayer(final int x, final int y) {
 		return gameField.getIsOccupiedFrom(x, y);
 	}
 	
@@ -100,8 +100,9 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			xCoordinateStartDot = xCoordinate;
 			yCoordinateStartDot = yCoordinate;
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 
 	}
 
@@ -113,8 +114,8 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			testSquare(squareArray[1], squareArray[2], squareArray[3],squareArray[4]);
 			testSquare(squareArray[5], squareArray[6], squareArray[7],squareArray[8]);
 		} else if(squareArray[0] == 4){
-			for(int i = 1; i < 17; i+=4){
-				testSquare(squareArray[i], squareArray[i+1], squareArray[i+2], squareArray[i+3]);
+			for (int i = 0; i < 4; i++) {
+				testSquare(squareArray[i * 4 + 1], squareArray[i * 4 + 2], squareArray[i * 4 + 3], squareArray[i * 4 + 4]);
 			}
 		}
 	}
