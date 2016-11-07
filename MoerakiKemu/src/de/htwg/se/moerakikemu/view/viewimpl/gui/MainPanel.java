@@ -112,7 +112,7 @@ public class MainPanel extends JPanel {
 	}
 
 	private void setSpotColor(JButton buttonToChange, final String playerNameOnSpot) {
-		if(playerNameOnSpot == null || "".equals(playerNameOnSpot)){
+		if (playerNameOnSpot == null || "".equals(playerNameOnSpot)){
 			buttonToChange.setText("+");
 			buttonToChange.setIcon(null);
 		} else if (myPlayerController.getPlayer1Name().equals(playerNameOnSpot)) {
@@ -121,7 +121,7 @@ public class MainPanel extends JPanel {
 		} else if (myPlayerController.getPlayer2Name().equals(playerNameOnSpot)) {
 			buttonToChange.setText("");
 			buttonToChange.setIcon(redIcon);
-		} else if("StartDot".equals(playerNameOnSpot)){
+		} else if ("StartDot".equals(playerNameOnSpot)){
 			buttonToChange.setText("");
 			buttonToChange.setIcon(greenIcon);
 		}
