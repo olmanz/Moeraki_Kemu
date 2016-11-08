@@ -133,7 +133,8 @@ public class ControllerHelper {
 	}
 
 	
-	private void setArray(final int start, final int edgeOne, final int edgeTwo, final int edgeThree, final int edgeFour){
+	private void setArray(final int start, final int edgeOne, final int edgeTwo,
+						  final int edgeThree, final int edgeFour){
 		squareArray[start] = edgeOne;
 		squareArray[start + 1] = edgeTwo;
 		squareArray[start + 2] = edgeThree;
