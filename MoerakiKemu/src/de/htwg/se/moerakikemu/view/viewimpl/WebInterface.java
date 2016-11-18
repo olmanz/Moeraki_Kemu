@@ -19,7 +19,26 @@ public class WebInterface {
     public WebInterface(IController controller) {
         this.controller = controller;
     }
+    
+    public String occupyAndGetBoard(final String coordinates) {
+		int []ij = splitXY(coordinates);
+    	final int retVal = controller.occupy(ij[0], ij[1]);
+    	return getBoardAsJSON();
+    }
 
+	/**
+	 * Takes a parameter (from AJAX call) and extracts the x and y coordinate.
+	 *
+	 * @param param String that must match the pattern [0-9]+/[0-9]*
+	 * @return An array of int with the length of 2.
+	 */
+	public static final int[] splitXY(final String param) {
+	    final int idx = param.indexOf("-");
+	    final int i = Integer.valueOf(param.substring(0, idx));
+	    final int j = Integer.valueOf(param.substring(idx + 1));
+	    return new int[]{i, j};
+	}
+	
     public String getBoardAsJSON() {
         final int boardLength = controller.getEdgeLength();
 
