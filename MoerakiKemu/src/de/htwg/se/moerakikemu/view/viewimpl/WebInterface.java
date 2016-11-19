@@ -11,10 +11,14 @@ public class WebInterface {
 
     private static final String OPENING = "[";
     private static final String CLOSING = "]";
+    private static final String oOpening = "{";
+    private static final String oCLOSING = "}";
     private static final String NEWLINE = "\n";
     private static final String JSONARRAYDELIMITER = ", ";
     private static final String EMPTYSTRING = "";
     private static final String DQUOTES = "\"";
+    private static final String LINES = "lines";
+    private static final String CELLS = "cells";
 
     public WebInterface(IController controller) {
         this.controller = controller;
@@ -22,7 +26,7 @@ public class WebInterface {
     
     public String occupyAndGetBoard(final String coordinates) {
 		int []ij = splitXY(coordinates);
-    	final int retVal = controller.occupy(ij[0], ij[1]);
+    	controller.occupy(ij[0], ij[1]);
     	return getBoardAsJSON();
     }
 
@@ -34,31 +38,43 @@ public class WebInterface {
 	 */
 	public static final int[] splitXY(final String param) {
 	    final int idx = param.indexOf("-");
-	    final int i = Integer.valueOf(param.substring(0, idx));
-	    final int j = Integer.valueOf(param.substring(idx + 1));
+        final int i = Integer.parseInt(param.substring(0, idx));
+	    final int j = Integer.parseInt(param.substring(idx + 1));
 	    return new int[]{i, j};
 	}
 	
     public String getBoardAsJSON() {
         final int boardLength = controller.getEdgeLength();
 
-        StringBuilder json = new StringBuilder("{");
+        StringBuilder json = new StringBuilder(oOpening);
+        json.append(JsonEscapeValue(LINES)).append(":");
         json.append(OPENING).append(NEWLINE);
 
         for (int i = 0; i < boardLength; i++) {
-            json.append(OPENING);
-            for (int j = 0; j < boardLength; j++) {
-                json.append(JsonEscapeValue(controller.getIsOccupiedByPlayer(i, j)));
-                json.append(delimiter(boardLength, j));
-            }
-            json.append(CLOSING).append(NEWLINE);
+            json.append(getJSONLine(i));
             json.append(delimiter(boardLength, i));
         }
         json.append(CLOSING);
 
-        return json.append("}").toString();
+        return json.append(oCLOSING).toString();
     }
 
+    private String getJSONLine(final int lineNumber) {
+    	final int boardLength = controller.getEdgeLength();
+    	
+    	StringBuilder line = new StringBuilder(oOpening);
+    	line.append(JsonEscapeValue(CELLS)).append(":");
+    	
+    	line.append(OPENING);
+    	for (int j = 0; j < boardLength; j++) {
+    		line.append(JsonEscapeValue(controller.getIsOccupiedByPlayer(lineNumber, j)));
+    		line.append(delimiter(boardLength, j));
+    	}
+    	line.append(CLOSING).append(NEWLINE);
+    	
+    	return line.append(oCLOSING).toString();
+    }
+    
     private String delimiter(final int edgeLength, final int pos) {
         return pos < edgeLength - 1 ? JSONARRAYDELIMITER : EMPTYSTRING;
     }
