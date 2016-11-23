@@ -9,12 +9,12 @@ public class WebInterface {
 
     private IController controller;
 
-    private static final String OPENING = "[";
-    private static final String CLOSING = "]";
+    private static final String aOPENING = "[";
+    private static final String aCLOSING = "]";
     private static final String oOpening = "{";
     private static final String oCLOSING = "}";
     private static final String NEWLINE = "\n";
-    private static final String JSONARRAYDELIMITER = ", ";
+    private static final String DELIMITER = ", ";
     private static final String EMPTYSTRING = "";
     private static final String DQUOTES = "\"";
     private static final String LINES = "lines";
@@ -44,39 +44,42 @@ public class WebInterface {
 	}
 	
     public String getBoardAsJSON() {
+        final String linesObject = JsonEscapeValue(LINES) + ":";
         final int boardLength = controller.getEdgeLength();
 
         StringBuilder json = new StringBuilder(oOpening);
-        json.append(JsonEscapeValue(LINES)).append(":");
-        json.append(OPENING).append(NEWLINE);
+        json.append(linesObject);
+
+        json.append(aOPENING).append(NEWLINE);
 
         for (int i = 0; i < boardLength; i++) {
             json.append(getJSONLine(i));
-            json.append(delimiter(boardLength, i));
+            json.append(getDelimiterOrEmpty(boardLength, i));
         }
-        json.append(CLOSING);
+        json.append(aCLOSING);
 
         return json.append(oCLOSING).toString();
     }
 
     private String getJSONLine(final int lineNumber) {
+        final String cellsObject = JsonEscapeValue(CELLS) + ":";
     	final int boardLength = controller.getEdgeLength();
     	
     	StringBuilder line = new StringBuilder(oOpening);
-    	line.append(JsonEscapeValue(CELLS)).append(":");
+    	line.append(cellsObject);
     	
-    	line.append(OPENING);
+    	line.append(aOPENING);
     	for (int j = 0; j < boardLength; j++) {
     		line.append(JsonEscapeValue(controller.getIsOccupiedByPlayer(lineNumber, j)));
-    		line.append(delimiter(boardLength, j));
+    		line.append(getDelimiterOrEmpty(boardLength, j));
     	}
-    	line.append(CLOSING).append(NEWLINE);
+    	line.append(aCLOSING).append(NEWLINE);
     	
     	return line.append(oCLOSING).toString();
     }
     
-    private String delimiter(final int edgeLength, final int pos) {
-        return pos < edgeLength - 1 ? JSONARRAYDELIMITER : EMPTYSTRING;
+    private String getDelimiterOrEmpty(final int edgeLength, final int pos) {
+        return pos < edgeLength - 1 ? DELIMITER : EMPTYSTRING;
     }
 
     private static String JsonEscapeValue(final String value) {
