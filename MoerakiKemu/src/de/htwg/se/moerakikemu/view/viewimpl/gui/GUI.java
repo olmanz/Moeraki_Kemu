@@ -42,7 +42,6 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		this.setVisible(true);
 	}
 
-	@Override
 	public void update() {
 		State controllerState = myController.getState();
 		
@@ -66,13 +65,11 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		}
 	}
 
-	@Override
 	public void drawCurrentState() {
 		this.myMainPanel.updateField();
 		this.repaint();
 	}
 
-	@Override
 	public void queryPlayerName() {
 		String player1Name = "";
 		String player2Name = "";
@@ -96,18 +93,15 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		JOptionPane.showMessageDialog(null, display);
 	}
 	
-	@Override
 	public void quit(){
 		printWinnerPopup();
 		this.dispose();
 	}
 
-	@Override
 	public void printMessage(String msg) {
 		myMessagePanel.printMessage(msg);		
 	}
 	
-	@Override
 	public void addPoints(int pointsPlayer1, int pointsPlayer2){
 		myMessagePanel.setPlayerPoints(pointsPlayer1, pointsPlayer2);
 	}

@@ -56,7 +56,6 @@ public class ControllerHelper {
 	}
 	
 	private class EdgeSquare implements SquareState{
-		@Override
 		public void test(Square square){
 			if(x == 0 && y == 0){
 				squareArray[0] = 1;
@@ -86,7 +85,6 @@ public class ControllerHelper {
 			test(square);
 		}
 
-		@Override
 		public void test(Square square){
 			if(x == 0){
 				squareArray[0] = 2;
@@ -119,7 +117,6 @@ public class ControllerHelper {
 			test(square);
 		}
 
-		@Override
 		public void test(Square square){
 			if(x < maxLength && y < maxLength) {
 				squareArray[0] = 4;

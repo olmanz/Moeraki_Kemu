@@ -64,7 +64,6 @@ public class MainMenu extends JMenuBar implements ActionListener{
 		this.add(moreInfos);
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if(source == quit){

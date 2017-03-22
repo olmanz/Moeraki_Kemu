@@ -296,7 +296,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		}
 	}
 
-	@Override
 	public State getState() {
 		if ("".equals(playerController.getPlayer1Name()) || "".equals(playerController.getPlayer2Name())) {
 			return State.QUERY_PLAYER_NAME;
@@ -310,12 +309,10 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	}
 
 
-	@Override
 	public String getPlayer1Name() {
 		return StringHelper.getDefaultEmptyString(playerController.getPlayer1Name());
 	}
 
-	@Override
 	public String getPlayer2Name() {
 		return StringHelper.getDefaultEmptyString(playerController.getPlayer2Name());
 	}

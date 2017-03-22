@@ -150,12 +150,10 @@ public class TextUI implements UserInterface, ObserverObserver {
 	/**
 	 * Prints the winner and ends the game.
 	 */
-	@Override
 	public void quit(){
 		LOGGER.error(getWinnerString());
 	}
 
-	@Override
 	public void update() {
 		final State controllerState = myController.getState();
 		if (controllerState == State.PLAYER_OCCUPIED) {
@@ -169,7 +167,6 @@ public class TextUI implements UserInterface, ObserverObserver {
 		}
 	}
 
-	@Override
 	public void addPoints(final int pointsPlayer1, final int pointsPlayer2) {
 		LOGGER.error(myPlayerController.getPlayer1Name() + " hat " + pointsPlayer1 + "Punkte");
 		LOGGER.error(myPlayerController.getPlayer2Name() + " hat " + pointsPlayer2 + "Punkte");

@@ -15,17 +15,14 @@ public class ObserverSubject implements IObserverSubject {
 		observers = new ArrayList<ObserverObserver>();
 	}
 
-	@Override
 	public void attatch(ObserverObserver newObserver) {
 		observers.add(newObserver);
 	}
 
-	@Override
 	public void detatch(ObserverObserver observer) {
 		observers.remove(observer);
 	}
 	
-	@Override
 	public void notifyObservers() {
 		for (ObserverObserver currentObserver : observers) {
 			currentObserver.update();
