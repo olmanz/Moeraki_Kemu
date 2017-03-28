@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.db4o.*;
 import com.db4o.query.Predicate;
-
 import de.htwg.se.moerakikemu.modellayer.IField;
+import de.htwg.se.moerakikemu.persistenceinterface.IFieldDAO;
 
-public class FieldDB4O {
+public class FieldDB4O implements IFieldDAO {
 	private ObjectContainer db;
 	
 	public FieldDB4O() {
