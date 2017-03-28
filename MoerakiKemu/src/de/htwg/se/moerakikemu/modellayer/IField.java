@@ -41,4 +41,8 @@ public interface IField {
 	 * @return Length of the square field.
 	 */
 	int getEdgeLength();
+	
+	void setID(String id);
+	
+	String getID();
 }

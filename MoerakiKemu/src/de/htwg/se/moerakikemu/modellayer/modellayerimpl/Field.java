@@ -6,6 +6,7 @@ public class Field implements IField {
 	private int edgeLength;
 	private int occupiedSpots;
 	private Spot[][] array;
+	private String id;
 	
 	
 	public Field(int edgeLength) throws IllegalArgumentException {
@@ -49,6 +50,15 @@ public class Field implements IField {
 
 	public boolean isFilled(){
 		return occupiedSpots == (edgeLength * edgeLength);
+	}
+
+	public void setID(String id) {
+		this.id = id;
+	}
+
+	public String getID() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 	
 }
