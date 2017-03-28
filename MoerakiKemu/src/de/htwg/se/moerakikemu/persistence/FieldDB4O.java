@@ -19,7 +19,9 @@ public class FieldDB4O {
 	}
 	
 	public void deleteFieldByID(final String id) {
-		db.delete(getFieldByID(id));
+		if (containsFieldByID(id)) {
+			db.delete(getFieldByID(id));
+		}
 	}
 	
 	public IField getFieldByID(final String id) {
@@ -36,5 +38,21 @@ public class FieldDB4O {
 		}
 		
 		return null;
+	}
+	
+	public boolean containsFieldByID(final String id) {
+		List<IField> fields = db.query(new Predicate<IField>() {
+			private static final long serialVersionUID = 1L;
+			
+			public boolean match(IField field) {
+				return (field.getID().equals(id));
+			}
+		});
+		
+		if (fields.size() > 0) {
+			return true;
+		}
+		
+		return false;
 	}
 }
