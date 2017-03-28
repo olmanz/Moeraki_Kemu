@@ -42,7 +42,14 @@ public interface IField {
 	 */
 	int getEdgeLength();
 	
+	/**
+	 * Sets an ID for the field which is used for storage in a database.
+	 */
 	void setID(String id);
 	
+	/**
+	 * Returns the ID of the Field.
+	 * @return ID of the field.
+	 */
 	String getID();
 }
