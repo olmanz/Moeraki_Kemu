@@ -1,13 +1,12 @@
-package de.htwg.se.moerakikemu.persistence;
+package de.htwg.se.moerakikemu.persistence.db4o;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.db4o.*;
 import com.db4o.query.Predicate;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
-import de.htwg.se.moerakikemu.persistenceinterface.IFieldDAO;
+import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 
 public class FieldDB4O implements IFieldDAO {
 	private ObjectContainer db;
@@ -24,13 +23,13 @@ public class FieldDB4O implements IFieldDAO {
 		db.store(field);
 	}
 
-	public void deleteFieldByID(final UUID id) {
+	public void deleteFieldByID(final String id) {
 		if (containsFieldByID(id)) {
 			db.delete(getFieldByID(id));
 		}
 	}
 
-	public IField getFieldByID(final UUID id) {
+	public IField getFieldByID(final String id) {
 		List<IField> fields = db.query(new Predicate<IField>() {
 			private static final long serialVersionUID = 1L;
 
@@ -46,7 +45,7 @@ public class FieldDB4O implements IFieldDAO {
 		return null;
 	}
 
-	public boolean containsFieldByID(final UUID id) {
+	public boolean containsFieldByID(final String id) {
 		List<IField> fields = db.query(new Predicate<IField>() {
 			private static final long serialVersionUID = 1L;
 

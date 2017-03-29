@@ -1,14 +1,12 @@
 package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
-import java.util.UUID;
-
 import de.htwg.se.moerakikemu.modellayer.IField;
 
 public class Field implements IField {
 	private int edgeLength;
 	private int occupiedSpots;
 	private Spot[][] array;
-	private UUID id;
+	private String id;
 	private String name;
 
 	public Field(int edgeLength) throws IllegalArgumentException {
@@ -55,11 +53,11 @@ public class Field implements IField {
 		return occupiedSpots == (edgeLength * edgeLength);
 	}
 
-	public void setID(UUID id) {
+	public void setID(String id) {
 		this.id = id;
 	}
 
-	public UUID getID() {
+	public String getID() {
 		return this.id;
 	}
 

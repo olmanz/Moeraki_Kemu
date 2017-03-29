@@ -1,7 +1,6 @@
-package de.htwg.se.moerakikemu.persistenceinterface;
+package de.htwg.se.moerakikemu.persistence;
 
 import java.util.List;
-import java.util.UUID;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
 
@@ -18,21 +17,21 @@ public interface IFieldDAO {
 	 * Deletes an instance of IField with a given id from the database.
 	 * @param id of the field that is deleted
 	 */
-	void deleteFieldByID(final UUID id);
+	void deleteFieldByID(final String id);
 
 	/**
 	 * Checks if an instance of IField with the given id exists in the database.
 	 * @param id that is searched for
 	 * @return true if the instance exists, otherwise false.
 	 */
-	boolean containsFieldByID(final UUID id);
+	boolean containsFieldByID(final String id);
 	
 	/**
 	 * Returns field with given ID
 	 * @param id that is searched for
 	 * @return field
 	 */
-	IField getFieldByID(final UUID id);
+	IField getFieldByID(final String id);
 	
 	/**
 	 * Generates given number of fields with given edgeLength
