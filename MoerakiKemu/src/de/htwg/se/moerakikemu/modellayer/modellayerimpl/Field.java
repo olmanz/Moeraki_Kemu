@@ -1,16 +1,18 @@
 package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
+import java.util.UUID;
+
 import de.htwg.se.moerakikemu.modellayer.IField;
 
 public class Field implements IField {
 	private int edgeLength;
 	private int occupiedSpots;
 	private Spot[][] array;
-	private String id;
-	
-	
+	private UUID id;
+	private String name;
+
 	public Field(int edgeLength) throws IllegalArgumentException {
-		if(edgeLength < 1) {
+		if (edgeLength < 1) {
 			throw new IllegalArgumentException("Edgelength too small: " + edgeLength);
 		}
 		this.edgeLength = edgeLength;
@@ -21,8 +23,9 @@ public class Field implements IField {
 			}
 		}
 		occupiedSpots = 0;
+		name = "default";
 	}
-	
+
 	public int getEdgeLength() {
 		return this.edgeLength;
 	}
@@ -48,17 +51,26 @@ public class Field implements IField {
 		return "";
 	}
 
-	public boolean isFilled(){
+	public boolean isFilled() {
 		return occupiedSpots == (edgeLength * edgeLength);
 	}
 
-	public void setID(String id) {
+	public void setID(UUID id) {
 		this.id = id;
 	}
 
-	public String getID() {
-		// TODO Auto-generated method stub
+	public UUID getID() {
 		return this.id;
 	}
-	
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		if (name != null) {
+			this.name = name;
+		}
+	}
+
 }

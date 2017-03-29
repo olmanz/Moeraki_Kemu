@@ -1,5 +1,7 @@
 package de.htwg.se.moerakikemu.modellayer;
 
+import java.util.UUID;
+
 public interface IField {
 
 	/**
@@ -44,12 +46,23 @@ public interface IField {
 	
 	/**
 	 * Sets an ID for the field which is used for storage in a database.
+	 * @param id of the field
 	 */
-	void setID(String id);
+	void setID(UUID id);
 	
 	/**
 	 * Returns the ID of the Field.
 	 * @return ID of the field.
 	 */
-	String getID();
+	UUID getID();
+	
+	/**
+	 * @return A name for this field
+	 */
+	String getName();
+	
+	/**
+	 * @param name A name for this field
+	 */
+	void setName(String name);
 }
