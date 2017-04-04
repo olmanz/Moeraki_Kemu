@@ -34,7 +34,7 @@ public class FieldDB4O implements IFieldDAO {
 			private static final long serialVersionUID = 1L;
 
 			public boolean match(IField field) {
-				return (id.equals(field.getID()));
+				return (id.equals(field.getId()));
 			}
 		});
 
@@ -50,7 +50,7 @@ public class FieldDB4O implements IFieldDAO {
 			private static final long serialVersionUID = 1L;
 
 			public boolean match(IField field) {
-				return (field.getID().equals(id));
+				return (field.getId().equals(id));
 			}
 		});
 

@@ -46,13 +46,13 @@ public interface IField {
 	 * Sets an ID for the field which is used for storage in a database.
 	 * @param id of the field
 	 */
-	void setID(String id);
+	void setId(String id);
 	
 	/**
 	 * Returns the ID of the Field.
 	 * @return ID of the field.
 	 */
-	String getID();
+	String getId();
 	
 	/**
 	 * @return A name for this field
@@ -63,4 +63,12 @@ public interface IField {
 	 * @param name A name for this field
 	 */
 	void setName(String name);
+	
+	/**
+	 * @param x The x-coordinate of the ISpot to return
+	 * @param y The y-coordinate of the ISpot to return
+	 * @return ISpot at the given coordinate
+	 */
+	ISpot getISpot(int x, int y);
+
 }

@@ -1,6 +1,8 @@
 package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
-public class Spot {
+import de.htwg.se.moerakikemu.modellayer.ISpot;
+
+public class Spot implements ISpot {
 
 	/**
 	 * Status of the Spot.

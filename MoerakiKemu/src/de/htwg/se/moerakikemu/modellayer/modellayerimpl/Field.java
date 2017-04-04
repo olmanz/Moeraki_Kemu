@@ -1,11 +1,12 @@
 package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
+import de.htwg.se.moerakikemu.modellayer.ISpot;
 
 public class Field implements IField {
 	private int edgeLength;
 	private int occupiedSpots;
-	private Spot[][] array;
+	private ISpot[][] array;
 	private String id;
 	private String name;
 
@@ -53,11 +54,11 @@ public class Field implements IField {
 		return occupiedSpots == (edgeLength * edgeLength);
 	}
 
-	public void setID(String id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getID() {
+	public String getId() {
 		return this.id;
 	}
 
@@ -69,6 +70,10 @@ public class Field implements IField {
 		if (name != null) {
 			this.name = name;
 		}
+	}
+
+	public ISpot getISpot(int x, int y) {
+		return array[x][y];
 	}
 
 }
