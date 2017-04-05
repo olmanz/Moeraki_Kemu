@@ -1,5 +1,7 @@
 package de.htwg.se.moerakikemu.modellayer.modellayerimpl;
 
+import java.util.UUID;
+
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.ISpot;
 
@@ -21,6 +23,7 @@ public class Field implements IField {
 				array[i][j] = new Spot();
 			}
 		}
+		this.id = UUID.randomUUID().toString();
 		occupiedSpots = 0;
 		name = "default";
 	}
