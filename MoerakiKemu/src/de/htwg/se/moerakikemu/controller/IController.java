@@ -1,7 +1,5 @@
 package de.htwg.se.moerakikemu.controller;
 
-import java.util.UUID;
-
 import de.htwg.se.moerakikemu.modellayer.IField;
 
 public interface IController {
@@ -76,7 +74,7 @@ public interface IController {
 	 * Load a field from the database
 	 * @param fieldId
 	 */
-	void loadFromDB(UUID fieldId);
+	void loadFromDB(String fieldId);
 	
 	/**
 	 * Save a field to the database

@@ -322,7 +322,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		return StringHelper.getDefaultEmptyString(playerController.getPlayer2Name());
 	}
 
-	public void loadFromDB(UUID fieldId) {
+	public void loadFromDB(String fieldId) {
 		this.gameField  = fieldDAO.getFieldByID(fieldId);
 	}
 
