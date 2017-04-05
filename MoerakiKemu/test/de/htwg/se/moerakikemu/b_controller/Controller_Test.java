@@ -2,11 +2,13 @@ package de.htwg.se.moerakikemu.b_controller;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.se.moerakikemu.controller.*;
 import de.htwg.se.moerakikemu.controller.controllerimpl.*;
+import de.htwg.se.moerakikemu.persistence.db4o.FieldDB4O;
 
 public class Controller_Test {
 
@@ -15,12 +17,19 @@ public class Controller_Test {
 
 	private IController controller;
 	private IControllerPlayer playerController;
+	private FieldDB4O db4oDao;
 	
 	@Before
 	public void setUp(){
 		playerController = new ControllerPlayer();
-		controller = new Controller(6, playerController);
+		db4oDao = new FieldDB4O();
+		controller = new Controller(6, playerController, db4oDao);
 		playerController.setName(PLAYER1NAME, PLAYER2NAME);
+	}
+	
+	@After
+	public void after() {
+		db4oDao.closeDb();
 	}
 	
 	@Test
@@ -61,7 +70,7 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getPointsOfPlayer_returnPointsofCurrentPlayer(){
-		controller = new Controller(5, playerController);
+		controller = new Controller(5, playerController, db4oDao);
 		
 		controller.occupy(1, 1);
 		controller.occupy(3, 3);
@@ -99,7 +108,7 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getQuit_gamefinished(){
-		controller = new Controller(5, playerController);
+		controller = new Controller(5, playerController, db4oDao);
 		assertFalse(controller.testIfWinnerExists());
 		
 		controller.occupy(3, 3);	// Set start Spot
@@ -114,7 +123,7 @@ public class Controller_Test {
 		
 		playerController = new ControllerPlayer();
 		playerController.setName(PLAYER1NAME, PLAYER2NAME);
-		controller = new Controller(5, playerController);
+		controller = new Controller(5, playerController, db4oDao);
 		assertEquals("", controller.getWinner());
 
 		controller.occupy(2, 2);	// Set start Spot
@@ -132,7 +141,7 @@ public class Controller_Test {
 	
 	@Test
 	public void test_getIsOccupiedByPlayer_ifOccupiedFromAPlayer(){
-		controller = new Controller(5, playerController);
+		controller = new Controller(5, playerController, db4oDao);
 		
 		controller.occupy(2, 2);	// Set start Spot
 		controller.occupy(0, 0);
@@ -152,7 +161,7 @@ public class Controller_Test {
 	@Test
 	public void test_getState_returnsStates() {
 		playerController = new ControllerPlayer();
-		controller = new Controller(6, playerController);
+		controller = new Controller(6, playerController, db4oDao);
 		
 		// Test player names
 		playerController.setName("", "");

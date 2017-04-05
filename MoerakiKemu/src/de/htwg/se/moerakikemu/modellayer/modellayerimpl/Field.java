@@ -55,11 +55,11 @@ public class Field implements IField {
 		return occupiedSpots == (edgeLength * edgeLength);
 	}
 
-	public void setID(UUID id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
-	public UUID getID() {
+	public UUID getId() {
 		return this.id;
 	}
 

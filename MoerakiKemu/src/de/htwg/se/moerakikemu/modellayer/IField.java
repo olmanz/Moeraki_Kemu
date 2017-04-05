@@ -48,13 +48,13 @@ public interface IField {
 	 * Sets an ID for the field which is used for storage in a database.
 	 * @param id of the field
 	 */
-	void setID(UUID id);
+	void setId(UUID id);
 	
 	/**
 	 * Returns the ID of the Field.
 	 * @return ID of the field.
 	 */
-	UUID getID();
+	UUID getId();
 	
 	/**
 	 * @return A name for this field
