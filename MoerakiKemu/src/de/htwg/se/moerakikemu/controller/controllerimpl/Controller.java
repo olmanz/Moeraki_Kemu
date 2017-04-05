@@ -1,7 +1,5 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
-import java.util.UUID;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
