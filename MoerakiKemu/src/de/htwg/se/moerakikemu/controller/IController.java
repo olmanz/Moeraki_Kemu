@@ -1,5 +1,9 @@
 package de.htwg.se.moerakikemu.controller;
 
+import java.util.UUID;
+
+import de.htwg.se.moerakikemu.modellayer.IField;
+
 public interface IController {
 
 	/**
@@ -67,4 +71,42 @@ public interface IController {
 	 */
 	String getPlayer1Name();
 	String getPlayer2Name();
+	
+	/**
+	 * Load a field from the database
+	 * @param fieldId
+	 */
+	void loadFromDB(UUID fieldId);
+	
+	/**
+	 * Save a field to the database
+	 */
+	void saveToDB();
+	
+	/**
+	 * Check whether the actual field is already in database
+	 * @return true if the entry exists, false if not
+	 */
+	boolean containsActualFieldDB();
+	
+	/**
+	 * Generate a number of fields and save them to the database
+	 * @param number
+	 */
+	void generateFieldToDB(int number);
+	
+	/**
+	 * Generate a number of fields and save them to the database
+	 * @return the name of the field
+	 */
+	String getFieldName();
+	
+	/**
+	 * Generate a number of fields and save them to the database
+	 * @param the name of the field
+	 */
+	void setFieldName(String name);
+	
+	IField getField();
+
 }

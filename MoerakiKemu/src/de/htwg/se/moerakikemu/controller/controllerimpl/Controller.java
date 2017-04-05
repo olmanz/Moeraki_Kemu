@@ -1,5 +1,7 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
+import java.util.UUID;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
@@ -9,6 +11,7 @@ import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
+import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 import de.htwg.se.moerakikemu.view.UserInterface;
 import de.htwg.se.util.StringHelper;
 import de.htwg.se.util.observer.IObserverSubject;
@@ -37,13 +40,15 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	private String playerWin;
 	private boolean quitGame;
 	private boolean winner;
+	private IFieldDAO fieldDAO;
 	
 	@Inject
-	public Controller(@Named("fieldLength") int fieldLength, IControllerPlayer playerCon) {
+	public Controller(@Named("fieldLength") int fieldLength, IControllerPlayer playerCon, IFieldDAO fieldDAO) {
 		super();
 		gameField = new Field(fieldLength);
 		this.fieldLength = fieldLength;
 		this.playerController = playerCon;
+		this.fieldDAO = fieldDAO;
 		quitGame = false;
 		playerWin = "";
 		xCoordinateStartDot = 0;
@@ -315,6 +320,34 @@ public class Controller extends ObserverSubject implements IController, IObserve
 
 	public String getPlayer2Name() {
 		return StringHelper.getDefaultEmptyString(playerController.getPlayer2Name());
+	}
+
+	public void loadFromDB(UUID fieldId) {
+		this.gameField  = fieldDAO.getFieldByID(fieldId);
+	}
+
+	public void saveToDB() {
+		fieldDAO.saveField(gameField);
+	}
+
+	public boolean containsActualFieldDB() {
+		return fieldDAO.containsFieldByID(gameField.getId());
+	}
+
+	public void generateFieldToDB(int number) {
+		fieldDAO.generateFields(number, fieldLength);		
+	}
+
+	public String getFieldName() {
+		return gameField.getName();
+	}
+
+	public void setFieldName(String name) {
+		gameField.setName(name);	
+	}
+
+	public IField getField() {
+		return gameField;
 	}
 	
 }
