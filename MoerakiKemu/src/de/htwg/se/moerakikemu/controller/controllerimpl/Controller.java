@@ -1,7 +1,5 @@
 package de.htwg.se.moerakikemu.controller.controllerimpl;
 
-import java.util.UUID;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
@@ -322,7 +320,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		return StringHelper.getDefaultEmptyString(playerController.getPlayer2Name());
 	}
 
-	public void loadFromDB(UUID fieldId) {
+	public void loadFromDB(String fieldId) {
 		this.gameField  = fieldDAO.getFieldByID(fieldId);
 	}
 
