@@ -68,7 +68,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	
 	public int occupy(final int x, final int y) {
 		printInfoAllUIs(x, y);
-		
+
 		if (!"".equals(gameField.getIsOccupiedFrom(x, y)) || noProperStartDot(x, y)) {
 			return -1;
 		}

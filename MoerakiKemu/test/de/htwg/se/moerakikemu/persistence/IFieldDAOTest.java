@@ -52,6 +52,21 @@ public class IFieldDAOTest {
 		fieldDAO.saveField(field);
 		IField foundField = fieldDAO.getFieldByID(testId);
 		assertEquals(foundField.getName(), testName);
+		assertTrue(fieldDAO.getFieldByID("TEST-ID02") == null);
+	}
+
+	@Test
+	public void testDeleteAndContainsFieldById() {
+		IField field = new Field(12);
+		String testId = "TEST-ID01";
+		String testName = "TEST-FILED01";
+		field.setId(testId);
+		field.setName(testName);
+		fieldDAO.saveField(field);
+		assertTrue(fieldDAO.containsFieldByID(testId));
+		fieldDAO.deleteFieldByID(testId);
+		assertFalse(fieldDAO.containsFieldByID(testId));
+		fieldDAO.deleteFieldByID(testId);
 	}
 
 }
