@@ -4,6 +4,13 @@ import java.util.List;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.persistence.IFieldDAO;
+import org.ektorp.CouchDbConnector;
+import org.ektorp.CouchDbInstance;
+import org.ektorp.Revision;
+import org.ektorp.ViewQuery;
+import org.ektorp.http.HttpClient;
+import org.ektorp.http.StdHttpClient;
+import org.ektorp.impl.StdCouchDbInstance;
 
 public class FieldCouchdbDAO implements IFieldDAO {
 
