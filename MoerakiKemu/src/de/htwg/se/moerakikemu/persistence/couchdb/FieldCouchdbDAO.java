@@ -1,5 +1,6 @@
 package de.htwg.se.moerakikemu.persistence.couchdb;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
@@ -14,6 +15,22 @@ import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbInstance;
 
 public class FieldCouchdbDAO implements IFieldDAO {
+	private CouchDbConnector db = null;
+	private Logger logger = Logger.getLogger("de.htwg.se.moerakikemu.persistence.couchdb");
+	
+	public FieldCouchdbDAO() {
+		HttpClient client = null;
+		
+		try {
+			client = new StdHttpClient.Builder().url("http://lenny2.in.htwg-konstanz.de:5984").build();
+		} catch (MalformedURLException e) {
+			logger.error("Malformed URL", e);
+		}
+		
+		CouchDbInstance dbInstance = new StdCouchDbInstance(client);
+		db = dbInstance.createConnector("moerakikemu_db", true);
+		db.createDatabaseIfNotExists();
+	}
 
 	public void saveField(IField field) {
 		// TODO Auto-generated method stub
