@@ -51,19 +51,19 @@ public class PersistentSpot extends CouchDbDocument {
 		return this.column;
 	}
 	
-	public void setRowCell(Integer rowCell) {
-		this.row = rowCell;
+	public void setRowSpot(Integer rowSpot) {
+		this.row = rowSpot;
 	}
 	
-	public Integer getRowCell() {
+	public Integer getRowSpot() {
 		return this.row;
 	}
 	
-	public void setColumnCell(Integer columnCell) {
-		this.column = columnCell;
+	public void setColumnSpot(Integer columnSpot) {
+		this.column = columnSpot;
 	}
 	
-	public Integer getColumnCell() {
+	public Integer getColumnSpot() {
 		return this.column;
 	}
 	
