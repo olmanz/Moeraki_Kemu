@@ -9,14 +9,14 @@ import org.junit.Test;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.persistence.db4o.FieldDB4O;
-import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
+//import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
 
 public class IFieldDAOTest {
 	IFieldDAO fieldDAO;
 
 	@Before
 	public void setUp() {
-		fieldDAO = new FieldHibernateDAO();
+		fieldDAO = new FieldDB4O();
 	}
 
 	@After
@@ -32,7 +32,10 @@ public class IFieldDAOTest {
 	public void testSaveField() {
 		fieldDAO.saveField(new Field(12));
 		fieldDAO.saveField(new Field(12));
-		fieldDAO.saveField(new Field(14));
+		IField field = new Field(14);
+		fieldDAO.saveField(field);
+		fieldDAO.saveField(field);
+		fieldDAO.saveField(null);
 		assertEquals(fieldDAO.getAllFields().size(), 3);
 	}
 
@@ -52,6 +55,21 @@ public class IFieldDAOTest {
 		fieldDAO.saveField(field);
 		IField foundField = fieldDAO.getFieldByID(testId);
 		assertEquals(foundField.getName(), testName);
+		assertTrue(fieldDAO.getFieldByID("TEST-ID02") == null);
+	}
+
+	@Test
+	public void testDeleteAndContainsFieldById() {
+		IField field = new Field(12);
+		String testId = "TEST-ID01";
+		String testName = "TEST-FILED01";
+		field.setId(testId);
+		field.setName(testName);
+		fieldDAO.saveField(field);
+		assertTrue(fieldDAO.containsFieldByID(testId));
+		fieldDAO.deleteFieldByID(testId);
+		assertFalse(fieldDAO.containsFieldByID(testId));
+		fieldDAO.deleteFieldByID(testId);
 	}
 
 }

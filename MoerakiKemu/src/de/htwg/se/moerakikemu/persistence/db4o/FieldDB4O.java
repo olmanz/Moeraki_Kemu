@@ -14,7 +14,7 @@ public class FieldDB4O implements IFieldDAO {
 	public FieldDB4O() {
 		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "field.data");
 	}
-	
+
 	public void closeDb() {
 		db.close();
 	}
@@ -64,29 +64,8 @@ public class FieldDB4O implements IFieldDAO {
 	public void generateFields(int number, int edgeLength) {
 		for (int i = 0; i < number; i++) {
 			IField field = new Field(edgeLength);
-			if (containsField(field)) {
-				number--;
-			} else {
-				db.store(field);
-			}
+			db.store(field);
 		}
-	}
-
-	private boolean containsField(IField field) {
-		final String fieldString = field.toString();
-		List<IField> fields = db.query(new Predicate<IField>() {
-
-			private static final long serialVersionUID = 1L;
-
-			public boolean match(IField field) {
-				return (field.toString().equals(fieldString));
-			}
-		});
-
-		if (fields.size() > 0) {
-			return true;
-		}
-		return false;
 	}
 
 	public List<IField> getAllFields() {
