@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.persistence.IFieldDAO;
+import org.apache.log4j.Logger;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.Revision;
