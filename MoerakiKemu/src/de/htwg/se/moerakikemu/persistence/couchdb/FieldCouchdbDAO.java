@@ -8,6 +8,7 @@ import java.util.Set;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.ISpot;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 import de.htwg.se.moerakikemu.persistence.hibernate.HibernateUtil;
 import de.htwg.se.moerakikemu.persistence.hibernate.PersistentField;
@@ -39,6 +40,25 @@ public class FieldCouchdbDAO implements IFieldDAO {
 		CouchDbInstance dbInstance = new StdCouchDbInstance(client);
 		db = dbInstance.createConnector("moerakikemu_db", true);
 		db.createDatabaseIfNotExists();
+	}
+	
+	public IField copyField(PersistentField pField) {
+		if (pField == null) {
+			return null;
+		}
+		IField field = new Field(pField.getEdgeLength());
+		field.setId(pField.getId());
+		field.setName(pField.getName());
+
+		for (PersistentSpot spotBase : pField.getSpots()) {
+			int column = spotBase.getColumn();
+			int row = spotBase.getRow();
+			String occupier = spotBase.getOccupiedByPlayer();
+
+			ISpot spot = field.getISpot(column, row);
+			spot.occupy(occupier);
+		}
+		return field;
 	}
 	
 	public PersistentField copyField(IField field) {
@@ -88,8 +108,7 @@ public class FieldCouchdbDAO implements IFieldDAO {
 	}
 
 	public void deleteFieldByID(String id) {
-		// TODO Auto-generated method stub
-		
+		db.delete(copyField(getFieldByID(id)));
 	}
 
 	public boolean containsFieldByID(String id) {
@@ -98,8 +117,13 @@ public class FieldCouchdbDAO implements IFieldDAO {
 	}
 
 	public IField getFieldByID(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistentField pField = db.find(PersistentField.class, id);
+		
+		if (pField == null) {
+			return null;
+		}
+		
+		return copyField(pField);
 	}
 
 	public void generateFields(int number, int edgeLength) {
