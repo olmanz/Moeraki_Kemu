@@ -19,6 +19,8 @@ import org.ektorp.CouchDbConnector;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.Revision;
 import org.ektorp.ViewQuery;
+import org.ektorp.ViewResult;
+import org.ektorp.ViewResult.Row;
 import org.ektorp.http.HttpClient;
 import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbInstance;
@@ -112,8 +114,11 @@ public class FieldCouchdbDAO implements IFieldDAO {
 	}
 
 	public boolean containsFieldByID(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (getFieldByID(id) == null) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	public IField getFieldByID(String id) {
@@ -127,13 +132,22 @@ public class FieldCouchdbDAO implements IFieldDAO {
 	}
 
 	public void generateFields(int number, int edgeLength) {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < number; i++) {
+			IField field = new Field(edgeLength);
+			saveField(field);
+		}
 	}
 
 	public List<IField> getAllFields() {
-		// TODO Auto-generated method stub
-		return null;
+		List<IField> lst = new ArrayList<IField>();
+		ViewQuery query = new ViewQuery().allDocs();
+		ViewResult vr = db.queryView(query);
+		
+		for (Row r : vr.getRows()) {
+			lst.add(getFieldByID(r.getId()));
+		}
+		
+		return lst;
 	}
 
 }
