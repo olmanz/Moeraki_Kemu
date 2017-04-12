@@ -16,6 +16,8 @@ import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 public class FieldHibernateDAO implements IFieldDAO {
 
 	public void saveField(IField field) {
+		if (field == null)
+			return;
 		Transaction tx = null;
 		Session session = null;
 
@@ -40,10 +42,6 @@ public class FieldHibernateDAO implements IFieldDAO {
 	}
 
 	private PersistentField copyField(IField field) {
-		if (field == null) {
-			return null;
-		}
-
 		String fieldId = field.getId();
 		PersistentField pfield;
 		if (containsFieldByID(fieldId)) {
@@ -86,23 +84,22 @@ public class FieldHibernateDAO implements IFieldDAO {
 	public void deleteFieldByID(String id) {
 		Transaction tx = null;
 		Session session = null;
+		if (containsFieldByID(id)) {
+			try {
+				session = HibernateUtil.getInstance().getCurrentSession();
+				tx = session.beginTransaction();
 
-		try {
-			session = HibernateUtil.getInstance().getCurrentSession();
-			tx = session.beginTransaction();
-
-			PersistentField pfield = (PersistentField) session.get(PersistentField.class, id);
-
-			for (PersistentSpot c : pfield.getSpots()) {
-				session.delete(c);
+				PersistentField pfield = (PersistentField) session.get(PersistentField.class, id);
+				for (PersistentSpot c : pfield.getSpots()) {
+					session.delete(c);
+				}
+				session.delete(pfield);
+				tx.commit();
+			} catch (HibernateException ex) {
+				if (tx != null)
+					tx.rollback();
+				throw new RuntimeException(ex.getMessage());
 			}
-			session.delete(pfield);
-
-			tx.commit();
-		} catch (HibernateException ex) {
-			if (tx != null)
-				tx.rollback();
-			throw new RuntimeException(ex.getMessage());
 		}
 	}
 
