@@ -18,4 +18,60 @@ public class PersistentSpot extends CouchDbDocument {
 	public PersistentSpot() {
 		
 	}
+	
+	public void setID(String id) {
+		this.id = id;
+	}
+	
+	public String getID() {
+		return this.id;
+	}
+	
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+	
+	public Integer getValue() {
+		return this.value;
+	}
+	
+	public void setRow(Integer row) {
+		this.row = row;
+	}
+	
+	public Integer getRow() {
+		return this.row;
+	}
+	
+	public void setColumn(Integer column) {
+		this.column = column;
+	}
+	
+	public Integer getColumn() {
+		return this.column;
+	}
+	
+	public void setRowCell(Integer rowCell) {
+		this.row = rowCell;
+	}
+	
+	public Integer getRowCell() {
+		return this.row;
+	}
+	
+	public void setColumnCell(Integer columnCell) {
+		this.column = columnCell;
+	}
+	
+	public Integer getColumnCell() {
+		return this.column;
+	}
+	
+	public void setGiven(Boolean given) {
+		this.given = given;
+	}
+	
+	public Boolean getGiven() {
+		return this.given;
+	}
 }
