@@ -9,14 +9,14 @@ import org.junit.Test;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.persistence.db4o.FieldDB4O;
-//import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
+import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
 
 public class IFieldDAOTest {
 	IFieldDAO fieldDAO;
 
 	@Before
 	public void setUp() {
-		fieldDAO = new FieldDB4O();
+		fieldDAO = new FieldHibernateDAO();
 	}
 
 	@After
@@ -52,6 +52,7 @@ public class IFieldDAOTest {
 		String testName = "TEST-FILED01";
 		field.setId(testId);
 		field.setName(testName);
+		field.setName(null);
 		fieldDAO.saveField(field);
 		IField foundField = fieldDAO.getFieldByID(testId);
 		assertEquals(foundField.getName(), testName);
