@@ -33,7 +33,10 @@ public class IFieldDAOTest {
 	public void testSaveField() {
 		fieldDAO.saveField(new Field(12));
 		fieldDAO.saveField(new Field(12));
-		fieldDAO.saveField(new Field(14));
+		IField field = new Field(14);
+		fieldDAO.saveField(field);
+		fieldDAO.saveField(field);
+		fieldDAO.saveField(null);
 		assertEquals(fieldDAO.getAllFields().size(), 3);
 	}
 
@@ -50,6 +53,7 @@ public class IFieldDAOTest {
 		String testName = "TEST-FILED01";
 		field.setId(testId);
 		field.setName(testName);
+		field.setName(null);
 		fieldDAO.saveField(field);
 		IField foundField = fieldDAO.getFieldByID(testId);
 		assertEquals(foundField.getName(), testName);
