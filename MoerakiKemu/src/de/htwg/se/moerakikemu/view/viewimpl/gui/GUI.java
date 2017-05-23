@@ -30,7 +30,7 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 		this.myMainPanel = new MainPanel(myController, myPlayerController, myController.getEdgeLength());
 		this.myMessagePanel = new MessagePanel(myController, myPlayerController);
 
-		this.setJMenuBar(new MainMenu(myController));
+		this.setJMenuBar(new MainMenu(this, myController));
 		
 		this.setLayout(new BorderLayout());
 		this.add(myMainPanel, BorderLayout.CENTER);
@@ -44,7 +44,6 @@ public class GUI extends JFrame implements UserInterface, ObserverObserver {
 
 	public void update() {
 		State controllerState = myController.getState();
-		
 		switch (controllerState) {
 		case GAME_FINISHED:
 			myController.setEnd(true);

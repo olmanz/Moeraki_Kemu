@@ -22,6 +22,7 @@ public class IFieldDAOTest {
 	@After
 	public void after() {
 		for (IField field : fieldDAO.getAllFields()) {
+			System.out.println(field.getId());
 			fieldDAO.deleteFieldByID(field.getId());
 		}
 		if (fieldDAO instanceof FieldDB4O)

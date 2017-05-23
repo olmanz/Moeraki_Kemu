@@ -107,4 +107,7 @@ public interface IController {
 	
 	IField getField();
 
+	void deleteFromDB(String id);
+
+	String[][] getRowDataAll();
 }

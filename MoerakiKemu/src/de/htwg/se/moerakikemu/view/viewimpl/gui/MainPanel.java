@@ -16,7 +16,6 @@ import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import java.awt.Color;
 
-
 public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
@@ -47,11 +46,29 @@ public class MainPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent me) {
 				JButton pressedButton = (JButton) me.getSource();
-				int []coordinates = getButtonCoordinates(pressedButton);
-				String name = myController.getIsOccupiedByPlayer(coordinates[0]-1, coordinates[1]-1);
-				if ("".equals(name)) {
-					setSpotColor(pressedButton, myPlayerController.getCurrentPlayerName());
-					myController.occupy(coordinates[0]-1, coordinates[1]-1);
+				int[] coordinates = getButtonCoordinates(pressedButton);
+				String name = myController.getIsOccupiedByPlayer(coordinates[0] - 1, coordinates[1] - 1);
+				if ("".equals(name) || "leer".equals(name)) {
+					String currentPlayer = myPlayerController.getCurrentPlayerName();
+					if ("leer".equals(name)) {
+						int fieldsPlayer1 = 0;
+						int fieldsPlayer2 = 0;
+						for (int i = 0; i < field.length; i++) {
+							for (int j = 0; j < field.length; j++) {
+								if (field[i][j].getIcon() == blackIcon)
+									fieldsPlayer1++;
+								else if (field[i][j].getIcon() == redIcon)
+									fieldsPlayer2++;
+							}
+						}
+						if (fieldsPlayer1 > fieldsPlayer2) 
+							currentPlayer = myPlayerController.getPlayer2Name();
+						else 
+							currentPlayer = myPlayerController.getPlayer1Name();
+
+					}
+					setSpotColor(pressedButton, currentPlayer);
+					myController.occupy(coordinates[0] - 1, coordinates[1] - 1);
 				}
 
 			}
@@ -88,7 +105,6 @@ public class MainPanel extends JPanel {
 		field = getJButtonField(fieldLength);
 	}
 
-	
 	public void updateField() {
 		final int fieldLength = myController.getEdgeLength();
 		for (int i = 0; i < fieldLength; i++) {
@@ -98,21 +114,21 @@ public class MainPanel extends JPanel {
 		}
 		this.repaint();
 	}
-	
+
 	private int[] getButtonCoordinates(JButton button) {
-		int []xyCoordinates = new int[2];
-		
-		Scanner getNumbers = new Scanner(button.getToolTipText()); 
+		int[] xyCoordinates = new int[2];
+
+		Scanner getNumbers = new Scanner(button.getToolTipText());
 		getNumbers.useDelimiter("[()/]");
 		xyCoordinates[0] = getNumbers.nextInt();
 		xyCoordinates[1] = getNumbers.nextInt();
 		getNumbers.close();
-		
+
 		return xyCoordinates;
 	}
 
 	private void setSpotColor(JButton buttonToChange, final String playerNameOnSpot) {
-		if (playerNameOnSpot == null || "".equals(playerNameOnSpot)){
+		if (playerNameOnSpot == null || "".equals(playerNameOnSpot)) {
 			buttonToChange.setText("+");
 			buttonToChange.setIcon(null);
 		} else if (myPlayerController.getPlayer1Name().equals(playerNameOnSpot)) {
@@ -121,7 +137,7 @@ public class MainPanel extends JPanel {
 		} else if (myPlayerController.getPlayer2Name().equals(playerNameOnSpot)) {
 			buttonToChange.setText("");
 			buttonToChange.setIcon(redIcon);
-		} else if ("StartDot".equals(playerNameOnSpot)){
+		} else if ("StartDot".equals(playerNameOnSpot)) {
 			buttonToChange.setText("");
 			buttonToChange.setIcon(greenIcon);
 		}
