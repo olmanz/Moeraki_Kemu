@@ -9,20 +9,19 @@ import org.junit.Test;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.persistence.db4o.FieldDB4O;
-import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
+//import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
 
 public class IFieldDAOTest {
 	IFieldDAO fieldDAO;
 
 	@Before
 	public void setUp() {
-		fieldDAO = new FieldHibernateDAO();
+		fieldDAO = new FieldDB4O();
 	}
 
 	@After
 	public void after() {
 		for (IField field : fieldDAO.getAllFields()) {
-			System.out.println(field.getId());
 			fieldDAO.deleteFieldByID(field.getId());
 		}
 		if (fieldDAO instanceof FieldDB4O)
