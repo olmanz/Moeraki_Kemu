@@ -9,6 +9,7 @@ import com.google.inject.name.Named;
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.IControllerPlayer;
 import de.htwg.se.moerakikemu.controller.State;
+import de.htwg.se.moerakikemu.controller.controllerimpl.actor.ActorEndpoint;
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.persistence.IFieldDAO;
@@ -27,10 +28,10 @@ public class Controller extends ObserverSubject implements IController, IObserve
 	 * setEnd() - occupy()
 	 */
 
+	private ActorEndpoint actorEndpoint;
 	private IField gameField;
 	private int fieldLength;
 
-	private ControllerHelper helper;
 	private IControllerPlayer playerController;
 
 	private int xCoordinateStartDot, yCoordinateStartDot;
@@ -51,6 +52,7 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		playerWin = "";
 		xCoordinateStartDot = 0;
 		yCoordinateStartDot = 0;
+		actorEndpoint = new ActorEndpoint(gameField, fieldLength);
 		notifyObservers();
 	}
 
@@ -74,15 +76,12 @@ public class Controller extends ObserverSubject implements IController, IObserve
 		}
 
 		gameField.occupy(x, y, playerController.getCurrentPlayerName());
-		helper = new ControllerHelper(x, y, fieldLength - 1);
-		helper.testSquare();
-		testListOfSquares();
+		int[] points = actorEndpoint.getPoints(x, y);
+		setPointsOfPlayer(points[0], points[1]);
 		if (!"StartDot".equals(playerController.getCurrentPlayerName())) {
 			testAllInLine(x, y);
 		}
-		helper.resetSquareTest();
 		playerController.selectNextPlayer();
-
 		if (gameField.isFilled()) {
 			setEnd(true);
 		}
@@ -107,56 +106,6 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			return false;
 		}
 
-	}
-
-	private void testListOfSquares() {
-		int[] squareArray = helper.getSquareArray();
-		if (squareArray[0] == 1) {
-			testSquare(squareArray[1], squareArray[2], squareArray[3], squareArray[4]);
-		} else if (squareArray[0] == 2) {
-			testSquare(squareArray[1], squareArray[2], squareArray[3], squareArray[4]);
-			testSquare(squareArray[5], squareArray[6], squareArray[7], squareArray[8]);
-		} else if (squareArray[0] == 4) {
-			for (int i = 0; i < 4; i++) {
-				testSquare(squareArray[i * 4 + 1], squareArray[i * 4 + 2], squareArray[i * 4 + 3],
-						squareArray[i * 4 + 4]);
-			}
-		}
-	}
-
-	private void testSquare(int xMin, int yMin, int xMax, int yMax) {
-		int[] counterForPlayers = { 0, 0 };
-
-		int index;
-		index = checkOccupationReturnPlayerGettingPoint(xMin, yMin);
-		if (index != -1) {
-			counterForPlayers[index]++;
-		}
-		index = checkOccupationReturnPlayerGettingPoint(xMin, yMax);
-		if (index != -1) {
-			counterForPlayers[index]++;
-		}
-		index = checkOccupationReturnPlayerGettingPoint(xMax, yMin);
-		if (index != -1) {
-			counterForPlayers[index]++;
-		}
-		index = checkOccupationReturnPlayerGettingPoint(xMax, yMax);
-		if (index != -1) {
-			counterForPlayers[index]++;
-		}
-
-		setPointsOfPlayer(counterForPlayers[0], counterForPlayers[1]);
-	}
-
-	private int checkOccupationReturnPlayerGettingPoint(final int x, final int y) {
-		if (!"".equals(gameField.getIsOccupiedFrom(x, y))) {
-			if (gameField.getIsOccupiedFrom(x, y).equals(playerController.getPlayer1Name())) {
-				return 0;
-			} else if (gameField.getIsOccupiedFrom(x, y).equals(playerController.getPlayer2Name())) {
-				return 1;
-			}
-		}
-		return -1;
 	}
 
 	private void setPointsOfPlayer(int counter1, int counter2) {
