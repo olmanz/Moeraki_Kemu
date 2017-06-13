@@ -23,21 +23,21 @@ import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 public class FieldCouchdbDAO implements IFieldDAO {
 	private CouchDbConnector db = null;
 	private static final Logger LOGGER = (Logger) LogManager.getLogger("de.htwg.se.moerakikemu.persistence.couchdb");
-	
+
 	public FieldCouchdbDAO() {
 		HttpClient client = null;
-		
+
 		try {
 			client = new StdHttpClient.Builder().url("http://lenny2.in.htwg-konstanz.de:5984").build();
 		} catch (MalformedURLException e) {
 			LOGGER.error("Malformed URL", e);
 		}
-		
+
 		CouchDbInstance dbInstance = new StdCouchDbInstance(client);
 		db = dbInstance.createConnector("moerakikemu_db", true);
 		db.createDatabaseIfNotExists();
 	}
-	
+
 	private IField copyField(PersistentField pField) {
 		if (pField == null) {
 			return null;
@@ -56,12 +56,12 @@ public class FieldCouchdbDAO implements IFieldDAO {
 		}
 		return field;
 	}
-	
+
 	private PersistentField copyField(IField field) {
 		String fieldId = field.getId();
 		PersistentField pfield;
 		if (containsFieldByID(fieldId)) {
-			pfield = (PersistentField) db.get(PersistentField.class, fieldId);
+			pfield = (PersistentField) db.find(PersistentField.class, fieldId);
 
 			List<PersistentSpot> spots = pfield.getSpots();
 			for (PersistentSpot s : spots) {
@@ -96,6 +96,8 @@ public class FieldCouchdbDAO implements IFieldDAO {
 	}
 
 	public void saveField(IField field) {
+		if (field == null)
+			return;
 		if (containsFieldByID(field.getId())) {
 			db.update(copyField(field));
 		} else {
@@ -104,24 +106,24 @@ public class FieldCouchdbDAO implements IFieldDAO {
 	}
 
 	public void deleteFieldByID(String id) {
-		db.delete(copyField(getFieldByID(id)));
+		if (containsFieldByID(id))
+			db.delete(copyField(getFieldByID(id)));
 	}
 
 	public boolean containsFieldByID(String id) {
 		if (getFieldByID(id) == null) {
 			return false;
 		}
-		
 		return true;
 	}
 
 	public IField getFieldByID(String id) {
 		PersistentField pField = db.find(PersistentField.class, id);
-		
+
 		if (pField == null) {
 			return null;
 		}
-		
+
 		return copyField(pField);
 	}
 
@@ -136,11 +138,11 @@ public class FieldCouchdbDAO implements IFieldDAO {
 		List<IField> lst = new ArrayList<IField>();
 		ViewQuery query = new ViewQuery().allDocs();
 		ViewResult vr = db.queryView(query);
-		
+
 		for (Row r : vr.getRows()) {
 			lst.add(getFieldByID(r.getId()));
 		}
-		
+
 		return lst;
 	}
 

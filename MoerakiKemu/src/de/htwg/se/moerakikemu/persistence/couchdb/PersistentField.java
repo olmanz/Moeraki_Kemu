@@ -11,8 +11,6 @@ public class PersistentField extends CouchDbDocument {
 	private String id;
 	private List<PersistentSpot> spots;
 	private String name;
-	private int blocksPerEdge;
-	private int numberSetSpots;
 	private int edgeLength;
 	
 	public PersistentField() {
@@ -43,22 +41,6 @@ public class PersistentField extends CouchDbDocument {
 		return this.name;
 	}
 	
-	public void setBlocksPerEdge(int blocksPerEdge) {
-		this.blocksPerEdge = blocksPerEdge;
-	}
-	
-	public int getBlocksPerEdge() {
-		return this.blocksPerEdge;
-	}
-	
-	public void setNumberSetSpots(int numberSetSpots) {
-		this.numberSetSpots = numberSetSpots;
-	}
-	
-	public int getNumberSetSpots() {
-		return this.numberSetSpots;
-	}
-
 	public int getEdgeLength() {
 		return edgeLength;
 	}

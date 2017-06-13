@@ -7,7 +7,7 @@ public class PersistentSpot extends CouchDbDocument {
 	private String id;
 	private int row = 0;
 	private int column = 0;
-	private boolean isOccupied = false;
+	private boolean occupied = false;
 
 	private String occupiedByPlayer;
 
@@ -46,11 +46,11 @@ public class PersistentSpot extends CouchDbDocument {
 	}
 
 	public boolean isOccupied() {
-		return isOccupied;
+		return occupied;
 	}
 
 	public void setIsOccupied(boolean occupied) {
-		this.isOccupied = occupied;
+		this.occupied = occupied;
 	}
 
 	public String getOccupiedByPlayer() {

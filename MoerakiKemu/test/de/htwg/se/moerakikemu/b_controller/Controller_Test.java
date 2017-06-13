@@ -196,7 +196,7 @@ public class Controller_Test {
 		controller.occupy(3, 4);
 		controller.occupy(2, 2);
 		controller.occupy(4, 3);
-		assertEquals(State.PLAYER_WON, controller.getState());
+		assertEquals(State.PLAYER_OCCUPIED, controller.getState());
 
 		// SetEnd
 		controller.setEnd(true);
