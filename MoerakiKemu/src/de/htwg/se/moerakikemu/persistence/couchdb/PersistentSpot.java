@@ -3,75 +3,70 @@ package de.htwg.se.moerakikemu.persistence.couchdb;
 import org.ektorp.support.CouchDbDocument;
 
 public class PersistentSpot extends CouchDbDocument {
-	private static final long serialVersionUID = -6049548436571017626L;
+	private static final long serialVersionUID = -756264832680406685L;
 	private String id;
-	private Integer value = 0;
-	private Integer row = 0;
-	private Integer column = 0;
-	private Boolean given = false;
-	
-	public PersistentSpot(Integer column, Integer row) {
+	private int row = 0;
+	private int column = 0;
+	private boolean isOccupied = false;
+
+	private String occupiedByPlayer;
+
+	private PersistentField field;
+
+	public PersistentSpot(int column, int row) {
 		this.column = column;
 		this.row = row;
 	}
 	
 	public PersistentSpot() {
-		
 	}
-	
-	public void setID(String id) {
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public String getID() {
-		return this.id;
+
+	public int getRow() {
+		return row;
 	}
-	
-	public void setValue(Integer value) {
-		this.value = value;
-	}
-	
-	public Integer getValue() {
-		return this.value;
-	}
-	
-	public void setRow(Integer row) {
+
+	public void setRow(int row) {
 		this.row = row;
 	}
-	
-	public Integer getRow() {
-		return this.row;
+
+	public int getColumn() {
+		return column;
 	}
-	
-	public void setColumn(Integer column) {
+
+	public void setColumn(int column) {
 		this.column = column;
 	}
-	
-	public Integer getColumn() {
-		return this.column;
+
+	public boolean isOccupied() {
+		return isOccupied;
 	}
-	
-	public void setRowSpot(Integer rowSpot) {
-		this.row = rowSpot;
+
+	public void setIsOccupied(boolean occupied) {
+		this.isOccupied = occupied;
 	}
-	
-	public Integer getRowSpot() {
-		return this.row;
+
+	public String getOccupiedByPlayer() {
+		return occupiedByPlayer;
 	}
-	
-	public void setColumnSpot(Integer columnSpot) {
-		this.column = columnSpot;
+
+	public void setOccupiedByPlayer(String occupiedByPlayer) {
+		this.occupiedByPlayer = occupiedByPlayer;
 	}
-	
-	public Integer getColumnSpot() {
-		return this.column;
+
+	public PersistentField getField() {
+		return field;
 	}
-	
-	public void setGiven(Boolean given) {
-		this.given = given;
+
+	public void setField(PersistentField field) {
+		this.field = field;
 	}
-	
-	public Boolean getGiven() {
-		return this.given;
-	}
+
 }

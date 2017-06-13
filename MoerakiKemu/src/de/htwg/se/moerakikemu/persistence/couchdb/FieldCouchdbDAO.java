@@ -2,33 +2,27 @@ package de.htwg.se.moerakikemu.persistence.couchdb;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import de.htwg.se.moerakikemu.modellayer.IField;
-import de.htwg.se.moerakikemu.modellayer.ISpot;
-import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
-import de.htwg.se.moerakikemu.persistence.IFieldDAO;
-import de.htwg.se.moerakikemu.persistence.hibernate.HibernateUtil;
-import de.htwg.se.moerakikemu.persistence.hibernate.PersistentField;
-import de.htwg.se.moerakikemu.persistence.hibernate.PersistentSpot;
-
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.CouchDbInstance;
-import org.ektorp.Revision;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult;
 import org.ektorp.ViewResult.Row;
 import org.ektorp.http.HttpClient;
 import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbInstance;
-import org.hibernate.Session;
+
+import de.htwg.se.moerakikemu.modellayer.IField;
+import de.htwg.se.moerakikemu.modellayer.ISpot;
+import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
+import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 
 public class FieldCouchdbDAO implements IFieldDAO {
 	private CouchDbConnector db = null;
-	private Logger logger = Logger.getLogger("de.htwg.se.moerakikemu.persistence.couchdb");
+	private static final Logger LOGGER = (Logger) LogManager.getLogger("de.htwg.se.moerakikemu.persistence.couchdb");
 	
 	public FieldCouchdbDAO() {
 		HttpClient client = null;
@@ -36,7 +30,7 @@ public class FieldCouchdbDAO implements IFieldDAO {
 		try {
 			client = new StdHttpClient.Builder().url("http://lenny2.in.htwg-konstanz.de:5984").build();
 		} catch (MalformedURLException e) {
-			logger.error("Malformed URL", e);
+			LOGGER.error("Malformed URL", e);
 		}
 		
 		CouchDbInstance dbInstance = new StdCouchDbInstance(client);
@@ -44,7 +38,7 @@ public class FieldCouchdbDAO implements IFieldDAO {
 		db.createDatabaseIfNotExists();
 	}
 	
-	public IField copyField(PersistentField pField) {
+	private IField copyField(PersistentField pField) {
 		if (pField == null) {
 			return null;
 		}
@@ -63,7 +57,7 @@ public class FieldCouchdbDAO implements IFieldDAO {
 		return field;
 	}
 	
-	public PersistentField copyField(IField field) {
+	private PersistentField copyField(IField field) {
 		String fieldId = field.getId();
 		PersistentField pfield;
 		if (containsFieldByID(fieldId)) {
