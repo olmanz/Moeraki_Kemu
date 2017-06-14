@@ -8,15 +8,15 @@ import org.junit.Test;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
 import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
+import de.htwg.se.moerakikemu.persistence.couchdb.FieldCouchdbDAO;
 import de.htwg.se.moerakikemu.persistence.db4o.FieldDB4O;
-//import de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO;
 
 public class IFieldDAOTest {
 	IFieldDAO fieldDAO;
 
 	@Before
 	public void setUp() {
-		fieldDAO = new FieldDB4O();
+		fieldDAO = new FieldCouchdbDAO();
 	}
 
 	@After
@@ -34,8 +34,11 @@ public class IFieldDAOTest {
 		fieldDAO.saveField(new Field(12));
 		IField field = new Field(14);
 		fieldDAO.saveField(field);
+
 		fieldDAO.saveField(field);
+
 		fieldDAO.saveField(null);
+
 		assertEquals(fieldDAO.getAllFields().size(), 3);
 	}
 

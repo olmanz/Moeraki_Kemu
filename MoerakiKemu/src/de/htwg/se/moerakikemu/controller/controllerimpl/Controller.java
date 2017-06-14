@@ -76,7 +76,23 @@ public class Controller extends ObserverSubject implements IController {
 
 		gameField.occupy(x, y, playerController.getCurrentPlayerName());
 		int[] points = actorEndpoint.getPoints(x, y);
-		setPointsOfPlayer(points[0], points[1]);
+		for (int i = 0; i < points[0]; i++) {
+			playerController.addAPointPlayer1();
+			printInfoALLUIs(playerController.getPlayer1Name());
+		}
+		for (int i = 0; i < points[1]; i++) {
+			playerController.addAPointPlayer2();
+			printInfoALLUIs(playerController.getPlayer2Name());
+		}
+		int winner = points[2];
+		if (winner == 1) {
+			playerWin = playerController.getPlayer1Name();
+			setWinner(true);
+		} else if (winner == 2) {
+			playerWin = playerController.getPlayer2Name();
+			setWinner(true);
+		}
+		
 		if (!"StartDot".equals(playerController.getCurrentPlayerName())) {
 			testAllInLine(x, y);
 		}
@@ -105,29 +121,6 @@ public class Controller extends ObserverSubject implements IController {
 			return false;
 		}
 
-	}
-
-	private void setPointsOfPlayer(int counter1, int counter2) {
-		if (counter1 == 3 && counter2 == 1) {
-			playerController.addAPointPlayer1();
-			printInfoALLUIs(playerController.getPlayer1Name());
-		}
-		if (counter1 == 4) {
-			playerController.addAPointPlayer1();
-			playerWin = playerController.getPlayer1Name();
-			printInfoALLUIs(playerController.getPlayer1Name());
-			setWinner(true);
-		}
-		if (counter2 == 3 && counter1 == 1) {
-			playerController.addAPointPlayer2();
-			printInfoALLUIs(playerController.getPlayer2Name());
-		}
-		if (counter2 == 4) {
-			playerController.addAPointPlayer2();
-			playerWin = playerController.getPlayer2Name();
-			printInfoALLUIs(playerController.getPlayer2Name());
-			setWinner(true);
-		}
 	}
 
 	private void testAllInLine(int x, int y) {
