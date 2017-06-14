@@ -7,6 +7,7 @@ import com.google.inject.Injector;
 import de.htwg.se.moerakikemu.controller.ControllerModuleWithController;
 import de.htwg.se.moerakikemu.controller.IController;
 import de.htwg.se.moerakikemu.controller.controllerimpl.Controller;
+import de.htwg.se.moerakikemu.view.HttpServer;
 import de.htwg.se.moerakikemu.view.UserInterface;
 import de.htwg.se.moerakikemu.view.viewimpl.TextUI;
 import de.htwg.se.moerakikemu.view.viewimpl.gui.GUI;
@@ -33,12 +34,12 @@ public class MoerakiKemu {
 		UserInterface[] interfaces =  new UserInterface[2];
 		interfaces[0] = injector.getInstance(TextUI.class);
 		interfaces[1] = injector.getInstance(GUI.class);
-
+//		interfaces[2] = injector.getInstance(HttpServer.class);
 		for (UserInterface iface : interfaces) {
 			((IObserverSubject) controller).attatch((ObserverObserver) iface);
 			iface.drawCurrentState();
 		}
-
+		
 		while (!controller.testIfEnd());
 		
 		for (UserInterface ui : interfaces) {

@@ -15,12 +15,11 @@ import de.htwg.se.moerakikemu.modellayer.modellayerimpl.Field;
 import de.htwg.se.moerakikemu.persistence.IFieldDAO;
 import de.htwg.se.moerakikemu.view.UserInterface;
 import de.htwg.se.util.StringHelper;
-import de.htwg.se.util.observer.IObserverSubject;
 import de.htwg.se.util.observer.ObserverObserver;
 import de.htwg.se.util.observer.ObserverSubject;
 
 @Singleton
-public class Controller extends ObserverSubject implements IController, IObserverSubject {
+public class Controller extends ObserverSubject implements IController {
 
 	/**
 	 * Replece the for-loop in the main program with update-calls from the
@@ -312,5 +311,58 @@ public class Controller extends ObserverSubject implements IController, IObserve
 			data[i][1] = f.getId().toString();
 		}
 		return data;
+	}
+
+	@Override
+	public String fieldToHtml() {
+		// TODO Auto-generated method stub
+		/*
+		+-+-+-+-+
+		|1|2| | |
+		+-+-+-+-+
+		| |M| | |
+		+-+-+-+-+
+		*/
+		
+		int xLength = gameField.getEdgeLength();
+		int yLength = gameField.getEdgeLength();
+		int borderLength = gameField.getEdgeLength() * 2 + 1;
+		
+		String player1Name = playerController.getPlayer1Name();
+		String player2Name = playerController.getPlayer2Name();
+		
+		StringBuilder border = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < borderLength; i++) {
+			if (i % 2 == 0) {
+				border.append("+");
+			} else {
+				border.append("-");
+			}
+		}
+		
+		sb.append(border);
+		
+		for (int i = 0; i < xLength; i++) {
+			sb.append("<br>|");
+			for (int j = 0; j < yLength; j++) {
+				if (gameField.getIsOccupiedFrom(i, j).equals(player1Name)) {
+					sb.append("1");
+				} else if (gameField.getIsOccupiedFrom(i, j).equals(player2Name)) {
+					sb.append("2");
+				} else if("StartDot".equals(gameField.getIsOccupiedFrom(i, j))) {
+					sb.append("M");
+				}	
+				else {
+					sb.append(" ");
+				}
+				sb.append("|");
+			}
+			sb.append("<br>");
+			sb.append(border);
+		}
+		
+		return sb.toString();
 	}
 }

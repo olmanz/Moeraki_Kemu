@@ -1,8 +1,9 @@
 package de.htwg.se.moerakikemu.controller;
 
 import de.htwg.se.moerakikemu.modellayer.IField;
+import de.htwg.se.util.observer.IObserverSubject;
 
-public interface IController {
+public interface IController extends IObserverSubject {
 
 	/**
 	 * Returns the name of the player that occupies the field with the coordinates.
@@ -110,4 +111,6 @@ public interface IController {
 	void deleteFromDB(String id);
 
 	String[][] getRowDataAll();
+
+	String fieldToHtml();
 }
