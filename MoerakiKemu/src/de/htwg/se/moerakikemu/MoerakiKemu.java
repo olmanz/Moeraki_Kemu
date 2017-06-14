@@ -34,11 +34,11 @@ public class MoerakiKemu {
 		UserInterface[] interfaces =  new UserInterface[2];
 		interfaces[0] = injector.getInstance(TextUI.class);
 		interfaces[1] = injector.getInstance(GUI.class);
-//		interfaces[2] = injector.getInstance(HttpServer.class);
 		for (UserInterface iface : interfaces) {
 			((IObserverSubject) controller).attatch((ObserverObserver) iface);
 			iface.drawCurrentState();
 		}
+		HttpServer webserver = new HttpServer(controller);
 		
 		while (!controller.testIfEnd());
 		

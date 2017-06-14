@@ -92,7 +92,7 @@ public class Controller extends ObserverSubject implements IController {
 			playerWin = playerController.getPlayer2Name();
 			setWinner(true);
 		}
-		
+
 		if (!"StartDot".equals(playerController.getCurrentPlayerName())) {
 			testAllInLine(x, y);
 		}
@@ -201,10 +201,12 @@ public class Controller extends ObserverSubject implements IController {
 	public void newGame() {
 		gameField = new Field(fieldLength);
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).printMessage("");
+			if (ui instanceof UserInterface)
+				((UserInterface) ui).printMessage("");
 		}
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).addPoints(0, 0);
+			if (ui instanceof UserInterface)
+				((UserInterface) ui).addPoints(0, 0);
 		}
 		playerController.newGame();
 		playerWin = "";
@@ -217,17 +219,21 @@ public class Controller extends ObserverSubject implements IController {
 	private void printInfoALLUIs() {
 		final String pointString = "Das Spiel endet";
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).printMessage(pointString);
+			if (ui instanceof UserInterface)
+				((UserInterface) ui).printMessage(pointString);
 		}
 	}
 
 	private void printInfoALLUIs(String player) {
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).addPoints(playerController.getPlayer1Points(), playerController.getPlayer2Points());
+			if (ui instanceof UserInterface)
+				((UserInterface) ui).addPoints(playerController.getPlayer1Points(),
+						playerController.getPlayer2Points());
 		}
 		final String pointString = "Ein Punkt fuer " + player;
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).printMessage(pointString);
+			if (ui instanceof UserInterface)
+				((UserInterface) ui).printMessage(pointString);
 		}
 	}
 
@@ -236,7 +242,8 @@ public class Controller extends ObserverSubject implements IController {
 		final String yValue = String.valueOf(y + 1);
 		final String pointString = "Gewaehlter Punkt: " + xValue + "/" + yValue;
 		for (ObserverObserver ui : observers) {
-			((UserInterface) ui).printMessage(pointString);
+			if (ui instanceof UserInterface)
+				((UserInterface) ui).printMessage(pointString);
 		}
 	}
 
@@ -308,25 +315,16 @@ public class Controller extends ObserverSubject implements IController {
 
 	@Override
 	public String fieldToHtml() {
-		// TODO Auto-generated method stub
-		/*
-		+-+-+-+-+
-		|1|2| | |
-		+-+-+-+-+
-		| |M| | |
-		+-+-+-+-+
-		*/
-		
 		int xLength = gameField.getEdgeLength();
 		int yLength = gameField.getEdgeLength();
 		int borderLength = gameField.getEdgeLength() * 2 + 1;
-		
+
 		String player1Name = playerController.getPlayer1Name();
 		String player2Name = playerController.getPlayer2Name();
 		
 		StringBuilder border = new StringBuilder();
 		StringBuilder sb = new StringBuilder();
-		
+		sb.append("<p  style=\"font-family:'Lucida Console', monospace\">");
 		for (int i = 0; i < borderLength; i++) {
 			if (i % 2 == 0) {
 				border.append("+");
@@ -334,9 +332,9 @@ public class Controller extends ObserverSubject implements IController {
 				border.append("-");
 			}
 		}
-		
+
 		sb.append(border);
-		
+
 		for (int i = 0; i < xLength; i++) {
 			sb.append("<br>|");
 			for (int j = 0; j < yLength; j++) {
@@ -344,10 +342,9 @@ public class Controller extends ObserverSubject implements IController {
 					sb.append("1");
 				} else if (gameField.getIsOccupiedFrom(i, j).equals(player2Name)) {
 					sb.append("2");
-				} else if("StartDot".equals(gameField.getIsOccupiedFrom(i, j))) {
+				} else if ("StartDot".equals(gameField.getIsOccupiedFrom(i, j))) {
 					sb.append("M");
-				}	
-				else {
+				} else {
 					sb.append(" ");
 				}
 				sb.append("|");
@@ -355,7 +352,7 @@ public class Controller extends ObserverSubject implements IController {
 			sb.append("<br>");
 			sb.append(border);
 		}
-		
+
 		return sb.toString();
 	}
 }
