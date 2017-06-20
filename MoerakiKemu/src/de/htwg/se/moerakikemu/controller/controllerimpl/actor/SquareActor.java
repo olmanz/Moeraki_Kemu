@@ -10,7 +10,7 @@ public class SquareActor extends UntypedAbstractActor {
 	private int[] squareArray;
 	private boolean finished;
 	private Square square;
-	private int winner = 0;
+	private int winner;
 	private int[] playerPoints;
 
 	@Override
@@ -19,12 +19,13 @@ public class SquareActor extends UntypedAbstractActor {
 			receivedCheckSquareRequest((CheckSquareRequest) msg);
 		}
 	}
-
+	
 	private void receivedCheckSquareRequest(CheckSquareRequest msg) {
 		playerPoints = new int[] { 0, 0 };
 		this.finished = false;
 		this.squareArray = new int[17];
 		this.square = new Square();
+		this.winner = 0;
 		x = msg.getPoint().x;
 		y = msg.getPoint().y;
 		maxLength = msg.getFieldLength() - 1;

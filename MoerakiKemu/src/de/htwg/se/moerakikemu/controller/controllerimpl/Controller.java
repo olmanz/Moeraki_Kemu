@@ -200,6 +200,10 @@ public class Controller extends ObserverSubject implements IController {
 
 	public void newGame() {
 		gameField = new Field(fieldLength);
+		playerController.newGame();
+		playerWin = "";
+		quitGame = false;
+		winner = false;
 		for (ObserverObserver ui : observers) {
 			if (ui instanceof UserInterface)
 				((UserInterface) ui).printMessage("");
@@ -208,10 +212,7 @@ public class Controller extends ObserverSubject implements IController {
 			if (ui instanceof UserInterface)
 				((UserInterface) ui).addPoints(0, 0);
 		}
-		playerController.newGame();
-		playerWin = "";
-		quitGame = false;
-		winner = false;
+		
 
 		notifyObservers();
 	}

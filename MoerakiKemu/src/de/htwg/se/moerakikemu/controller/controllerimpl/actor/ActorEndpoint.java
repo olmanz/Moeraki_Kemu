@@ -27,7 +27,8 @@ public class ActorEndpoint {
 	}
 
 	public int[] getPoints(int x, int y) {
-		CheckSquareResponse response = (CheckSquareResponse) askSquareActor(new CheckSquareRequest(new Point(x, y), field, fieldLength));
+		CheckSquareResponse response = (CheckSquareResponse) askSquareActor(
+				new CheckSquareRequest(new Point(x, y), field, fieldLength));
 		return response.getResult();
 	}
 

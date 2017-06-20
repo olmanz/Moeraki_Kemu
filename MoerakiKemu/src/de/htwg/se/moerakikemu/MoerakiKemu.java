@@ -38,7 +38,8 @@ public class MoerakiKemu {
 			((IObserverSubject) controller).attatch((ObserverObserver) iface);
 			iface.drawCurrentState();
 		}
-		HttpServer webserver = new HttpServer(controller);
+		
+		new HttpServer(controller);
 		
 		while (!controller.testIfEnd());
 		

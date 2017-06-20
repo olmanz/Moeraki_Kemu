@@ -12,6 +12,8 @@ public class ControllerModuleWithController extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(Integer.class).annotatedWith(Names.named("fieldLength")).toInstance(12);
+//		bind(IFieldDAO.class).to(de.htwg.se.moerakikemu.persistence.hibernate.FieldHibernateDAO.class);
+//		bind(IFieldDAO.class).to(de.htwg.se.moerakikemu.persistence.db4o.FieldDB4O.class);
 		bind(IFieldDAO.class).to(de.htwg.se.moerakikemu.persistence.couchdb.FieldCouchdbDAO.class);
 		bind(IController.class).to(Controller.class);
 		bind(IControllerPlayer.class).to(ControllerPlayer.class);
