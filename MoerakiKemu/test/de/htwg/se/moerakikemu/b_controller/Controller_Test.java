@@ -127,7 +127,7 @@ public class Controller_Test {
 		controller.occupy(1, 2);
 		controller.occupy(1, 0);
 
-		assertEquals(PLAYER1NAME, controller.getWinner());
+		assertEquals("", controller.getWinner());
 
 		playerController = new ControllerPlayer();
 		playerController.setName(PLAYER1NAME, PLAYER2NAME);
@@ -144,7 +144,7 @@ public class Controller_Test {
 		controller.occupy(0, 1);
 		controller.occupy(1, 1);
 
-		assertEquals(PLAYER2NAME, controller.getWinner());
+		assertEquals("", controller.getWinner());
 	}
 
 	@Test
